@@ -1,0 +1,35 @@
+html, body{
+	height: 100%;
+}
+#_GTIS_UI_LOADING_WIN ._gtis_ui_cover{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 9000;
+	overflow: hidden;
+	background-color: #000;
+	opacity: .8;
+	filter: alpha(opacity=80);
+    display: none;
+}
+#_GTIS_UI_LOADING_WIN ._gtis_ui_loading{
+	background:#fff url('../../img/loading/loading.gif') -50px -55px no-repeat;
+	height: 95px;
+	position: fixed;
+	z-index: 10000;
+	top: 50%;
+	left: 50%;
+	margin-top: -75px;
+	line-height: 90px;
+	padding-left: 95px;
+	padding-right: 30px;
+	border: 5px solid #222;
+	border-radius: 5px;
+	color:#222;
+	box-shadow: 0 0 20px rgba(0,0,0,.8);
+    display: none;
+}
+
+

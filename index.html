@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>CodeSnippets</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        
+        <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        
+        
+        <link rel="stylesheet" href="css/plugin/loading.css">
+        <link rel="stylesheet" href="css/plugin/confirmpanel.css">
+        <link rel="stylesheet" href="css/plugin/pagin.css">
+        <link rel="stylesheet" href="css/plugin/gridtree.css">
+		
+		<style>
+        	.alert{
+        		margin : 0;
+        	}
+        	.btn-mini [class^="icon-"], .btn-mini [class*=" icon-"]{
+        		margin-top : 1px;
+        	}
+        	th input[type="checkbox"]
+        	,td input[type="checkbox"]{
+        		vertical-align: middle;
+        		margin: 0;
+        	}
+        
+            body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+            .row > div{
+            	padding: 5px 10px;
+            	margin-bottom: 10px;
+            	-webkit-box-sizing : border-box;
+            	box-sizing : border-box;
+            	border-radius : 5px;
+            	border : 1px solid #cdcdcd;
+            	-webkit-box-shadow : 0 0 5px rgba(0,0,0,.2);
+            	box-shadow : 0 0 5px rgba(0,0,0,.2);
+            	min-height: 230px;
+            	position: relative;
+            }
+            .row > div > p > .btn{
+            	position: absolute;
+            	bottom: 10px;
+            	right: 10px;
+            }
+            .hero-unit h1{
+            	margin-bottom: 20px;
+            }
+            .brand, h1, h2, h3{
+            	font-family : "microsoft yahei";
+            	font-weight : normal;
+            }
+        </style>
+		
+        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="#">CodeSnippets</a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li class="active"><a href="#">第一期</a></li>
+                            <li><a href="no2.html">第二期</a></li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <!-- Main hero unit for a primary marketing message or call to action -->
+            <div class="hero-unit">
+                <h1>工作代码片段整理 - 第一期</h1>
+                <p>
+                	第一期的代码基于最近工作用到的一些JavaScript交互部分。
+                </p>
+            </div>
+
+            <!-- Example row of columns -->
+            <div class="row">
+                <div id="J_CORNER" class="span4">
+                    <h3>右上角删除</h3>
+                    <p>鼠标悬浮，会在右上角出现删除按钮。</p>
+                </div>
+                <div class="span4">
+                	<div id="J_ALERT" class="alert alert-block alert-success hide">
+						<button type="button" class="close">&times;</button>
+						<div class="j_alert_ctn"></div>
+					</div>
+                    <h3>页面加载Alerts</h3>
+                    <p>如果.j_alert_ctn中有内容，页面加载就会展现，如果没有内容则否，可以直接调用alerts('操作失败','error','blablabla..')</p>
+               		<p><a class="btn btn-primary" href="#" onclick="alerts('操作失败','error','未知类型。。。');">显示错误alert &raquo;</a></p>
+               </div>
+                <div class="span4">
+                    <h3>Loading动画</h3>
+                    <p>前后台通信等待时的loading动画，可以直接调用loading.show('等待文字'),然后loading.hide()隐藏</p>
+                    <p><a class="btn btn-primary" href="#" onclick="loading.show('测试loading');">显示loading &raquo;</a></p>
+                </div>
+            </div>
+            <br />
+			
+			<div class="row">
+                <div id="J_FOCUS" class="span4">
+                    <h3>高亮结果</h3>
+                    <p>通常完成一个操作，需要将操作结果高亮强调一下。</p>
+                    <p><a class="btn btn-primary" href="#" onclick="$('#J_FOCUS').focusresult();">高亮结果 &raquo;</a></p>
+                </div>
+                <div class="span4">
+                    <h3>分页工具函数</h3>
+                    <p>页面加载时的分页渲染,对dom结构有要求，具体要求请右键自己看代码，直接调用pagin(page, size, count, pre)</p>
+                    <div id="J_PAGIN" class="pagination">
+                    	<a href="#" class="prev">上一页</a>
+                    	<span></span>
+                    	<a href="#" class="next">下一页</a>            	
+                    </div>
+                    <p><a href="#" onclick="pagin(5, 5, 40);" style="font-size: 13px;">渲染一个在第5页总数40每页显示5个</a></p>
+                </div>
+                <div id="J_CONFIRM_PARENT" class="span4">
+                    <h3>Confrim面板</h3>
+                    <p>这个中确认面板试用于进行一系列操作后的撤销或提交。</p>
+                    <p><a class="btn btn-primary" href="#" onclick="$('#J_CONFIRM_PARENT').confirms();">显示Confirm &raquo;</a></p>
+                </div>
+            </div>
+			<br />
+			<div class="row">
+				<div class="span6">
+					<h3>gridtree插件</h3>
+					<p>主要服务需要显示列表式信息的树状数据</p>
+					<table cellpadding="0" cellspacing="0" width="100%" class="table table-hover table-bordered table-striped table-condensed">
+						<tbody id="J_GRID_TREE">
+							<tr id="js">
+								<td style="width: 70%"><i class="region-icon region-PROVINCE"></i>江苏省</td><td>320000</td><td>省</td>
+							</tr>
+							<tr id="nanjing" data-parent="js">
+								<td><i class="region-icon region-CITY"></i>南京市</td><td>320000</td><td>市</td>
+							</tr>
+							<tr id="gulou" data-parent="nanjing">
+								<td><i class="region-icon region-DISTRICT"></i>鼓楼区</td><td>320000</td><td>市</td>
+							</tr>
+							<tr id="qinhuai" data-parent="nanjing">
+								<td><i class="region-icon region-DISTRICT"></i>秦淮区</td><td>320000</td><td>市</td>
+							</tr>
+							<tr id="xuzhou" data-parent="js">
+								<td><i class="region-icon region-CITY"></i>徐州市</td><td>320000</td><td>市</td>
+							</tr>
+							<tr id="sh" data-has-child="true" url="json/test.json">
+								<td style="width: 70%"><i class="region-icon region-PROVINCE"></i>上海市</td><td>320000</td><td>省</td>
+							</tr>
+						</tbody>
+					</table>					
+				</div>
+				<div class="span6">
+					<h3>表单CheckAll</h3>
+					<p>仅仅需要按照标准dom结构书写表格，然后添加表头部分的checkbox以 .j_check_all 的 class name</p>
+					<table cellpadding="0" cellspacing="0" class="table table-hover table-bordered table-striped table-condensed">
+						<thead>
+							<tr>
+								<th style="width:50%">名称</th>
+								<th>代码</th>
+								<th>类型</th>
+								<th>
+									<input type="checkbox" class="j_check_all"/>
+									全选
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr id="js">
+								<td ><i class="region-icon region-PROVINCE"></i>江苏省</td><td>320000</td><td>省</td><td><input type="checkbox" /></td>
+							</tr>
+							<tr id="nanjing" data-parent="js">
+								<td><i class="region-icon region-CITY"></i>南京市</td><td>320000</td><td>市</td><td><input type="checkbox" /></td>
+							</tr>
+							<tr id="gulou" data-parent="nanjing">
+								<td><i class="region-icon region-DISTRICT"></i>鼓楼区</td><td>320000</td><td>市</td><td><input disabled type="checkbox" /></td>
+							</tr>
+							<tr id="qinhuai" data-parent="nanjing">
+								<td><i class="region-icon region-DISTRICT"></i>秦淮区</td><td>320000</td><td>市</td><td><input type="checkbox" /></td>
+							</tr>
+							<tr id="xuzhou" data-parent="js">
+								<td><i class="region-icon region-CITY"></i>徐州市</td><td>320000</td><td>市</td><td><input type="checkbox" /></td>
+							</tr>
+							<tr id="sh" data-has-child="true" url="json/test.json">
+								<td style="width: 70%"><i class="region-icon region-PROVINCE"></i>上海市</td><td>320000</td><td>省</td><td><input type="checkbox" /></td>
+							</tr>
+						</tbody>
+					</table>					
+				</div>	
+			</div>
+			
+            <hr>
+
+            <footer>
+                <p>&copy; Ray Zhang 2013</p>
+            </footer>
+
+        </div> <!-- /container -->
+
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+		
+		<script src="js/vendor/jquery-ui.js"></script>
+		
+        <script src="js/vendor/bootstrap.min.js"></script>
+		
+		<script src="js/dest/interaction.js"></script>
+		<script src="js/main.js"></script>
+		<script>
+			$('#J_CORNER').closeremove();
+			$('#J_GRID_TREE').gridtree();
+		</script>
+    </body>
+</html>

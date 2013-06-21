@@ -1,0 +1,15 @@
+<tr id="sh">
+	<td><i class="region-icon region-ROAD"></i>上海</td>
+	<td>2</td>
+	<td>直辖市</td>
+</tr>
+<tr id="hkq" data-parent="sh" data-has-child="true" url="json/hongkou.json">
+	<td><i class="region-icon region-DISTRICT"></i>虹口区</td>
+	<td>1</td>
+	<td>区</td>
+</tr>
+<tr id="pdxq" data-parent="sh" data-has-child="false">
+	<td><i class="region-icon region-DISTRICT"></i>浦东新区</td>
+	<td>2</td>
+	<td>区</td>
+</tr>

@@ -1,0 +1,45 @@
+span._empty {
+	display: inline-block;
+	width: 13px;
+}
+span.gridtree_trigger {
+	background-image: url(../../img/gridtree/trigger.gif);
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	cursor: pointer;
+}
+span.gridtree_trigger._close {
+	background-position: 20px -1px;
+}
+span.gridtree_trigger._open {
+	background-position: 0 -1px;
+}
+span.gridtree_trigger._root {
+	background-position: 0 20px;
+	cursor: default;
+}
+tr.gridtree_h0 {
+	display: none;
+	height: 0;
+}
+
+.region-icon {
+	width: 6px;
+	height: 6px;
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 5px 5px 0;
+}
+.region-PROVINCE {
+	background-color: #ec4242;
+}
+.region-CITY {
+	background-color: #32ad80;
+}
+.region-DISTRICT {
+	background-color: #2377f5;
+}
+.region-ROAD {
+	background-color: #B764C1;
+}

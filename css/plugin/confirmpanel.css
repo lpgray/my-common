@@ -1,0 +1,23 @@
+.final-panel {
+	position: absolute;
+	z-index: 500;
+	background: #EAEAEA;
+	border: 1px solid #CDCDCD;
+	border-radius: 4px;
+	box-shadow: -1px 2px 3px rgba(0,0,0,.2);
+	top: 50%;
+	right: 50%;
+	padding: 10px;
+}
+.final-panel.fix-top {
+	top: 0;
+	right: 0;
+	padding: 10px 15px 10px 15px;
+	border-top: none;
+	border-radius: 0 0 4px 4px;
+	-webkit-transition: all .5s ease-in-out;
+	-moz-transition: all .5s ease-in-out;
+	-ms-transition: all .5s ease-in-out;
+	-o-transition: all .5s ease-in-out;
+	transition: all .5s ease-in-out;
+}
