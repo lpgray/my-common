@@ -6,7 +6,12 @@
  * Copyright (c) 2013 Gtmap Ltd. All Rights Reserved.
  *
  */
- 
+Array.prototype.contains = function ( needle ) {
+   for (i in this) {
+       if (this[i] == needle) return true;
+   }
+   return false;
+}
 !function() {
 	// stop default link behavior
     $(document).on('click', '[href="#"],.disabled', function(e) {
