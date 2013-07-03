@@ -1,7 +1,29 @@
-/*
- * 将带有多级属性的对象转换成单级别
- */
-window.multipleToSingle = function(obj, prefix) {
+var Utils = {};
+
+Utils.hasFeature = function(str){
+	return document.getElementsByTagName('html')[0].className.indexOf(str) > -1;
+};
+
+Utils.filterFileName = function(fullPath){
+	if (fullPath) {
+		var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+		var filename = fullPath.substring(startIndex);
+		if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+			filename = filename.substring(1);
+		}
+		return filename;
+	}
+};
+
+Utils.isMobile = function(){
+	return /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
+};
+
+Utils.encodeXML = function(code){
+	return code.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+};
+/* 将带有多级属性的对象转换成单级 */
+Utils.multipleToSingle = function(obj, prefix) {
 	var back = {}, sObj;
 	prefix ? ( prefix = prefix + ".") : ( prefix = "")
 	for (i in obj ) {
@@ -14,10 +36,8 @@ window.multipleToSingle = function(obj, prefix) {
 	}
 	return back;
 };
-/*
- * 获取当前url中的参数值
- */
-window.getUrlParam = function(paramName) {
+/* 获取当前url中的参数值 */
+Utils.getUrlParam = function(paramName) {
 	paramValue = "";
 	isFound = false;
 	if (this.location.search.indexOf("?") == 0 && this.location.search.indexOf("=") > 1) {
@@ -34,53 +54,20 @@ window.getUrlParam = function(paramName) {
 		}
 	}
 	return paramValue;
-}
-/*
- * 表单序列化成json
- *
- * 支持 name.name1.name2这种 input name转化
- */
-( function($) {
-		$.fn.serializeObject = function() {
-			var o = {}, a = this.serializeArray(), back = {}, p;
-			$.each(a, function() {
-				if (this.name.indexOf('.') > -1) {
-					var nArray = this.name.split('.');
-					for ( i = 0; i < nArray.length; i++) {
-						if (i == 0) {
-							if (back[nArray[i]]) {
-								back[nArray[i]] = $.extend({}, back[nArray[i]]);
-							} else {
-								back[nArray[i]] = {};
-							}
-							p = back[nArray[i]];
-						} else if (i == (nArray.length - 1)) {
-							p[nArray[i]] = this.value || '';
-						} else {
-							if (p[nArray[i]]) {
-								p[nArray[i]] = $.extend({}, p[nArray[i]]);
-							} else {
-								p[nArray[i]] = {};
-							}
-							p = p[nArray[i]];
-						}
-					}
-					if (o[nArray[0]]) {
-						o[nArray[0]] = $.extend({}, o[nArray[0]], back[nArray[0]]);
-					} else {
-						o[nArray[0]] = back[nArray[0]];
-					}
-					return;
-				}
-				if (o[this.name] !== undefined) {
-					if (!o[this.name].push) {
-						o[this.name] = [o[this.name]];
-					}
-					o[this.name].push(this.value || '');
-				} else {
-					o[this.name] = this.value || '';
-				}
-			});
-			return o;
-		};
-	}(jQuery));
+};
+
+document.getElementsByClassName || (document.getElementsByClassName = function(searchClass,node,tag){
+	node = node || document;
+	tag = tag || '*';
+	var returnElements = []
+	var els = (tag === "*" && node.all) ? node.all : node.getElementsByTagName(tag);
+	var i = els.length;
+	searchClass = searchClass.replace(/\-/g, "\\-");
+	var pattern = new RegExp("(^|\\s)" + searchClass + "(\\s|$)");
+	while (--i >= 0) {
+		if (pattern.test(els[i].className)) {
+			returnElements.push(els[i]);
+		}
+	}
+	return returnElements;
+});

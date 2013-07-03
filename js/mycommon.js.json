@@ -1,0 +1,15 @@
+{
+  "name": "gtis-common",
+  "title": "gtis front-end common snippets",
+  "description": "南京国图信息股份有限公司",
+  "version": "0.1.0",
+  "homepage": "http://gtis.com.cn",
+  "author": {
+    "name": "ray",
+    "email": "rayzy1991@163.com"
+  },
+  "dependencies": {
+    "jquery": "1.9.0"
+  },
+  "keywords": []
+}
