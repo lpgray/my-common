@@ -34,6 +34,7 @@
 	, options
 	
 	, methods = {
+		
 		render : function( list_item ){
 			var td = options.grid ? $(list_item).children('td:first-child') : $(list_item).children('a')
 				, name = td.html()
@@ -102,12 +103,12 @@
 			});
 		}
 		, fetchChild : function( tr ){
-			var reqUrl = $(tr).attr('url');
+			var reqUrl = $(tr).attr('data-url');
 			if( !reqUrl ){
-				alert('没有设置 attr url');
+				alert('没有设置标签属性data-url');
 				return;
 			}
-			$.ajax({
+			reqUrl && $.ajax({
 				url : reqUrl,
 				dataType : 'html',
 				success : function(msg){
@@ -136,74 +137,119 @@
 				
 			} else {
 				var div = $('<div/>');
-				div.html(items).find('tr').each(function(){
+				div.html(items).find('tr,li').each(function(){
 					options.fetchCallback && options.fetchCallback( this );
 					methods.render(this);
 				});
 				return div.html();
 			}
 		}
+	}
+	
+	, Tree = function(option, elem){
+		this.options = option;
+		this.elem = $(elem);
+		this.init();
+	};
+	
+	Tree.prototype = {
+		init : function(){
+			var self = this;
+			$(self.elem).children('tr,li').each(function(){
+				self.renderItem( this );
+			});
+			
+			$(self.elem).delegate('._treetoggle', 'click', function(){
+				self.move($(this).parents('li,tr')[0]);	
+			});
+		}
+		, renderItem : function( item ){
+			var pNum = this.parentNumber( item )// parents number
+				, cStatus = this.childrenStatus( item );// children status
+			// add blank based on parents
+			// add toggle based on children
+			this.addPrefix(pNum, cStatus, item);
+		}
+		, parentNumber : function( item ){
+			var parentId = $(item).attr('data-parent')
+				, num = 0;
+			if( parentId ){
+				num = num + 1;
+				num = num + this.parentNumber( $('#'+parentId) );
+			}
+			return num;
+		}
+		// 1: 有且显示着， 0：没，不需要显示； 2：有，但是目前没有显示，需要异步加载
+		, childrenStatus : function( item ){
+			var back = $( '[data-parent="' + $(item).attr('id') + '"]' ).length ? 1 : 0;
+			if( !back && $(item).attr('data-has-child') === 'true' ){
+				back = 2;
+			}
+			return back;
+		}
+		, move : function( item ){
+			var id = $(item).attr('id')
+				, toggle = $(item).find('._treetoggle');
+			
+			if( toggle.hasClass('_open') ){
+				this.hideChildren(id);
+			}else if (toggle.hasClass('_close')){
+				this.elem.find('[data-parent='+ id +']').css('display','block');
+				toggle.removeClass('_close').addClass('_open');
+			}
+		}
+		, hideChildren : function( id ){
+			var self = this;
+			this.elem.find('[data-parent='+ id +']').each(function(){
+				$(this).css('display','none');
+				self.hideChildren( $(this).attr('id') );
+			});
+			$('#'+id).find('._treetoggle').removeClass('_open').addClass('_close');
+		}
+		, addPrefix : function(pNum, cStatus, item){
+			var blank = "<i class='_treetoggle ico ico-blank'></i>"
+				, open = "<i class='_treetoggle ico _open'></i>"
+				, close = "<i class='_treetoggle ico _close'></i>"
+				, root = "<i class='_treetoggle ico _root'></i>"
+				, cell;
+				
+			cell = $(item).children('td:first-child').length ? $(item).children('td:first-child') : $(item).children('a');
+			cell.html('<span>'+ cell.html() +'</span>');
+			
+			switch(cStatus){
+				case 1:
+					cell.prepend(open);
+					break;
+				case 0:
+					cell.prepend(root);
+					break;
+				case 2:
+					cell.prepend(close);
+					break;
+			}
+			
+			for( var i=0 ; i<pNum ; i++ ){
+				cell.prepend(blank);
+			}
+		}
 	};
 	
 	$.fn.listtree = function( option ){
-	
-		options = $.extend( {}, defaults, option );
-		
+		this.addClass('_listtree');
+		var options = $.extend( {}, defaults, option );
 		return this.each( function(){
-			$(this).delegate('a', 'click', function(){
-				
-				var mark = $(this).children(options.trigger)
-					, p = $(this).parent();
-				
-				if( mark.hasClass( options.root_class ) ){
-					return;
-				}else if( mark.hasClass( options.open_class ) ){
-					methods.hideChild(p);
-				}else if( mark.hasClass( options.close_class ) ){
-					methods.showChild(p);
-				}
-				
-			});
-			
-			$(this).children('li').each(function(){
-				// console.log(this);
-				methods.render( this );
-			});
+			var tree = $(this).data('tree');
+			if( !tree ) $(this).data('tree', (tree = new Tree(options, this)));
 		});
 	};
 	
 	$.fn.gridtree = function( option ){
-		
-		options = $.extend( {}, defaults, option );
-		
+		this.addClass('_gridtree');
+		var options = $.extend( {}, defaults, option );
 		return this.each( function(){
-			//console.log( option.trigger );
-			$(this).delegate(options.trigger, 'click', function(){
-				var btn , tr;
-				
-				if( options.trigger === '.gridtree_trigger' ){
-					btn = $(this);
-				} else {
-					btn = $(this).find('.gridtree_trigger');
-				}
-				
-				tr = btn.parents('tr')[0];
-				
-				if( btn.hasClass( options.root_class ) ){
-					return;
-				}else if( btn.hasClass( options.open_class ) ){
-					methods.hideChild(tr);
-				}else if( btn.hasClass( options.close_class ) ){
-					methods.showChild(tr);
-				}
-			});
-			
-			$(this).find('tr').each(function(){
-				methods.render( this );
-			});
-			
+			var tree = $(this).data('tree');
+			if( !tree ) $(this).data('tree', (tree = new Tree(options, this)));
 		});
-		
 	}
-	
+
 }(jQuery));

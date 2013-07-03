@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8" />
+		
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>my-common 代码测试</title>
+		<meta name="description" content="" />
+		<meta name="author" content="zhangyang" />
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		
+		<link rel="stylesheet" href="../css/bootstrap.css" />
+		
+		<link rel="stylesheet" href="../css/plugins/loading.css" />
+		<link rel="stylesheet" href="../css/plugins/gridtree.css" />
+	</head>
+
+	<body>
+		<header class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<h1 class="brand">Front-end snippets</h1>
+				</div>
+			</div>
+		</header>
+		<br /><br /><br /><br /><br />
+		<div class="container">
+			<nav>
+				<ul class="nav nav-tabs">
+					<li>
+						<a href="#loading" data-toggle="tab">loading</a>
+					</li>
+					<li class="active">
+						<a href="#gridtree" data-toggle="tab">gridtree</a>
+					</li>
+					<li>
+						<a href="#">closeremove</a>
+					</li>
+					<li>
+						<a href="#">ajaxSubmit</a>
+					</li>
+					<li>
+						<a href="#">confirm</a>
+					</li>
+					<li>
+						<a href="#">formSerializeObject</a>
+					</li>
+					<li>
+						<a href="#">beforeRm</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<article>
+			<div class="tab-content container">
+				
+				<div id="loading" class="tab-pane">
+					<h4>loading</h4>
+					<button class="btn" onclick="loading.show('这是一个loading画面，想关闭就刷新吧');">显示loading</button>
+				</div>
+				
+				<div id="gridtree" class="tab-pane active">
+					<div class="row">
+						<div class="span6">
+							<h4>listtree</h4>
+							<ul id="listtree" class="nav">
+								<li id="jcsj" data-has-child="true"><a href="#">基础数据</a></li>
+								<li id="dljdm" data-has-child="true" data-parent="jcsj"><a href="#">道路及地名</a></li>
+								<li id="sd" data-has-child="false" data-parent="dljdm"><a href="#">省道</a></li>
+								<li class="active" id="czdt" data-has-child="false" data-parent="jcsj"><a href="#">城镇地图</a></li>
+								<li data-has-child="false" data-parent="jcsj"><a href="#">基础地理中文名字加长测试名字加长测试</a></li>
+								<li data-has-child="false" data-parent="jcsj"><a href="#">遥感影像</a></li>
+								<li data-has-child="false" data-parent="jcsj"><a href="#">1:50万地质图</a></li>
+								<li id="edsj" data-has-child="true"><a href="#">二调数据</a></li>
+								<li class="last" id="dltb" data-has-child="true"><a href="#">地类图斑</a></li>
+							</ul>
+						</div>
+						<div class="span6">
+							<h4>gridtree</h4>
+							<table class="table table-bordered table-condensed">
+	                        	<tbody id="tbodyGridTree">
+		                        	<tr id="tdlyxz">
+		                        		<td><a href="#"><i class="li-icon li-PARENT"></i> 土地利用现状</a></td>
+		                        	</tr>
+		                        	<tr data-parent="tdlyxz">
+		                        		<td><a href="#"><i class="li-icon li-SON"></i> 一级分类现状</a></td>
+		                        	</tr>
+		                        	<tr data-parent="tdlyxz">
+		                        		<td><a href="#"><i class="li-icon li-SON"></i> 二级分类现状</a></td>
+		                        	</tr>
+		                        	<tr data-parent="tdlyxz">
+		                        		<td><a href="#"><i class="li-icon li-SON"></i> 土地利用现状</a></td>
+		                        	</tr>
+		                        	<tr id="tdlygh">
+		                        		<td><a href="#"><i class="li-icon li-PARENT"></i> 土地利用规划</a></td>
+		                        	</tr>
+		                        	<tr data-parent="tdlygh">
+		                        		<td><a href="#"><i class="li-icon li-SON"></i> 土地利用结构调整表</a></td>
+		                        	</tr>
+		                        	<tr data-parent="tdlygh">
+		                        		<td><a href="#"><i class="li-icon li-SON"></i> 重点项目情况统计表</a></td>
+		                        	</tr>
+		                        	<tr data-parent="tdlygh">
+		                        		<td><a href="#"><i class="li-icon li-SON"></i> 土地用途分区面积表</a></td>
+		                        	</tr>
+		                        	<tr id="ndbbsp">
+		                        		<td><a href="#"><i class="li-icon li-PARENT"></i> 建设用地审批</a></td>
+		                        	</tr>
+		                        	<tr data-parent="ndbbsp">
+		                        		<td><a href="#"><i class="li-icon li-SON"></i> 年度报表审批</a></td>
+		                        	</tr>
+		                        	<tr id="tdgyhliy">
+		                        		<td><a href="#"><i class="li-icon li-PARENT"></i> 土地供应和利用统计</a></td>
+		                        	</tr>
+		                        	<tr data-parent="tdgyhliy">
+		                        		<td><a href="#"><i class="li-icon li-SON"></i> 供地项目计划</a></td>
+		                        	</tr>
+		                        	<tr data-parent="tdgyhliy">
+		                        		<td><a href="#"><i class="li-icon li-SON"></i> 地价走势图</a></td>
+		                        	</tr>
+		                        	<tr data-parent="tdgyhliy">
+		                        		<td><a href="#"><i class="li-icon li-SON"></i> 出让金统计</a></td>
+		                        	</tr>
+	                        	</tbody>
+	                        </table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</article>
+		
+		<footer>
+			<div class="container">
+				<hr />
+				<p>
+					&copy; Copyright  by zhangyang
+				</p>
+			</div>
+		</footer>
+		
+		<!-- START Repo -->
+		<script src="../js/vendor/jquery-1.9.1.min.js"></script>
+		<script src="../js/vendor/bootstrap.js"></script>
+		<script src="../js/vendor/jquery-ui.js"></script>
+		<script src="../js/vendor/jquery.validationEngine.js"></script>
+		<script src="../js/vendor/jquery.validationEngine-zh_CN.js"></script>
+		<!-- END Repo -->
+		
+		<script src="../js/slip/jquery.loading.js"></script>
+		<!-- <script>
+			loading.show('这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字');
+			setTimeout(function(){
+				loading.hide();
+			}, 2000);
+		</script> -->
+		
+		<script src="../js/slip/jquery.gridtree.js"></script>
+		<script>
+			$('#listtree').listtree();
+			$('#tbodyGridTree').gridtree();
+		</script>
+	</body>
+</html>

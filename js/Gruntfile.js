@@ -15,14 +15,7 @@ module.exports = function(grunt) {
 				stripBanners : false
 			},
 			dist : {
-				src : [	'slip/ajax4data-1.1.js'
-						, 'slip/ajaxSubmit-1.0.js'
-						, 'slip/before-rm.0.2.js'
-						, 'slip/closeremove.1.0.js'
-						, 'slip/form-seri.0.2.js'
-						, 'slip/gridtree-1.2.0.js'
-						, 'slip/pagin.0.2.js'
-						], // 合并 
+				src : [	'slip/jquery.loading.js'], // 合并 
 				dest : 'dest/gtis-common.js'// 合并成dest下的GruntDemo.js
 			}
 		},	//

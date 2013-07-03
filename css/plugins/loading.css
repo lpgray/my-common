@@ -15,11 +15,11 @@ html, body{
     display: none;
 }
 #_GTIS_UI_LOADING_WIN ._gtis_ui_loading{
-	background:#fff url('../../img/loading/loading.gif') -50px -55px no-repeat;
+	background:#fff url('loading/loading.gif') -50px -55px no-repeat;
 	height: 95px;
 	position: fixed;
 	z-index: 10000;
-	top: 50%;
+	top: 40%;
 	left: 50%;
 	margin-top: -75px;
 	line-height: 90px;
