@@ -6,8 +6,11 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		// Metadata.
 		pkg : grunt.file.readJSON('mycommon.js.json'),
-		banner : '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' + 
-		' * Copyright (c) <%= grunt.template.today("yyyy") %> Gtmap Ltd. All Rights Reserved.*/\n',
+		banner : '/*! \n' +
+		' *  <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' + 
+		' *  Author: <%= pkg.author.name %>, Email: <%= pkg.author.email %>\n'+
+		' *  Copyright (c) <%= grunt.template.today("yyyy") %> Gtmap Ltd. All Rights Reserved.\n' + 
+		' */\n',
 		// Task configuration.
 		concat : {
 			options : {
@@ -15,7 +18,21 @@ module.exports = function(grunt) {
 				stripBanners : false
 			},
 			dist : {
-				src : [	'slip/jquery.loading.js'], // 合并 
+				src : [	
+						'slip/utils.js'
+						, 'slip/func.common.js'
+						, 'slip/jquery.loading.js'
+					  	, 'slip/jquery.loading.js'
+					  	, 'slip/jquery.gridtree.js'
+					  	, 'slip/jquery.form-serialize.js'
+					  	, 'slip/jquery.focusresult.js'
+					  	, 'slip/jquery.confirm.js'
+					  	, 'slip/jquery.closeremove.js'
+					  	, 'slip/jquery.ajaxSubmit.js'
+					  	, 'slip/func.pagin.js'
+					  	, 'slip/jquery.closeremove.js'
+					  	, 'slip/func.ajax4data.js'
+					  ], // 合并 
 				dest : 'dest/gtis-common.js'// 合并成dest下的GruntDemo.js
 			}
 		},	//
