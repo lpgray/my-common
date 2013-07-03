@@ -18,6 +18,26 @@
 		<link rel="stylesheet" href="../css/bootstrap.css" />
 		<link rel="stylesheet" href="../css/prettify.css" />
 		
+		<style>
+			.navbar .navbar-inner{
+				background: none transparent;
+			}
+			.brand img{
+				height: 30px;
+				vertical-align: bottom;
+			}
+			.navbar .brand{
+				font:normal bold 26px/28px 'arial';
+			}
+			.navbar .brand small{
+				font-size: .5em;
+			}
+			.navbar .brand a:hover{
+				color: #0099CB;
+				text-decoration: none;
+			}
+		</style>
+		
 		<link rel="stylesheet" href="../css/plugins/loading.css" />
 		<link rel="stylesheet" href="../css/plugins/gridtree.css" />
 		<link rel="stylesheet" href="../css/plugins/confirmpanel.css" />
@@ -28,7 +48,10 @@
 		<header class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container">
-					<h1 class="brand">Front-end snippets</h1>
+					<h1 class="brand">
+						<a href="#"><img src="../img/logo_gtmap.png" alt="" />GTMAP</a>
+						<small>前端代码片段</small>
+					</h1>
 				</div>
 			</div>
 		</header>
@@ -53,6 +76,9 @@
 					</li>
 					<li>
 						<a href="#formSerializeObject" data-toggle="tab">formSerializeObject</a>
+					</li>
+					<li>
+						<a href="#ajax4data" data-toggle="tab">ajax4data</a>
 					</li>
 					<li>
 						<a href="#ajaxSubmit" data-toggle="tab">ajaxSubmit</a>
@@ -190,7 +216,7 @@ $('#domId').confirms({
 						<button class="btn btn-large btn-info" onclick="confirmss();" >显示面板</button>
 					</div>
 				</div>
-				<!-- ajaxSubmit -->
+				<!-- confirmPanel -->
 				
 				<div id="pagin" class="tab-pane fade in">
 					<hr />
@@ -221,10 +247,21 @@ Utils.pagin('#J_PAGIN2', 5, 10, 100, 10);
 						</div>
 					</div>
 				</div>
-				<!-- ajaxSubmit -->
+				<!-- pagin -->
+				
+				<div id="ajax4data" class="tab-pane fade in">
+					<h4>ajax获取数据
+					<br />
+					<small>ajax向后台请求数据，数据以特定jQuery方法，显示在指定的dom内</small>
+					</h4>
+					<hr />
+					
+				</div>
+				<!-- ajax4data -->
 				
 				<div id="ajaxSubmit" class="tab-pane fade in">
 					<h4>ajax提交表单</h4>
+					
 				</div>
 				<!-- ajaxSubmit -->
 				

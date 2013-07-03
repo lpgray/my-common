@@ -2,6 +2,13 @@
  * ajax提交表单插件
  */
 ( function($) {
+	var defaults = {
+		callback : function(msg){
+			
+		}
+		, loading : '等待文字'
+	}
+	
 	$.fn.ajaxSubmit = function(opts) {
 		this.validationEngine();
 		var form = this;
@@ -28,14 +35,4 @@
 		});
 		return this;
 	};
-	
-	$(document).delegate('.j_ajax_form', 'click', function() {
-		var fId = $(this).attr('data-form');
-		if (fId) {
-			$('#' + fId).ajaxSubmit();
-		} else {
-			$($(this).parents('form')[0]).ajaxSubmit();
-		}
-		return false;
-	});
 }(jQuery));
