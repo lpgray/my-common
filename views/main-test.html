@@ -30,7 +30,9 @@
 				font:normal bold 26px/28px 'arial';
 			}
 			.navbar .brand small{
-				font-size: .5em;
+				font-size: 12px;
+				letter-spacing: 5px;
+				text-align: center;
 			}
 			.navbar .brand a:hover{
 				color: #0099CB;
@@ -50,7 +52,6 @@
 				<div class="container">
 					<h1 class="brand">
 						<a href="#"><img src="../img/logo_gtmap.png" alt="" />GTMAP</a>
-						<small>前端代码片段</small>
 					</h1>
 				</div>
 			</div>
@@ -77,10 +78,10 @@
 					<li>
 						<a href="#ajax4data" data-toggle="tab">ajax4data</a>
 					</li>
-					<li class="active">
+					<li>
 						<a href="#focusresult" data-toggle="tab">focusresult</a>
 					</li>
-					<li>
+					<li class="active">
 						<a href="#formSerializeObject" data-toggle="tab">formSerializeObject</a>
 					</li>
 					<li>
@@ -250,7 +251,7 @@ Utils.pagin('#J_PAGIN2', 5, 10, 100, 10);
 				</div>
 				<!-- pagin -->
 				
-				<div id="focusresult" class="tab-pane fade in active">
+				<div id="focusresult" class="tab-pane fade in">
 					<h4>强调结果
 						<br />
 						<small>依赖 jquery color animation 插件</small></h4>
@@ -314,11 +315,71 @@ $('#focusResultCtn').focusresult();
 				<!-- ajax4data -->
 				
 				<div id="ajaxSubmit" class="tab-pane fade in">
-					<h4>ajax提交表单</h4>
-					
+					<h4>ajax提交表单 <br />
+						<small>依赖: loading插件，validationEngine插件（因为会验证表单）</small>
+					</h4>
+					<hr />
+					<h5>API</h5>
+<pre class="prettyprint lang-js linenums">
+$('form').ajaxSubmit({
+	callback : function(msg){
+		$('#ajaxformresult').html(msg);
+	}
+	, loading : '正在提交表单'
+})
+</pre>
+					<hr />
+					<div class="hero-unit">
+						<div class="row-fluid">
+							<div class="span6">
+								<form id="J_AJAX_FORM" action="test/ajaxsubmit.json" method="post">
+									<input type="text" name="username" value="" placeholder="用户名"/>
+									<input type="text" name="password" value="" placeholder="密码"/><br />
+									<label for="gender1" class="radio inline"><input id="gender1" type="radio" name="gender" value="1"/>男</label>
+									<label for="gender2" class="radio inline"><input id="gender2" type="radio" name="gender" value="2"/>女</label>&nbsp;&nbsp;
+									<label for="remember" class="checkbox inline"><input type="checkbox" id="remember" name="remember" value="true"/>记住我</label><br /><br />
+									<button class="btn btn-info" onclick="return ajaxsubmitform();">提交</button>
+								</form>
+							</div>
+							<div id="ajaxformresult" class="span6">
+								
+							</div>
+						</div>
+					</div>
 				</div>
 				<!-- ajaxSubmit -->
 				
+				<div id="formSerializeObject" class="tab-pane active fade in">
+					<h4>表单转json对象</h4>
+					
+					<p>支持多级对象转换，如<code>input name="user.name" value="小强"</code> <code>input name="user.email" value="xiaoqiang@gmail.com"</code> 可以转换成 <code>{ 'user' : { 'name' : '小强','email' : 'xiaoqiang@gmail.com' } }</code> </p>
+					
+					<hr />
+					<h5>API</h5>
+<pre class="prettyprint lang-js linenums">
+$('form').serializeObject();
+</pre>
+					<hr />
+					<div class="hero-unit">
+						<div class="row-fluid">
+							<div class="span6">
+								<form id="J_FORM_S" action="test/ajaxsubmit.json" method="post">
+									<input type="text" name="user.name" placeholder="用户名" value="小强"/>
+									<input type="text" name="user.email" value="xiaoqiang@gmail.com"/><br />
+									<label for="gender1" class="radio inline"><input id="gender1" type="radio" name="user.gender" checked value="1"/>男</label>
+									<label for="gender2" class="radio inline"><input id="gender2" type="radio" name="user.gender" value="2"/>女</label>&nbsp;&nbsp;
+									<label for="remember" class="checkbox inline"><input type="checkbox" id="remember" name="rememberMe" checked value="true"/>记住我</label><br /><br />
+									<button class="btn btn-info" onclick="return formSerialize();">转换</button>
+								</form>
+							</div>
+							<div class="span6">
+								<h4>转换结果：</h4>
+								<p id="formsresult" style="font-size: 12px;"></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- ajaxSubmit -->
 			</div>
 		</article>
 		
@@ -358,6 +419,10 @@ $('#focusResultCtn').focusresult();
 		
 		<script src="../js/slip/func.ajax4data.js"></script>
 		
+		<script src="../js/slip/jquery.ajaxSubmit.js"></script>
+		
+		<script src="../js/slip/jquery.form-serialize.js"></script>
+		
 		<script>
 			prettyPrint();
 			
@@ -379,6 +444,21 @@ $('#focusResultCtn').focusresult();
 			
 			Utils.pagin('#J_PAGIN', 5, 10, 200, 10);
 			Utils.pagin('#J_PAGIN2', 5, 10, 100, 10);
+			
+			function ajaxsubmitform(){
+				$('#J_AJAX_FORM').ajaxSubmit({
+					callback : function(msg){
+						$('#ajaxformresult').html(msg);
+					}
+					, loading : '正在提交表单'
+				});
+				return false;
+			}
+			
+			function formSerialize(){
+				$('#formsresult').html( JSON.stringify($('#J_FORM_S').serializeObject()) );
+				return false;
+			}
 		</script>
 	</body>
 </html>

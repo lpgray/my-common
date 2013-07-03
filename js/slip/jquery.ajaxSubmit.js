@@ -9,7 +9,7 @@
 		, loading : '等待文字'
 	}
 	
-	$.fn.ajaxSubmit = function(opts) {
+	$.fn.ajaxSubmit = function( opts ) {
 		this.validationEngine();
 		var form = this;
 	
@@ -23,11 +23,12 @@
 		}
 	
 		opts.loading && loading.show(opts.loading);
-	
+		
 		$.ajax({
 			url : form.attr('action'),
 			type : form.attr('method') || 'get',
 			data : form.serialize(),
+			dataType : 'html',
 			success : function(msg) {
 				opts.callback && opts.callback(msg);
 				loading.hide();
