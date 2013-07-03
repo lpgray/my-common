@@ -24,3 +24,10 @@ $(document).on('click', '[href="#"],.disabled', function(e) {
         }
     }
 }());
+
+function beforeRemove(){
+	$('.j_btn_del,.j_ask').click(function(){
+		var ask = $(this).attr('data-ask') || '确定执行删除操作吗？'
+		return window.confirm(ask);
+	});
+}

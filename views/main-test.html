@@ -20,7 +20,7 @@
 		
 		<style>
 			.navbar .navbar-inner{
-				background: none transparent;
+				background: none white;
 			}
 			.brand img{
 				height: 30px;
@@ -75,10 +75,13 @@
 						<a href="#pagin" data-toggle="tab">pagin</a>
 					</li>
 					<li>
-						<a href="#formSerializeObject" data-toggle="tab">formSerializeObject</a>
+						<a href="#ajax4data" data-toggle="tab">ajax4data</a>
 					</li>
 					<li>
-						<a href="#ajax4data" data-toggle="tab">ajax4data</a>
+						<a href="#focusresult" data-toggle="tab">focusresult</a>
+					</li>
+					<li>
+						<a href="#formSerializeObject" data-toggle="tab">formSerializeObject</a>
 					</li>
 					<li>
 						<a href="#ajaxSubmit" data-toggle="tab">ajaxSubmit</a>
@@ -249,13 +252,66 @@ Utils.pagin('#J_PAGIN2', 5, 10, 100, 10);
 				</div>
 				<!-- pagin -->
 				
+				<div id="focusresult" class="tab-pane fade in active">
+					<h4>强调结果
+						<br />
+						<small>依赖 jquery color animation 插件</small></h4>
+					<hr />
+					<h5>API</h5>
+<pre class="prettyprint linenums lang-js">
+$('#focusResultCtn').focusresult();
+</pre>
+					<hr />
+					<div class="hero-unit">
+						<div class="row-fluid">
+							<div class="span6">
+								<button data-result-ctn="#focusResultCtn(prepend)" href="test/ajax4data.json" class="btn btn-large btn-info a4d" onclick="$('#focusResultCtn').focusresult();">
+									强调结果
+								</button>
+							</div>
+							<div class="span6">
+								<div id="focusResultCtn">
+									一会儿这里会加数据
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
 				<div id="ajax4data" class="tab-pane fade in">
 					<h4>ajax获取数据
 					<br />
 					<small>ajax向后台请求数据，数据以特定jQuery方法，显示在指定的dom内</small>
 					</h4>
 					<hr />
-					
+					<h5>API</h5>
+					<p>
+						首先需要给触发事件的按钮添加一个类 <code>a4d</code> 一个 <code>data-result-ctn="jquery选择字符串[(jquery方法)]"</code> 我这里写的是div的id。
+						以及需要ajax访问的url <code>data-url="url"</code> 或者 <code>href="url"</code>。
+						默认情况下 ajax for data 特性是被激活的，你不需要写任何 javascript 代码。
+					</p>
+<pre class="prettyprint lang-xml linenums">
+&lt;button href="test/ajax4data.json" data-result-ctn="#a4dctn1" class="btn btn-large btn-info a4d"&gt;ajax4data(默认)&lt;/button&gt;
+&lt;button data-url="test/ajax4data.json" data-result-ctn="#a4dctn2(append)" class="btn btn-large btn-info a4d"&gt;ajax4data(默认)&lt;/button&gt;
+</pre>
+					<hr />
+					<div class="hero-unit">
+						<div class="row-fluid">
+							<div class="span6">
+								<button href="test/ajax4data.json" data-result-ctn="#a4dctn1" class="btn btn-large btn-info a4d">ajax4data(默认)</button>
+								<button data-url="test/ajax4data.json" data-result-ctn="#a4dctn2(append)" class="btn btn-large btn-info a4d">ajax4data(append)</button>
+							</div>
+							<div class="span6">
+								<div id="a4dctn1">
+									一会儿这里会加数据
+								</div>
+								<br />
+								<div id="a4dctn2">
+									一会儿这里会以append形式添加数据<br />
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 				<!-- ajax4data -->
 				
@@ -279,6 +335,7 @@ Utils.pagin('#J_PAGIN2', 5, 10, 100, 10);
 		
 		<!-- START Repo -->
 		<script src="../js/vendor/jquery-1.9.1.min.js"></script>
+		<script src="../js/vendor/jquery.animate-colors.js"></script>
 		<script src="../js/vendor/bootstrap.js"></script>
 		<script src="../js/vendor/jquery-ui.js"></script>
 		<script src="../js/vendor/jquery.validationEngine.js"></script>
@@ -287,6 +344,8 @@ Utils.pagin('#J_PAGIN2', 5, 10, 100, 10);
 		<!-- END Repo -->
 		
 		<script src="../js/slip/utils.js"></script>
+		
+		<script src="../js/slip/func.common.js"></script>
 		
 		<script src="../js/slip/jquery.loading.js"></script>
 		
@@ -297,6 +356,10 @@ Utils.pagin('#J_PAGIN2', 5, 10, 100, 10);
 		<script src="../js/slip/jquery.confirm.js"></script>
 		
 		<script src="../js/slip/func.pagin.js"></script>
+		
+		<script src="../js/slip/jquery.focusresult.js"></script>
+		
+		<script src="../js/slip/func.ajax4data.js"></script>
 		
 		<script>
 			prettyPrint();
