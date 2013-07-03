@@ -1,9 +1,4 @@
-/*! 
- *@name: pagin 0.2 
- *
- *@log: 0.2: 支持指定显示最大分页按钮数
- */
-function refreshPagin(page, size, count, pre) {
+Utils.pagin = function(dom, page, size, count, max, pre) {
 	Array.prototype.contains = function(needle) {
 		for (i in this) {
 			if (this[i] == needle)
@@ -12,7 +7,7 @@ function refreshPagin(page, size, count, pre) {
 		return false;
 	}
 	var maxnum = 5, 
-		pagin = $('#J_PAGIN'), 
+		pagin = $(dom), 
 		pagePre = 'page.page', 
 		sizePre = 'page.size', 
 		prev = pagin.children('.prev'), 
@@ -63,8 +58,8 @@ function refreshPagin(page, size, count, pre) {
 		var items = pagin.children('span').children('a'), 
 			active = pagin.children('span').children('.active'), 
 			aIndex, 
-			disNum = [], 
-			max = 20;
+			disNum = [];
+			
 		if (items.length > max) {
 			// get active index
 			aIndex = active.index() + 1;
@@ -110,7 +105,6 @@ function refreshPagin(page, size, count, pre) {
 			}
 		}
 	}
-	
 	simplify(page);
 	pagin.find('a').addClass('j_pagin_link');
 }

@@ -16,8 +16,9 @@
 		style : {
 			'color' : 'white',
 			'background-color' : '#CE3939',
-			'padding' : '5px 10px',
-			'font' : 'normal bold 18px arial'
+			'padding' : '5px 15px',
+			'font' : 'normal bold 30px arial',
+			'border-radius' : '0 5px 0 0'
 		}
 	}
 	
@@ -32,7 +33,8 @@
 	
 	$.fn.closeremove = function(opts) {
 		return this.each(function() {
-			var self = $(this), options = $.extend(true, {}, defaults, opts);
+			var self = $(this)
+				, options = $.extend(true, {}, defaults, opts);
 			self.css('position', 'relative');
 			$link = new LinkRemove(options).render(self.attr('data-url'));
 			self.append($link);

@@ -16,9 +16,12 @@
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		
 		<link rel="stylesheet" href="../css/bootstrap.css" />
+		<link rel="stylesheet" href="../css/prettify.css" />
 		
 		<link rel="stylesheet" href="../css/plugins/loading.css" />
 		<link rel="stylesheet" href="../css/plugins/gridtree.css" />
+		<link rel="stylesheet" href="../css/plugins/confirmpanel.css" />
+		<link rel="stylesheet" href="../css/plugins/pagin.css" />
 	</head>
 
 	<body>
@@ -36,23 +39,26 @@
 					<li>
 						<a href="#loading" data-toggle="tab">loading</a>
 					</li>
-					<li class="active">
+					<li>
 						<a href="#gridtree" data-toggle="tab">gridtree</a>
 					</li>
 					<li>
-						<a href="#">closeremove</a>
+						<a href="#closeremove" data-toggle="tab">closeremove</a>
 					</li>
 					<li>
-						<a href="#">ajaxSubmit</a>
+						<a href="#confirmPanel" data-toggle="tab">confirm</a>
 					</li>
 					<li>
-						<a href="#">confirm</a>
+						<a href="#pagin" data-toggle="tab">pagin</a>
 					</li>
 					<li>
-						<a href="#">formSerializeObject</a>
+						<a href="#formSerializeObject" data-toggle="tab">formSerializeObject</a>
 					</li>
 					<li>
-						<a href="#">beforeRm</a>
+						<a href="#ajaxSubmit" data-toggle="tab">ajaxSubmit</a>
+					</li>
+					<li>
+						<a href="#beforeRm" data-toggle="tab">beforeRm</a>
 					</li>
 				</ul>
 			</nav>
@@ -60,15 +66,30 @@
 		<article>
 			<div class="tab-content container">
 				
-				<div id="loading" class="tab-pane">
-					<h4>loading</h4>
-					<button class="btn" onclick="loading.show('这是一个loading画面，想关闭就刷新吧');">显示loading</button>
+				<div id="loading" class="tab-pane fade in">
+					<h4>loading <br />
+						<small>loading等待面板，常用在ajax异步加载等待时调用</small>
+					</h4>
+					<hr />
+					<h5>API</h5>
+<pre class="prettyprint lang-js linenums">
+loading.show('这是一个loading画面，想关闭就刷新吧'); //打开loading
+loading.hide(); // 关闭loading
+</pre>
+<hr />
+					<div class="hero-unit">
+						<button class="btn btn-large btn-info" onclick="loading.show('这是一个loading画面，想关闭就刷新吧');">显示loading</button>
+					</div>
 				</div>
+				<!-- loading -->
 				
-				<div id="gridtree" class="tab-pane active">
+				<div id="gridtree" class="tab-pane fade in">
 					<div class="row">
 						<div class="span6">
-							<h4>listtree</h4>
+							<h4>listtree <br />
+								<small>对 ul 标签提供支持</small>
+							</h4>
+							<hr />
 							<ul id="listtree" class="nav">
 								<li id="jcsj" data-has-child="true"><a href="#">基础数据</a></li>
 								<li id="dljdm" data-has-child="true" data-parent="jcsj"><a href="#">道路及地名</a></li>
@@ -77,12 +98,15 @@
 								<li data-has-child="false" data-parent="jcsj"><a href="#">基础地理中文名字加长测试名字加长测试</a></li>
 								<li data-has-child="false" data-parent="jcsj"><a href="#">遥感影像</a></li>
 								<li data-has-child="false" data-parent="jcsj"><a href="#">1:50万地质图</a></li>
-								<li id="edsj" data-has-child="true"><a href="#">二调数据</a></li>
-								<li class="last" id="dltb" data-has-child="true"><a href="#">地类图斑</a></li>
+								<li id="edsj" data-has-child="true" data-url="test/listtree.json"><a href="#">二调数据（点我测试异步加载）</a></li>
+								<li class="last" id="dltb" data-has-child="true"><a href="#">地类图斑（我没有配URL，点我会报错）</a></li>
 							</ul>
 						</div>
 						<div class="span6">
-							<h4>gridtree</h4>
+							<h4>gridtree <br />
+								<small>对 tbody 标签提供支持</small>
+							</h4>
+							<hr />
 							<table class="table table-bordered table-condensed">
 	                        	<tbody id="tbodyGridTree">
 		                        	<tr id="tdlyxz">
@@ -132,6 +156,78 @@
 						</div>
 					</div>
 				</div>
+				<!-- gridtree -->
+				
+				<div id="closeremove" class="tab-pane fade in">
+					<h4>鼠标悬浮时，右上角会出现关闭按钮</h4>
+					<hr />
+					<h5>API</h5>
+<pre class="prettyprint lang-js linenums">
+$('#divCloseRemove').closeremove();					
+</pre>
+<hr />
+					<div id="divCloseRemove" class="hero-unit">
+					</div>
+				</div>
+				<!-- closeremove -->
+				
+				<div id="confirmPanel" class="tab-pane fade in">
+					<h4>confirm面板<br /><small>可以自定义reset及confirm回调函数。</small></h4>
+					<hr />
+					<h5>API</h5>
+<pre class="prettyprint lang-js linenums">
+$('#domId').confirms({
+	reset : function(){
+		alert('这是reset回调函数');						
+	},
+	confirm : function(){
+		alert('这是confirm回调');
+	}
+});
+</pre>
+<hr />
+					<div id="divConfirmPanel" class="hero-unit">
+						<button class="btn btn-large btn-info" onclick="confirmss();" >显示面板</button>
+					</div>
+				</div>
+				<!-- ajaxSubmit -->
+				
+				<div id="pagin" class="tab-pane fade in">
+					<hr />
+					<h4>分页控件 <br />
+						<small>六个参数：jquery选择符或者分页容器对象，当前页，每页显示数，总数，最大显示分页按钮数，参数前缀</small>
+					</h4>
+					<h5>API</h5>
+<pre class="prettyprint lang-js linenums">
+Utils.pagin('#J_PAGIN', 5, 10, 200, 10);
+Utils.pagin('#J_PAGIN2', 5, 10, 100, 10);
+</pre>
+<hr />
+					<div class="hero-unit">
+						<div id="J_PAGIN" class="pagin">
+							<a href="#" class="prev">prev</a>
+							<span>
+								
+							</span>
+							<a href="" class="next">next</a>
+						</div>
+						<br />
+						<div id="J_PAGIN2" class="pagin">
+							<a href="#" class="prev">prev</a>
+							<span>
+								
+							</span>
+							<a href="" class="next">next</a>
+						</div>
+					</div>
+				</div>
+				<!-- ajaxSubmit -->
+				
+				<div id="ajaxSubmit" class="tab-pane fade in">
+					<h4>ajax提交表单</h4>
+				</div>
+				<!-- ajaxSubmit -->
+				
 			</div>
 		</article>
 		
@@ -150,20 +246,42 @@
 		<script src="../js/vendor/jquery-ui.js"></script>
 		<script src="../js/vendor/jquery.validationEngine.js"></script>
 		<script src="../js/vendor/jquery.validationEngine-zh_CN.js"></script>
+		<script src="../js/vendor/prettify.js"></script>
 		<!-- END Repo -->
 		
+		<script src="../js/slip/utils.js"></script>
+		
 		<script src="../js/slip/jquery.loading.js"></script>
-		<!-- <script>
-			loading.show('这是测试文字这是测试文字这是测试文字这是测试文字这是测试文字');
-			setTimeout(function(){
-				loading.hide();
-			}, 2000);
-		</script> -->
 		
 		<script src="../js/slip/jquery.gridtree.js"></script>
+		
+		<script src="../js/slip/jquery.closeremove.js"></script>
+		
+		<script src="../js/slip/jquery.confirm.js"></script>
+		
+		<script src="../js/slip/func.pagin.js"></script>
+		
 		<script>
+			prettyPrint();
+			
 			$('#listtree').listtree();
 			$('#tbodyGridTree').gridtree();
+			
+			$('#divCloseRemove').closeremove();
+			
+			function confirmss(){
+				$('#divConfirmPanel').confirms({
+					reset : function(){
+						alert('这是reset回调函数');						
+					},
+					confirm : function(){
+						alert('这是confirm回调');
+					}
+				});
+			}
+			
+			Utils.pagin('#J_PAGIN', 5, 10, 200, 10);
+			Utils.pagin('#J_PAGIN2', 5, 10, 100, 10);
 		</script>
 	</body>
 </html>

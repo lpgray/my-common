@@ -12,6 +12,7 @@
  * 0.1.1   	添加trigger定义
  * 0.1.2   	添加fetchCallback功能
  * 0.2		添加 listtree 插件，支持 ul 标签
+ * 1.0		重构，面向对象风格。支持页面多次使用插件
  */
 (function($){
 	"use strict";
@@ -169,6 +170,7 @@
 			// add blank based on parents
 			// add toggle based on children
 			this.addPrefix(pNum, cStatus, item);
+			return item;
 		}
 		, parentNumber : function( item ){
 			var parentId = $(item).attr('data-parent')
@@ -189,13 +191,15 @@
 		}
 		, move : function( item ){
 			var id = $(item).attr('id')
-				, toggle = $(item).find('._treetoggle');
-			
+				, toggle = $(item).find('._treetoggle')
+				, cStatus = this.childrenStatus( item );
 			if( toggle.hasClass('_open') ){
 				this.hideChildren(id);
-			}else if (toggle.hasClass('_close')){
+			} else if ( toggle.hasClass('_close') && cStatus === 1 ){
 				this.elem.find('[data-parent='+ id +']').css('display','block');
-				toggle.removeClass('_close').addClass('_open');
+				$(item).find('._close').removeClass('_close').addClass('_open');
+			} else {
+				this.fetch( item );
 			}
 		}
 		, hideChildren : function( id ){
@@ -204,13 +208,13 @@
 				$(this).css('display','none');
 				self.hideChildren( $(this).attr('id') );
 			});
-			$('#'+id).find('._treetoggle').removeClass('_open').addClass('_close');
+			$('#'+id).find('._open').removeClass('_open').addClass('_close');
 		}
 		, addPrefix : function(pNum, cStatus, item){
-			var blank = "<i class='_treetoggle ico ico-blank'></i>"
+			var blank = "<i class='ico ico-blank'></i>"
 				, open = "<i class='_treetoggle ico _open'></i>"
 				, close = "<i class='_treetoggle ico _close'></i>"
-				, root = "<i class='_treetoggle ico _root'></i>"
+				, root = "<i class='ico _root'></i>"
 				, cell;
 				
 			cell = $(item).children('td:first-child').length ? $(item).children('td:first-child') : $(item).children('a');
@@ -231,6 +235,27 @@
 			for( var i=0 ; i<pNum ; i++ ){
 				cell.prepend(blank);
 			}
+		}
+		, fetch : function( item ){
+			var self = this
+				, reqUrl = $(item).attr('data-url');
+			if( !reqUrl ){
+				alert('没有设置标签属性data-url');
+				return;
+			}
+			reqUrl && $.ajax({
+				url : reqUrl,
+				dataType : 'html',
+				success : function(msg){
+					var div = $('<div />');
+					div.html(msg);
+					div.children('tr,li').each(function(){
+						self.renderItem( this );
+					});
+					$(item).after(div.html())
+						   .find('._treetoggle').removeClass('_close').addClass('_open');
+				}
+			})
 		}
 	};
 	

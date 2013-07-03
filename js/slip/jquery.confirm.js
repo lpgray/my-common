@@ -1,5 +1,5 @@
 /*!
- * confirm面板
+ * confirm面板 - css3交互
  */
 (function ($) {
 	var ConfirmPanel = function( dom ){
@@ -38,7 +38,7 @@
 		}
 	};
 	
-	$.fn.confirms = function(method, opts){
+	$.fn.confirms = function(opts, method){
 		var options, cp
 			, panel = this.children('.j_final_panel');
 		
@@ -63,11 +63,7 @@
 			cp = this.data('confirmpanel');
 		}
 		
-		if( method && typeof method === 'string' ){
-			cp[method]();
-		}else{
-			cp.show();
-		}
+		cp.show();
 		
 		return this;
 	};

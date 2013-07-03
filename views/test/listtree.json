@@ -1,0 +1,3 @@
+<li id="zxy" data-has-child="true" data-parent="edsj"><a href="#">二调数据子项一</a></li>
+<li id="zxe" data-has-child="true" data-parent="edsj" data-url="test/listtree2.json"><a href="#">二调数据子项二（点我测试异步加载）</a></li>
+<li id="zxs" data-has-child="false" data-parent="edsj"><a href="#">二调数据子项三</a></li>
