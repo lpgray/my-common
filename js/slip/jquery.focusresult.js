@@ -7,12 +7,11 @@
  */
 ( function($) {
 	var focus = function(elem, opt) {
-		var elem = $(elem), color = elem.css('background-color');
+		var elem = $(elem)
+			, color = elem.css('background-color');
 	
 		elem.css('background-color', opt.color);
-		elem.animate({
-			backgroundColor : color
-		}, 1000);
+		elem.animate({'background-color' : color}, 1000);
 	};
 	
 	$.fn.focusresult = function(options) {

@@ -94,7 +94,7 @@
 				
 				<div id="loading" class="tab-pane fade in">
 					<h4>loading <br />
-						<small>loading等待面板，常用在ajax异步加载等待时调用</small>
+						<small>loading等待面板，常用在ajax异步加载等待时调用，默认情况下，loading就被封装了进了 window 上下文</small>
 					</h4>
 					<hr />
 					<h5>API</h5>
@@ -185,7 +185,7 @@ loading.hide(); // 关闭loading
 				<!-- gridtree -->
 				
 				<div id="closeremove" class="tab-pane fade in">
-					<h4>鼠标悬浮时，右上角会出现关闭按钮</h4>
+					<h4>自动添加删除按钮 <br /><small>鼠标悬浮时，右上角会出现关闭按钮</small></h4>
 					<hr />
 					<h5>API</h5>
 <pre class="prettyprint lang-js linenums">
@@ -193,6 +193,7 @@ $('#divCloseRemove').closeremove();
 </pre>
 <hr />
 					<div id="divCloseRemove" class="hero-unit">
+						<h4>将鼠标悬浮一下</h4>
 					</div>
 				</div>
 				<!-- closeremove -->
@@ -332,7 +333,6 @@ $('#focusResultCtn').focusresult();
 		
 		<!-- START Repo -->
 		<script src="../js/vendor/jquery-1.9.1.min.js"></script>
-		<script src="../js/vendor/jquery.animate-colors.js"></script>
 		<script src="../js/vendor/bootstrap.js"></script>
 		<script src="../js/vendor/jquery-ui.js"></script>
 		<script src="../js/vendor/jquery.validationEngine.js"></script>
