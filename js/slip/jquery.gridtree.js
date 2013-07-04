@@ -2,7 +2,7 @@
  * @name: gridtree jquery plugin
  * @author: ray zhang
  * @datetime: 2013-06-28
- * @version: 0.2
+ * @version: 1.2
  *
  * Copyright (c) 2013 Gtmap Ltd. All Rights Reserved.
  *
@@ -14,6 +14,7 @@
  * 0.2		添加 listtree 插件，支持 ul 标签
  * 1.0		重构，面向对象风格。支持页面多次使用插件
  * 1.1		隐藏时添加 hide class,而不是 display none;
+ * 1.2		data-has-child 支持 '1'
  */
 (function($){
 	"use strict";
@@ -56,8 +57,12 @@
 		}
 		// 1: 有且显示着， 0：没，不需要显示； 2：有，但是目前没有显示，需要异步加载
 		, childrenStatus : function( item ){
-			var back = $( '[data-parent="' + $(item).attr('id') + '"]' ).length ? 1 : 0;
-			if( !back && $(item).attr('data-has-child') === 'true' ){
+			var back = $( '[data-parent="' + $(item).attr('id') + '"]' ).length ? 1 : 0
+				, hasChild = $(item).attr('data-has-child');
+			
+			hasChild = (hasChild == 'true' || hasChild == '1') ? true : false;
+			
+			if( !back && hasChild ){
 				back = 2;
 			}
 			return back;
