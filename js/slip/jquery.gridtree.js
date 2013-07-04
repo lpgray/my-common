@@ -13,6 +13,7 @@
  * 0.1.2   	添加fetchCallback功能
  * 0.2		添加 listtree 插件，支持 ul 标签
  * 1.0		重构，面向对象风格。支持页面多次使用插件
+ * 1.1		隐藏时添加 hide class,而不是 display none;
  */
 (function($){
 	"use strict";
@@ -196,7 +197,7 @@
 			if( toggle.hasClass('_open') ){
 				this.hideChildren(id);
 			} else if ( toggle.hasClass('_close') && cStatus === 1 ){
-				this.elem.find('[data-parent='+ id +']').css('display','block');
+				this.elem.find('[data-parent='+ id +']').removeClass('hide');
 				$(item).find('._close').removeClass('_close').addClass('_open');
 			} else {
 				this.fetch( item );
@@ -205,7 +206,7 @@
 		, hideChildren : function( id ){
 			var self = this;
 			this.elem.find('[data-parent='+ id +']').each(function(){
-				$(this).css('display','none');
+				$(this).addClass('hide');
 				self.hideChildren( $(this).attr('id') );
 			});
 			$('#'+id).find('._open').removeClass('_open').addClass('_close');

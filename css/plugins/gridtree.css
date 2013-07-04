@@ -23,10 +23,6 @@
 	top: 2px;
 	margin-right: 1px;
 }
-._gridtree > tr td{
-	display: block;
-	font-size: 12px;
-}
 
 ._listtree > li .ico {
 	display: inline-block;
