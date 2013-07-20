@@ -1,4 +1,4 @@
- /*!
+/*!
  * @name: gridtree jquery plugin
  * @author: ray zhang
  * @datetime: 2013-06-28
@@ -14,12 +14,23 @@
  * 0.2		添加 listtree 插件，支持 ul 标签
  * 1.0		重构，面向对象风格。支持页面多次使用插件
  * 1.1		隐藏时添加 hide class,而不是 display none;
- * 1.2		data-has-child 支持 '1'
+ * 1.2      增加hideCallback, openCallback; 删除未使用的 defaults 参数
  */
 (function($){
 	"use strict";
 	
-	var defaults = {}
+	var defaults = {
+		fetchCallback : null
+		, hideCallback : function( item ){
+			item.find('.icon-folder-open').addClass('icon-folder-close').removeClass('icon-folder-open');
+		}
+		, openCallback : function( item ){
+			console.log(item);
+			item.find('.icon-folder-close').removeClass('icon-folder-close').addClass('icon-folder-open');
+		}
+	}
+	
+	, options
 	
 	, Tree = function(option, elem){
 		this.options = option;
@@ -35,7 +46,7 @@
 			});
 			
 			$(self.elem).delegate('._treetoggle', 'click', function(){
-				self.move($(this).parents('li,tr')[0]);	
+				self.move($(this).parents('li,tr')[0]);
 			});
 		}
 		, renderItem : function( item ){
@@ -57,12 +68,8 @@
 		}
 		// 1: 有且显示着， 0：没，不需要显示； 2：有，但是目前没有显示，需要异步加载
 		, childrenStatus : function( item ){
-			var back = $( '[data-parent="' + $(item).attr('id') + '"]' ).length ? 1 : 0
-				, hasChild = $(item).attr('data-has-child');
-			
-			hasChild = (hasChild == 'true' || hasChild == '1') ? true : false;
-			
-			if( !back && hasChild ){
+			var back = $( '[data-parent="' + $(item).attr('id') + '"]' ).length ? 1 : 0;
+			if( !back && $(item).attr('data-has-child') === 'true' ){
 				back = 2;
 			}
 			return back;
@@ -76,6 +83,7 @@
 			} else if ( toggle.hasClass('_close') && cStatus === 1 ){
 				this.elem.find('[data-parent='+ id +']').removeClass('hide');
 				$(item).find('._close').removeClass('_close').addClass('_open');
+				this.options.openCallback( $(item) );
 			} else {
 				this.fetch( item );
 			}
@@ -87,6 +95,7 @@
 				self.hideChildren( $(this).attr('id') );
 			});
 			$('#'+id).find('._open').removeClass('_open').addClass('_close');
+			self.options.hideCallback( $('#'+id) );
 		}
 		, addPrefix : function(pNum, cStatus, item){
 			var blank = "<i class='ico ico-blank'></i>"
@@ -138,18 +147,18 @@
 	};
 	
 	$.fn.listtree = function( option ){
-		this.addClass('_listtree');
-		var options = $.extend( {}, defaults, option );
 		return this.each( function(){
+			$(this).addClass('_listtree');
+			var options = $.extend( {}, defaults, option );
 			var tree = $(this).data('tree');
 			if( !tree ) $(this).data('tree', (tree = new Tree(options, this)));
 		});
 	};
 	
 	$.fn.gridtree = function( option ){
-		this.addClass('_gridtree');
-		var options = $.extend( {}, defaults, option );
 		return this.each( function(){
+			var options = $.extend( {}, defaults, option );
+			$(this).addClass('_gridtree');
 			var tree = $(this).data('tree');
 			if( !tree ) $(this).data('tree', (tree = new Tree(options, this)));
 		});
