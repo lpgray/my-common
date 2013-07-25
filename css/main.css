@@ -15,9 +15,11 @@ p{
 	font: normal bold 26px/28px 'arial';
 }
 .navbar .brand small {
-	font-size: 12px;
-	letter-spacing: 5px;
-	text-align: center;
+	font-size: 14px;
+	letter-spacing: 1px;
+}
+.navbar .brand a{
+	color: #009CE1;
 }
 .navbar .brand a:hover {
 	color: #0099CB;
