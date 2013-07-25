@@ -15,6 +15,7 @@
  * 1.0		重构，面向对象风格。支持页面多次使用插件
  * 1.1		隐藏时添加 hide class,而不是 display none;
  * 1.2      增加hideCallback, openCallback; 删除未使用的 defaults 参数
+ * 1.2.1	修复bug，异步一次加载多级会有错乱现象
  */
 (function($){
 	"use strict";
@@ -22,11 +23,8 @@
 	var defaults = {
 		fetchCallback : null
 		, hideCallback : function( item ){
-			item.find('.icon-folder-open').addClass('icon-folder-close').removeClass('icon-folder-open');
 		}
 		, openCallback : function( item ){
-			console.log(item);
-			item.find('.icon-folder-close').removeClass('icon-folder-close').addClass('icon-folder-open');
 		}
 	}
 	
@@ -50,19 +48,21 @@
 			});
 		}
 		, renderItem : function( item ){
-			var pNum = this.parentNumber( item )// parents number
+			if( !$(item).find('._treetoggle').length ){
+				var pNum = this.parentNumber( item )// parents number
 				, cStatus = this.childrenStatus( item );// children status
-			// add blank based on parents
-			// add toggle based on children
-			this.addPrefix(pNum, cStatus, item);
-			return item;
+				// add blank based on parents
+				// add toggle based on children
+				this.addPrefix(pNum, cStatus, item);
+				return item;
+			}
 		}
 		, parentNumber : function( item ){
 			var parentId = $(item).attr('data-parent')
 				, num = 0;
 			if( parentId ){
 				num = num + 1;
-				num = num + this.parentNumber( $('#'+parentId) );
+				num = num + this.parentNumber( '#'+parentId );
 			}
 			return num;
 		}
@@ -136,11 +136,11 @@
 				success : function(msg){
 					var div = $('<div />');
 					div.html(msg);
-					div.children('tr,li').each(function(){
-						self.renderItem( this );
-					});
 					$(item).after(div.html())
 						   .find('._treetoggle').removeClass('_close').addClass('_open');
+					$($(item).parents('ul,table')[0]).children('tr,li').each(function(){
+						self.renderItem( this );
+					});
 				}
 			})
 		}

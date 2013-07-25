@@ -1,5 +1,5 @@
 /*! 
- *  gtis front-end common snippets - v0.1.0 - 2013-07-03
+ *  gtis front-end common snippets - v0.1.0 - 2013-07-25
  *  Author: Ray Zhang, Email: rayzy1991@163.com
  *  Copyright (c) 2013 Gtmap Ltd. All Rights Reserved.
  */
@@ -109,46 +109,54 @@ function beforeRemove(){
 		return window.confirm(ask);
 	});
 }
+/*!
+ * @name: loading jquery plugin
+ * @author: ray zhang
+ * @datetime: 2013-06-28
+ * @version: 1.2
+ *
+ * Copyright (c) 2013 Gtmap Ltd. All Rights Reserved.
+ *
+ * change-log
+ * 1.0 init
+ * 1.1 支持指定容器而非全屏
+ */
 (function($){
-	var LoadingPanel = function (text) {
-        this.$elem = $(this.tmpl);
-        $('body').append(this.$elem);
-        this.$loading = this.$elem.find('._gtis_ui_loading');
-        this.$cover = this.$elem.find('._gtis_ui_cover');
-        this.setText(text);
+	var LoadingPanel = function () {
         return this;
     };
 
     LoadingPanel.prototype = {
-        tmpl: "<div id='_GTIS_UI_LOADING_WIN'><div class='_gtis_ui_loading'></div><div class='_gtis_ui_cover'></div></div>",
-
-        setText: function (text) {
-            $(this.$loading).html(text + '...');
-        },
-
-        show: function (text) {
-            this.$cover.css('display','block');
-            this.$loading.fadeIn();
-            text && this.setText(text);
-            var loading = this.$loading
-                , ml = loading.outerWidth();
-        	loading.css('margin-left', '-' + ml/2 + 'px');
+        tmpl: "<div id='_loadingWrap' class='._loading_wrap'><div class='_inner'><div class='_main'></div><div class='_cover'></div></div></div>",
+        
+        show: function (text, ctn) {
+        	$('._loading_wrap').remove();
+        	var wrap = ctn || 'body'
+        		, txt = text || '正在努力加载'
+        		, tmpl = $(this.tmpl)
+            	, loading;
+            this.elem = tmpl;
+            loading = this.elem.find('._main');
+            loading.html(txt);
+            $(wrap).css('position','relative').append(this.elem);
+        	this.elem.css('display','block');
+        	loading.css('margin-left', '-' + loading.outerWidth()/2 + 'px');
+        	
         },
 
         hide: function () {
-            var self = this;
-            this.$loading.fadeOut('fast',function(){
-                self.$cover.css('display','none');
+            this.elem.fadeOut('fast',function(){
+                $('._loading_wrap').remove();
             });
         }
     };
-   	window.loading = new LoadingPanel('初始化文字');
+   	window.loading = new LoadingPanel();
 }(jQuery));
- /*!
+/*!
  * @name: gridtree jquery plugin
  * @author: ray zhang
  * @datetime: 2013-06-28
- * @version: 0.2
+ * @version: 1.2
  *
  * Copyright (c) 2013 Gtmap Ltd. All Rights Reserved.
  *
@@ -159,139 +167,22 @@ function beforeRemove(){
  * 0.1.2   	添加fetchCallback功能
  * 0.2		添加 listtree 插件，支持 ul 标签
  * 1.0		重构，面向对象风格。支持页面多次使用插件
+ * 1.1		隐藏时添加 hide class,而不是 display none;
+ * 1.2      增加hideCallback, openCallback; 删除未使用的 defaults 参数
+ * 1.2.1	修复bug，异步一次加载多级会有错乱现象
  */
 (function($){
 	"use strict";
 	
 	var defaults = {
-		 empty : "<span class='_empty'>&nbsp;</span>"
-		, trigger_root : "<span class='gridtree_trigger _root'>&nbsp;</span>"
-		, trigger_open : "<span class='gridtree_trigger _open'>&nbsp;</span>"
-		, trigger_close : "<span class='gridtree_trigger _close'>&nbsp;</span>"
-		, nameWrap : "<span class='name'></span>"
-		, hiddenClass : "gridtree_h0"
-		, trigger : ".gridtree_trigger"
-		, root_class : '_root'
-		, open_class : '_open'
-		, close_class : '_close'
-		, grid : true
-		, fetchCallback : null
+		fetchCallback : null
+		, hideCallback : function( item ){
+		}
+		, openCallback : function( item ){
+		}
 	}
 	
 	, options
-	
-	, methods = {
-		
-		render : function( list_item ){
-			var td = options.grid ? $(list_item).children('td:first-child') : $(list_item).children('a')
-				, name = td.html()
-				, pNum = methods.hasParent( $(list_item) )
-				, iHc = methods.hasChild( $(list_item) );
-			
-			options.grid ? td.children('span').remove() : td.children('i').remove();
-			
-			td.html( methods.getNameTpl(name) );
-			
-			if( iHc ){
-				if ( iHc == 1){
-					td.prepend(options.trigger_open);
-				}else{
-					td.prepend(options.trigger_close);
-				}
-			} else {
-				td.prepend( methods.getTpl('trigger_root', 1) );
-			}
-			
-			if( pNum ){
-				//console.log( $(this).children('td:first-child').html() + " has " + num + "parents" );
-				td.prepend( methods.getTpl( 'empty', pNum ) );
-			}
-		}
-		/*
-		 * return: 1: 有子项，且子项需要展开，2:有子项，但子项尚未加载，需要异步加载, 0:无子项
-		 */
-		, hasChild : function( item ){
-			var back = $( '[data-parent="' + item.attr('id') + '"]' ).length ? 1 : 0;
-			
-			if( !back && item.attr('data-has-child') === 'true' ){
-				back = 2;
-			}
-			
-			return back;
-		}
-		, hasParent : function( item ){
-			var parentId = item.attr('data-parent')
-				, num = 0;
-			if( parentId ){
-				num = num + 1;
-				num = num + methods.hasParent( $('#'+parentId) );
-				return num;
-			} else {
-				return num;
-			}
-		}
-		, showChild : function( tr ){
-			var children = $( '[data-parent="' + $(tr).attr('id') + '"]' );
-			if( !children.length ){
-				methods.fetchChild(tr);
-				return;
-			}
-			children.each(function(){
-				$(this).removeClass('gridtree_h0');
-			});
-			$(tr).find('.gridtree_trigger').removeClass( options.close_class ).addClass( options.open_class );
-		}
-		, hideChild : function( tr ){
-			$(tr).find('.gridtree_trigger').removeClass( options.open_class ).addClass( options.close_class );
-			$( '[data-parent="' + $(tr).attr('id') + '"]' ).each(function(){
-				$(this).addClass('gridtree_h0');
-				$(this).find('.gridtree_trigger').removeClass( options.open_class ).addClass( options.close_class );
-				methods.hideChild( $(this) );
-			});
-		}
-		, fetchChild : function( tr ){
-			var reqUrl = $(tr).attr('data-url');
-			if( !reqUrl ){
-				alert('没有设置标签属性data-url');
-				return;
-			}
-			reqUrl && $.ajax({
-				url : reqUrl,
-				dataType : 'html',
-				success : function(msg){
-					//console.log(msg);
-					var dom = methods.renderResult(msg);
-					
-					$(tr).after( dom ).find('.gridtree_trigger').removeClass( options.close_class ).addClass( options.open_class );
-				}
-			})
-		}
-		, getTpl : function( name, num ){
-			var	back = "",
-				i;
-			for ( i = 0; i<num ; i++){
-				back = back + options[name];
-			}
-			return back;
-		}
-		, getNameTpl : function( name ){
-			var tpl = $(options.nameWrap);
-			tpl.html(name);
-			return $('<div/>').append(tpl).html();
-		}
-		, renderResult : function( items ){
-			if( typeof(items) === "object" ){ // 返回的结果是json
-				
-			} else {
-				var div = $('<div/>');
-				div.html(items).find('tr,li').each(function(){
-					options.fetchCallback && options.fetchCallback( this );
-					methods.render(this);
-				});
-				return div.html();
-			}
-		}
-	}
 	
 	, Tree = function(option, elem){
 		this.options = option;
@@ -307,23 +198,25 @@ function beforeRemove(){
 			});
 			
 			$(self.elem).delegate('._treetoggle', 'click', function(){
-				self.move($(this).parents('li,tr')[0]);	
+				self.move($(this).parents('li,tr')[0]);
 			});
 		}
 		, renderItem : function( item ){
-			var pNum = this.parentNumber( item )// parents number
+			if( !$(item).find('._treetoggle').length ){
+				var pNum = this.parentNumber( item )// parents number
 				, cStatus = this.childrenStatus( item );// children status
-			// add blank based on parents
-			// add toggle based on children
-			this.addPrefix(pNum, cStatus, item);
-			return item;
+				// add blank based on parents
+				// add toggle based on children
+				this.addPrefix(pNum, cStatus, item);
+				return item;
+			}
 		}
 		, parentNumber : function( item ){
 			var parentId = $(item).attr('data-parent')
 				, num = 0;
 			if( parentId ){
 				num = num + 1;
-				num = num + this.parentNumber( $('#'+parentId) );
+				num = num + this.parentNumber( '#'+parentId );
 			}
 			return num;
 		}
@@ -342,8 +235,9 @@ function beforeRemove(){
 			if( toggle.hasClass('_open') ){
 				this.hideChildren(id);
 			} else if ( toggle.hasClass('_close') && cStatus === 1 ){
-				this.elem.find('[data-parent='+ id +']').css('display','block');
+				this.elem.find('[data-parent='+ id +']').removeClass('hide');
 				$(item).find('._close').removeClass('_close').addClass('_open');
+				this.options.openCallback( $(item) );
 			} else {
 				this.fetch( item );
 			}
@@ -351,10 +245,11 @@ function beforeRemove(){
 		, hideChildren : function( id ){
 			var self = this;
 			this.elem.find('[data-parent='+ id +']').each(function(){
-				$(this).css('display','none');
+				$(this).addClass('hide');
 				self.hideChildren( $(this).attr('id') );
 			});
 			$('#'+id).find('._open').removeClass('_open').addClass('_close');
+			self.options.hideCallback( $('#'+id) );
 		}
 		, addPrefix : function(pNum, cStatus, item){
 			var blank = "<i class='ico ico-blank'></i>"
@@ -395,29 +290,29 @@ function beforeRemove(){
 				success : function(msg){
 					var div = $('<div />');
 					div.html(msg);
-					div.children('tr,li').each(function(){
-						self.renderItem( this );
-					});
 					$(item).after(div.html())
 						   .find('._treetoggle').removeClass('_close').addClass('_open');
+					$($(item).parents('ul,table')[0]).children('tr,li').each(function(){
+						self.renderItem( this );
+					});
 				}
 			})
 		}
 	};
 	
 	$.fn.listtree = function( option ){
-		this.addClass('_listtree');
-		var options = $.extend( {}, defaults, option );
 		return this.each( function(){
+			$(this).addClass('_listtree');
+			var options = $.extend( {}, defaults, option );
 			var tree = $(this).data('tree');
 			if( !tree ) $(this).data('tree', (tree = new Tree(options, this)));
 		});
 	};
 	
 	$.fn.gridtree = function( option ){
-		this.addClass('_gridtree');
-		var options = $.extend( {}, defaults, option );
 		return this.each( function(){
+			var options = $.extend( {}, defaults, option );
+			$(this).addClass('_gridtree');
 			var tree = $(this).data('tree');
 			if( !tree ) $(this).data('tree', (tree = new Tree(options, this)));
 		});
@@ -796,12 +691,13 @@ Utils.pagin = function(dom, page, size, count, max, pre) {
  * change-log：
  * 1.0			init
  * 1.1			可以在class中指定调用什么方法显示数据 比如append数据 <a href="#" class="j_ajax4data" data-result-ctn="#J_ID(append)" >btn</a>
+ * 1.2			IE8下清除缓存
  */
 Utils.ajax4data = function() {
 	$(document).delegate('.a4d', 'click', function() {
 		var url = $(this).attr('data-url') || $(this).attr('href')
 		, sCtn = $(this).attr('data-result-ctn')
-		, method , ctn;
+		, method , ctn, pre = "";
 
 		if (!sCtn) {
 			alert('没有设定存放结果的容器选择符');
@@ -813,16 +709,23 @@ Utils.ajax4data = function() {
 			method = 'html';
 		}
 		ctn = $(sCtn);
-		// loading.show('正在请求数据');
-		url && $.ajax({
-			url : url,
-			dataType : 'html',
-			success : function(msg){
-				ctn[method](msg);
-				ctn.find('form').validationEngine();
-				// loading.hide();
+		loading.show('正在请求数据');
+		if( url ){
+			if( url.indexOf('?') > -1 ){
+				pre = "&d="
+			}else{
+				pre = "?d="
 			}
-		});
+			url && $.ajax({
+	            url : url + pre + new Date().getMilliseconds(),
+	            dataType : 'html',
+	            success : function(msg){
+	                ctn[method](msg);
+	                ctn.find('form').validationEngine();
+					loading.hide();
+	            }
+	        });
+		}
 		return false;
 	});
 };
