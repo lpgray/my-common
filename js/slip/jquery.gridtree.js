@@ -22,10 +22,11 @@
 	var defaults = {
 		fetchCallback : null
 		, hideCallback : function( item ){
-			
+			item.find('.icon-folder-open').addClass('icon-folder-close').removeClass('icon-folder-open');
 		}
 		, openCallback : function( item ){
-			
+			console.log(item);
+			item.find('.icon-folder-close').removeClass('icon-folder-close').addClass('icon-folder-open');
 		}
 	}
 	
