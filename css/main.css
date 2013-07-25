@@ -1,6 +1,9 @@
 body {
 	font: normal normal 12px "microsoft yahei";
 }
+p{
+	line-height: 25px;
+}
 .navbar .navbar-inner {
 	background: none white;
 }

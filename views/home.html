@@ -36,7 +36,7 @@
 		<div class="container">
 			<nav>
 				<ul class="nav nav-tabs">
-					<li>
+					<li class="active">
 						<a href="#loading" data-toggle="tab">loading</a>
 					</li>
 					<li>
@@ -51,7 +51,7 @@
 					<li>
 						<a href="#pagin" data-toggle="tab">pagin</a>
 					</li>
-					<li class="active">
+					<li>
 						<a href="#ajax4data" data-toggle="tab">ajax4data</a>
 					</li>
 					<li>
@@ -69,10 +69,11 @@
 		<article>
 			<div class="tab-content container">
 				
-				<div id="loading" class="tab-pane fade in">
-					<h4>loading <br />
-						<small>loading等待面板，常用在ajax异步加载等待时调用，默认情况下，loading就被封装了进了 window 上下文</small>
+				<div id="loading" class="tab-pane active fade in">
+					<h4>loading <small>loading等待面板，常用在ajax异步加载等待时调用，默认情况下，loading就被封装了进了 window 上下文 </small>
 					</h4>
+					<a href="../js/slip/jquery.loading.js" class="btn btn-mini btn-success">loading.js</a>
+					<a href="../css/plugins/loading.css" class="btn btn-mini btn-warning">loading.css</a>
 					<hr />
 					<h5>API</h5>
 <pre class="prettyprint lang-js linenums">
@@ -80,13 +81,20 @@ loading.show('这是一个loading画面，想关闭就刷新吧'); //打开loadi
 loading.hide(); // 关闭loading
 </pre>
 <hr />
-					<div class="hero-unit">
-						<button class="btn btn-large btn-info" onclick="loading.show('这是一个loading画面，想关闭就刷新吧');">显示loading</button>
+					<div id="loadingPane" class="hero-unit">
+						<button class="btn btn-info" onclick="loading.show('这是一个loading画面','#loadingPane');">外框显示loading</button>
+						<button class="btn btn-info" onclick="loading.show('全屏loading');">显示全屏loading</button><br />
+						<button class="btn btn-danger btn-mini" style="position: relative; z-index: 99999" onclick="loading.hide();">关闭</button>
 					</div>
+					
 				</div>
 				<!-- loading -->
 				
 				<div id="gridtree" class="tab-pane fade in">
+					<h3>jquery.gridtree <small>listtree 和 gridtree 这两个插件都在gridtree.js中</small></h3>
+					<a href="../js/slip/jquery.gridtree.js" class="btn btn-mini btn-success">gridtree.js</a>
+					<a href="../css/plugins/loading.css" class="btn btn-mini btn-warning">gridtree.css</a>
+					<br /><br />
 					<div class="row">
 						<div class="span6">
 							<h4>listtree <br />
@@ -162,7 +170,8 @@ loading.hide(); // 关闭loading
 				<!-- gridtree -->
 				
 				<div id="closeremove" class="tab-pane fade in">
-					<h4>自动添加删除按钮 <br /><small>鼠标悬浮时，右上角会出现关闭按钮</small></h4>
+					<h4>自动添加删除按钮 <small>鼠标悬浮时，右上角会出现关闭按钮</small></h4>
+					<a href="../js/slip/jquery.closeremove.js" class="btn btn-mini btn-success">closeremove.js</a>
 					<hr />
 					<h5>API</h5>
 <pre class="prettyprint lang-js linenums">
@@ -176,7 +185,9 @@ $('#divCloseRemove').closeremove();
 				<!-- closeremove -->
 				
 				<div id="confirmPanel" class="tab-pane fade in">
-					<h4>confirm面板<br /><small>可以自定义reset及confirm回调函数。</small></h4>
+					<h4>confirm面板 <small>可以自定义reset及confirm回调函数。</small></h4>
+					<a href="../js/slip/jquery.confirm.js" class="btn btn-mini btn-success">confirm.js</a>
+					<a href="../css/plugins/confirmpanel.css" class="btn btn-mini btn-warning">confirm.css</a>
 					<hr />
 					<h5>API</h5>
 <pre class="prettyprint lang-js linenums">
@@ -197,9 +208,8 @@ $('#domId').confirms({
 				<!-- confirmPanel -->
 				
 				<div id="pagin" class="tab-pane fade in">
-					<h4>分页控件 <br />
-						<small>六个参数：jquery选择符或者分页容器对象，当前页，每页显示数，总数，最大显示分页按钮数，参数前缀</small>
-					</h4>
+					<h4>分页控件 <small>六个参数：jquery选择符或者分页容器对象，当前页，每页显示数，总数，最大显示分页按钮数，参数前缀</small></h4>
+					<a href="../js/slip/func.pagin.js" class="btn btn-mini btn-success">pagin.js</a>
 					<hr />
 					<h5>API</h5>
 <pre class="prettyprint lang-js linenums">
@@ -228,9 +238,8 @@ Utils.pagin('#J_PAGIN2', 5, 10, 100, 10);
 				<!-- pagin -->
 				
 				<div id="focusresult" class="tab-pane fade in">
-					<h4>强调结果
-						<br />
-						<small>依赖 jquery color animation 插件</small></h4>
+					<h4>强调结果 <small>依赖 jquery color animation 插件</small></h4>
+					<a href="../js/slip/func.focusresult.js" class="btn btn-mini btn-success">focusresult.js</a>
 					<hr />
 					<h5>API</h5>
 <pre class="prettyprint linenums lang-js">
@@ -253,11 +262,9 @@ $('#focusResultCtn').focusresult();
 					</div>
 				</div>
 				
-				<div id="ajax4data" class="tab-pane fade active in">
-					<h4>ajax获取数据
-					<br />
-					<small>ajax向后台请求数据，数据以特定jQuery方法，显示在指定的dom内</small>
-					</h4>
+				<div id="ajax4data" class="tab-pane fade in">
+					<h4>ajax获取数据 <small>ajax向后台请求数据，数据以特定jQuery方法，显示在指定的dom内</small></h4>
+					<a href="../js/slip/func.ajax4date.js" class="btn btn-mini btn-success">ajax4date.js</a>
 					<hr />
 					<h5>API</h5>
 					<p>
@@ -291,9 +298,8 @@ $('#focusResultCtn').focusresult();
 				<!-- ajax4data -->
 				
 				<div id="ajaxSubmit" class="tab-pane fade in">
-					<h4>ajax提交表单 <br />
-						<small>依赖: loading插件，validationEngine插件（因为会验证表单）</small>
-					</h4>
+					<h4>ajax提交表单 <small>依赖: loading插件，validationEngine插件（因为会验证表单）</small></h4>
+					<a href="../js/slip/jquery.ajaxSubmit.js" class="btn btn-mini btn-success">ajaxSubmit.js</a>
 					<hr />
 					<h5>API</h5>
 <pre class="prettyprint lang-js linenums">
@@ -308,7 +314,7 @@ $('form').ajaxSubmit({
 					<div class="hero-unit">
 						<div class="row-fluid">
 							<div class="span6">
-								<form id="J_AJAX_FORM" action="test/ajaxsubmit.json" method="post">
+								<form id="J_AJAX_FORM" action="test/ajaxsubmit.json" method="get">
 									<input type="text" name="username" value="" placeholder="用户名"/>
 									<input type="text" name="password" value="" placeholder="密码"/><br />
 									<label for="gender1" class="radio inline"><input id="gender1" type="radio" name="gender" value="1"/>男</label>
@@ -327,9 +333,8 @@ $('form').ajaxSubmit({
 				
 				<div id="formSerializeObject" class="tab-pane fade in">
 					<h4>表单转json对象</h4>
-					
-					<p>支持多级对象转换，如<code>input name="user.name" value="小强"</code> <code>input name="user.email" value="xiaoqiang@gmail.com"</code> 可以转换成 <code>{ 'user' : { 'name' : '小强','email' : 'xiaoqiang@gmail.com' } }</code> </p>
-					
+					<p>支持多级对象转换，如 <code>input name="user.name" value="小强"</code> <code>input name="user.email" value="xiaoqiang@gmail.com"</code> 可以转换成 <code>{ 'user' : { 'name' : '小强','email' : 'xiaoqiang@gmail.com' } }</code> </p>
+					<a href="../js/slip/jquery.form-serialize.js" class="btn btn-mini btn-success">serializeObject.js</a>
 					<hr />
 					<h5>API</h5>
 <pre class="prettyprint lang-js linenums">

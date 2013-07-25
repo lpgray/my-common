@@ -1,35 +1,43 @@
+/*!
+ * @name: loading jquery plugin
+ * @author: ray zhang
+ * @datetime: 2013-06-28
+ * @version: 1.2
+ *
+ * Copyright (c) 2013 Gtmap Ltd. All Rights Reserved.
+ *
+ * change-log
+ * 1.0 init
+ * 1.1 支持指定容器而非全屏
+ */
 (function($){
-	var LoadingPanel = function (text) {
-        this.$elem = $(this.tmpl);
-        $('body').append(this.$elem);
-        this.$loading = this.$elem.find('._gtis_ui_loading');
-        this.$cover = this.$elem.find('._gtis_ui_cover');
-        this.setText(text);
+	var LoadingPanel = function () {
         return this;
     };
 
     LoadingPanel.prototype = {
-        tmpl: "<div id='_GTIS_UI_LOADING_WIN'><div class='_gtis_ui_loading'></div><div class='_gtis_ui_cover'></div></div>",
-
-        setText: function (text) {
-            $(this.$loading).html(text + '...');
-        },
-
-        show: function (text) {
-            this.$cover.css('display','block');
-            this.$loading.fadeIn();
-            text && this.setText(text);
-            var loading = this.$loading
-                , ml = loading.outerWidth();
-        	loading.css('margin-left', '-' + ml/2 + 'px');
+        tmpl: "<div id='_loadingWrap' class='._loading_wrap'><div class='_inner'><div class='_main'></div><div class='_cover'></div></div></div>",
+        
+        show: function (text, ctn) {
+        	$('._loading_wrap').remove();
+        	var wrap = ctn || 'body'
+        		, txt = text || '正在努力加载'
+        		, tmpl = $(this.tmpl)
+            	, loading;
+            this.elem = tmpl;
+            loading = this.elem.find('._main');
+            loading.html(txt);
+            $(wrap).css('position','relative').append(this.elem);
+        	this.elem.css('display','block');
+        	loading.css('margin-left', '-' + loading.outerWidth()/2 + 'px');
+        	
         },
 
         hide: function () {
-            var self = this;
-            this.$loading.fadeOut('fast',function(){
-                self.$cover.css('display','none');
+            this.elem.fadeOut('fast',function(){
+                $('._loading_wrap').remove();
             });
         }
     };
-   	window.loading = new LoadingPanel('初始化文字');
+   	window.loading = new LoadingPanel();
 }(jQuery));
