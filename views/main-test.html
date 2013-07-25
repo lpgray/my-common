@@ -7,37 +7,13 @@
 		Remove this if you use the .htaccess -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-		<title>代码测试</title>
-		<meta name="description" content="" />
+		<title>GTMAP前端代码测试</title>
 		<meta name="author" content="zhangyang" />
-
-		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
-		<link rel="shortcut icon" href="/favicon.ico" />
-		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-		
 		<link rel="stylesheet" href="../css/bootstrap.css" />
 		<link rel="stylesheet" href="../css/prettify.css" />
-		
+		<link rel="stylesheet" href="../css/main.css" />
 		<style>
-			.navbar .navbar-inner{
-				background: none white;
-			}
-			.brand img{
-				height: 30px;
-				vertical-align: bottom;
-			}
-			.navbar .brand{
-				font:normal bold 26px/28px 'arial';
-			}
-			.navbar .brand small{
-				font-size: 12px;
-				letter-spacing: 5px;
-				text-align: center;
-			}
-			.navbar .brand a:hover{
-				color: #0099CB;
-				text-decoration: none;
-			}
+			
 		</style>
 		
 		<link rel="stylesheet" href="../css/plugins/loading.css" />
@@ -75,13 +51,13 @@
 					<li>
 						<a href="#pagin" data-toggle="tab">pagin</a>
 					</li>
-					<li>
+					<li class="active">
 						<a href="#ajax4data" data-toggle="tab">ajax4data</a>
 					</li>
 					<li>
 						<a href="#focusresult" data-toggle="tab">focusresult</a>
 					</li>
-					<li class="active">
+					<li>
 						<a href="#formSerializeObject" data-toggle="tab">formSerializeObject</a>
 					</li>
 					<li>
@@ -221,10 +197,10 @@ $('#domId').confirms({
 				<!-- confirmPanel -->
 				
 				<div id="pagin" class="tab-pane fade in">
-					<hr />
 					<h4>分页控件 <br />
 						<small>六个参数：jquery选择符或者分页容器对象，当前页，每页显示数，总数，最大显示分页按钮数，参数前缀</small>
 					</h4>
+					<hr />
 					<h5>API</h5>
 <pre class="prettyprint lang-js linenums">
 Utils.pagin('#J_PAGIN', 5, 10, 200, 10);
@@ -277,7 +253,7 @@ $('#focusResultCtn').focusresult();
 					</div>
 				</div>
 				
-				<div id="ajax4data" class="tab-pane fade in">
+				<div id="ajax4data" class="tab-pane fade active in">
 					<h4>ajax获取数据
 					<br />
 					<small>ajax向后台请求数据，数据以特定jQuery方法，显示在指定的dom内</small>
@@ -286,7 +262,7 @@ $('#focusResultCtn').focusresult();
 					<h5>API</h5>
 					<p>
 						首先需要给触发事件的按钮添加一个类 <code>a4d</code> 一个 <code>data-result-ctn="jquery选择字符串[(jquery方法)]"</code> 我这里写的是div的id。
-						以及需要ajax访问的url <code>data-url="url"</code> 或者 <code>href="url"</code>。
+						以及需要ajax访问的url写在<code>data-url="url"</code> 或者 <code>href="url"</code>中。
 						默认情况下 ajax for data 特性是被激活的，你不需要写任何 javascript 代码。
 					</p>
 <pre class="prettyprint lang-xml linenums">
@@ -349,7 +325,7 @@ $('form').ajaxSubmit({
 				</div>
 				<!-- ajaxSubmit -->
 				
-				<div id="formSerializeObject" class="tab-pane active fade in">
+				<div id="formSerializeObject" class="tab-pane fade in">
 					<h4>表单转json对象</h4>
 					
 					<p>支持多级对象转换，如<code>input name="user.name" value="小强"</code> <code>input name="user.email" value="xiaoqiang@gmail.com"</code> 可以转换成 <code>{ 'user' : { 'name' : '小强','email' : 'xiaoqiang@gmail.com' } }</code> </p>

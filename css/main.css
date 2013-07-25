@@ -1,0 +1,22 @@
+body {
+	font: normal normal 12px "microsoft yahei";
+}
+.navbar .navbar-inner {
+	background: none white;
+}
+.brand img {
+	height: 30px;
+	vertical-align: bottom;
+}
+.navbar .brand {
+	font: normal bold 26px/28px 'arial';
+}
+.navbar .brand small {
+	font-size: 12px;
+	letter-spacing: 5px;
+	text-align: center;
+}
+.navbar .brand a:hover {
+	color: #0099CB;
+	text-decoration: none;
+}
