@@ -12,9 +12,6 @@
 		<link rel="stylesheet" href="../css/bootstrap.css" />
 		<link rel="stylesheet" href="../css/prettify.css" />
 		<link rel="stylesheet" href="../css/main.css" />
-		<style>
-			
-		</style>
 		
 		<link rel="stylesheet" href="../css/plugins/loading.css" />
 		<link rel="stylesheet" href="../css/plugins/gridtree.css" />
@@ -220,17 +217,19 @@ Utils.pagin('#J_PAGIN2', 5, 10, 100, 10);
 					<div class="hero-unit">
 						<div id="J_PAGIN" class="pagin">
 							<a href="#" class="prev">prev</a>
-							<span>
-								
-							</span>
+							<span></span>
 							<a href="" class="next">next</a>
 						</div>
 						<br />
 						<div id="J_PAGIN2" class="pagin">
 							<a href="#" class="prev">prev</a>
-							<span>
-								
-							</span>
+							<span></span>
+							<a href="" class="next">next</a>
+						</div>
+						<br />
+						<div id="J_PAGIN3" class="pagin">
+							<a href="#" class="prev">prev</a>
+							<span></span>
 							<a href="" class="next">next</a>
 						</div>
 					</div>
@@ -427,6 +426,7 @@ $('form').serializeObject();
 			
 			Utils.pagin('#J_PAGIN', 5, 10, 200, 10);
 			Utils.pagin('#J_PAGIN2', 5, 10, 100, 10);
+			Utils.pagin('#J_PAGIN3', 50, 10, 600, 10);
 			
 			function ajaxsubmitform(){
 				$('#J_AJAX_FORM').ajaxSubmit({

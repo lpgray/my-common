@@ -16,6 +16,7 @@
  * 1.1		隐藏时添加 hide class,而不是 display none;
  * 1.2      增加hideCallback, openCallback; 删除未使用的 defaults 参数
  * 1.2.1	修复bug，异步一次加载多级会有错乱现象
+ * 1.2.3	修复bug, 异步加载渲染样式错误
  */
 (function($){
 	"use strict";
@@ -23,8 +24,11 @@
 	var defaults = {
 		fetchCallback : null
 		, hideCallback : function( item ){
+			item.find('.icon-folder-open').addClass('icon-folder-close').removeClass('icon-folder-open');
 		}
 		, openCallback : function( item ){
+			console.log(item);
+			item.find('.icon-folder-close').removeClass('icon-folder-close').addClass('icon-folder-open');
 		}
 	}
 	
@@ -48,7 +52,7 @@
 			});
 		}
 		, renderItem : function( item ){
-			if( !$(item).find('._treetoggle').length ){
+			if( !$(item).find('._treetoggle, ._root').length ){
 				var pNum = this.parentNumber( item )// parents number
 				, cStatus = this.childrenStatus( item );// children status
 				// add blank based on parents
@@ -137,8 +141,10 @@
 					var div = $('<div />');
 					div.html(msg);
 					$(item).after(div.html())
-						   .find('._treetoggle').removeClass('_close').addClass('_open');
-					$($(item).parents('ul,table')[0]).children('tr,li').each(function(){
+						   .find('._treetoggle')
+						   .removeClass('_close')
+						   .addClass('_open');
+					$( $(item).parents('ul,table')[0] ).children('tr,li').each(function(){
 						self.renderItem( this );
 					});
 				}
