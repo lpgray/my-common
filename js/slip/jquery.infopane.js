@@ -8,7 +8,7 @@
   $.infopane.show = function( text, classname, callback ){
     $.infopane.pane = $.infopane.pane || $('#_infopane');
     text && $.infopane.setText(text);
-    classname && $.infopane.pane.attr('class', classname);
+    (classname && $.infopane.pane.attr('class', classname)) || $.infopane.pane.attr('class', '')
     $.infopane.pane.fadeIn('fast',callback);
   }
   
