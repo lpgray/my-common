@@ -1,0 +1,1 @@
+define(["service/find","service/location"],function(e,t){return{name:"module-common"}});

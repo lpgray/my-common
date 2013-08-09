@@ -1,0 +1,1 @@
+define(["jquery","model/entity/abstract"],function(e,t){return{name:"student"}});

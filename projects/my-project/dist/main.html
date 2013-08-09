@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Home</title>
+</head>
+<body>
+	<h1>RequireJS模块加载器测试</h1>
+	<p>本案例演示了如何进行RequireJS开发环境code与生产环境code分离，即模块压缩与合并</p>
+	<h2>项目架构</h2>
+	<ul>
+      <li>
+        project
+        <ul>
+          <li>
+            -- main.html
+          </li>
+          <li>
+            -- js/
+            <ul>
+              <li>
+                require.js
+              </li>
+              <li>
+                main.js(requirejs默认会加载的主要模块)
+              </li>
+              <li>
+                service/
+                <ul>
+                  <li>
+                    location.js
+                  </li>
+                  <li>
+                    find.js
+                  </li>
+                </ul>
+              </li>
+              <li>
+                model/
+                <ul>
+                  <li>
+                    student.js
+                  </li>
+                  <li>
+                    animal.js
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  <p>
+    
+  </p>
+	<script data-main="js/main" src="js/lib/require.js"></script>
+</body>
+</html>

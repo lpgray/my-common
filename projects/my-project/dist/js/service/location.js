@@ -1,0 +1,1 @@
+define(["jquery","model/student"],function(e,t){return{name:"service-location"}});
