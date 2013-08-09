@@ -1,0 +1,217 @@
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+a {
+  color: #1734E3;
+}
+a:hover {
+  color: ##182A94;
+}
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1100;
+}
+.navbar-inner {
+  box-shadow: none;
+}
+.navbar-inner .main-nav > .nav > li.current > a {
+  color: #67FFF3;
+  font-weight: bold;
+}
+.dropdown-menu
+,.nav-pills .dropdown-menu{
+  border-radius: 3px;
+}
+.main {
+  height: 100%;
+  padding: 74px 0 0 0;
+  margin: 0;
+  border: none;
+  box-sizing: border-box;
+}
+.main > .left, .main > .right {
+  position: relative;
+  height: 100%;
+}
+.main > .left {
+  background-color: #fff;
+  border-right: 1px solid #E0E0E0;
+  width: 260px;
+  float: left;
+  padding: 0 20px;
+  overflow-y: auto;
+}
+.main > .right {
+  margin-left: 300px;
+  box-sizing: border-box;
+}
+.main > .left > hr{
+  margin: 0 0 10px 0;
+}
+/*Toolbar*/
+#toolbar {
+  background: #C4DBFA url(../img/bg.png) 0 -2px repeat-x;
+  background-position: 0 -45px;
+  border-bottom: 1px solid #a6bee1;
+  height: 30px;
+  left: 0;
+  line-height: 30px;
+  *line-height: 36px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  box-shadow: 1px 1px 1px rgba(0,0,0,.2);
+}
+#toolbar > .opt {
+  position: absolute;
+  right: 10px;
+  top: 3px;
+  *top: 4px;
+  margin: 0;
+}
+#toolbar > .city {
+  position: absolute;
+  left: 5px;
+  top: 3px;
+  *top: 4px;
+  margin: 0;
+  line-height: 0;
+}
+#toolbar > .opt > li > a
+, #toolbar > .city > a {
+  display: inline-block;
+  height: 22px;
+  margin: 0;
+  margin-left: -1px;
+  padding: 0 10px;
+  line-height: 22px;
+  border-radius: 0;
+  border: 1px solid #B4C2D5;
+  background: #FFF url(../img/bg.png) 0 -234px repeat-x;
+  font-size: 12px;
+  font-family: '宋体';
+  color: #424242;
+}
+#toolbar a > .caret {
+  margin-top: 9px;
+  *margin-top: 4px;
+  border-top-color: #424242;
+}
+#toolbar > .opt > li > a:hover
+, #toolbar > .city > a:hover {
+  background-position: 0 -258px;
+  color: #000;
+  text-decoration: none;
+}
+#toolbar > .opt > li.active > a
+, #toolbar > .opt > li.active > a:hover
+, #toolbar .open > a
+, #toolbar .open > a:hover
+, #toolbar li.open > a
+, #toolbar li.open > a:hover {
+  background-position: 0 -282px;
+  border-color: #68A9EB;
+  color: #fff;
+  text-decoration: none;
+}
+#toolbar .active > a .caret
+, #toolbar .open > a .caret {
+  border-top-color: #fff;
+}
+#toolbar .dropdown > .dropdown-menu {
+  right: 0;
+  left: auto;
+}
+#toolbar .city-menu {
+  padding: 0 20px;
+  width: 300px;
+  z-index: 900;
+  line-height: 20px;
+  top: 30px;
+}
+#toolbar .city-menu > a {
+  display: inline-block;
+  margin: 0 .2em;
+}
+/*mapTypesTree*/
+#mapTypesTree > .top > a > span{
+  font-size: 14px;
+  font-weight: bold;
+  color: #1529C0;
+}
+#mapTypesTree > li > a{
+  color: #3F3F3F;
+  font-size: 12px;
+}
+#mapTypesTree > li{
+  position: relative;
+}
+#mapTypesTree > li > .tools{
+  position: absolute;
+  right: 0;
+  top: 0;
+  *top: 1px;
+  z-index: 100;
+}
+#mapTypesTree > li > .tools > input[type=checkbox]{
+  margin: 0;
+}
+#mapTypesTree .ico-duibi{
+  background: url(../img/left-item.png) 0 0 no-repeat;
+  width: 13px;
+  height: 13px;
+  display: inline-block;
+  position: relative;
+  top: 2px;
+  *top: -3px;
+}
+#mapTypesTree .ico-duibi:hover
+, #mapTypesTree .ico-duibi.active{
+  background-position: 0 -14px;
+}
+
+#measureCtn{
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  width: 190px;
+  top: 34px;
+  right: 70px;
+  z-index: 100;
+  border-radius: 3px;
+}
+#measureCtn .resultLabel{
+  margin: 0;
+  border-color: #ececec;
+  font-weight: bold;
+}
+#measureCtn .dijitContentPane{
+  padding: 5px;
+}
+.dijitPopup table{
+  border:  1px solid #eee;
+  border-bottom: 0;
+}
+.dijitPopup table td{
+  border-bottom: 1px solid #eee;
+  padding: 3px 6px;
+}
+.dijitPopup table tr:hover{
+  background: #153EC1;
+}
+.widget{
+  display: none;
+}
+
+/*Map*/
+#map {
+  height: 100%;
+}
+table.esriLargeSliderTL {
+  top: 50px;
+  background: transparent none;
+}

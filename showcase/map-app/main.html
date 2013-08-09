@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <title>矿产资源规划 - 南京</title>
+    <link rel="stylesheet" href="http://127.0.0.1:8080/arcgis_js_api/library/3.5/3.5/js/esri/css/esri.css" />
+    <link rel="stylesheet" href="http://127.0.0.1:8080/arcgis_js_api/library/3.5/3.5/js/dojo/dijit/themes/claro/claro.css" />
+    
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.css" />
+    <link rel="stylesheet" href="css/plugins/gridtree/gridtree-noline.css" />
+    <link rel="stylesheet" href="css/plugins/infopane.css" />
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+  <body>
+    <div class="navbar navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container" style="width: 100%">
+          <a href="home.html" class="brand">江苏省国土资源“一张图”信息门户</a>
+          <div class="pull-right">
+            <div class="small-nav">
+              <ul class="nav nav-pills">
+                <li>
+                  <a href="#">登录</a>
+                </li>
+                <li>
+                  <a href="#">江苏省国土资源厅</a>
+                </li>
+                <li>
+                  <a href="#">帮助</a>
+                </li>
+              </ul>
+            </div>
+            <div class="main-nav">
+              <ul class="nav nav-pills">
+                <li>
+                  <a href="#">一张图</a>
+                </li>
+                <li class="current">
+                  <a href="#">专题图</a>
+                </li>
+                <li>
+                  <a href="#">统计报表</a>
+                </li>
+                <li>
+                  <a href="#">资源中心</a>
+                </li>
+                <li>
+                  <a href="#">地图API</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- navbar -->
+
+    <div class="main claro">
+      
+      <div class="left">
+        <br />
+        <h4>&nbsp;</h4>
+        <hr />
+        <!-- <ul id="mapTypesTree" data-gtmap-service="layerCompare(.ico-duibi),layerShowHide(input[type=checkbox])">
+          <li class="top" id="jcsj"><a href="#">基础数据</a><div class="tools"><input type="checkbox" /> <a href="#" class="ico-duibi"></a></div></li>
+          <li data-parent="jcsj" data-has-child="true"><a href="#">基础地理</a><div class="tools"><input type="checkbox" /> <a href="#" class="ico-duibi"></a></div></li>
+          <li data-parent="jcsj" data-has-child="true"><a href="#">遥感影像</a><div class="tools"><input type="checkbox" /> <a href="#" class="ico-duibi"></a></div></li>
+          <li data-parent="jcsj" data-has-child="true"><a href="#">基础地质</a><div class="tools"><input type="checkbox" /> <a href="#" class="ico-duibi"></a></div></li>
+          <li class="top" id="tdzt"><a href="#">土地专题</a><div class="tools"><input type="checkbox" /> <a href="#" class="ico-duibi"></a></div></li>
+          <li id="tddc" data-parent="tdzt"><a href="#">土地调查</a><div class="tools"><input type="checkbox" /> <a href="#" class="ico-duibi"></a></div></li>
+          <li id="tddc2010" data-parent="tddc"><a href="#">土地调查2010</a><div class="tools"><input type="checkbox" /> <a href="#" class="ico-duibi"></a></div></li>
+          <li class="active" id="tdlyxz2010" data-parent="tddc2010"><a href="#">土地利用现状2010（图斑、线物）</a><div class="tools"><input type="checkbox" /> <a href="#" class="ico-duibi"></a></div></li>
+          <li id="tdlygh" data-parent="tdzt" data-has-child="true"><a href="#">土地利用规划</a><div class="tools"><input type="checkbox" /> <a href="#" class="ico-duibi"></a></div></li>
+          <li id="tdzzgh" data-parent="tdzt" data-has-child="true"><a href="#">土地整治规划</a><div class="tools"><input type="checkbox" /> <a href="#" class="ico-duibi"></a></div></li>
+          <li class="top" id="kczt"><a href="#">矿产专题</a><div class="tools"><input type="checkbox" /> <a href="#" class="ico-duibi"></a></div></li>
+          <li data-parent="kczt" data-has-child="true"><a href="#">矿产资源规划</a><div class="tools"><input type="checkbox" /> <a href="#" class="ico-duibi"></a></div></li>
+          <li data-parent="kczt" data-has-child="true"><a href="#">地质勘查规划</a><div class="tools"><input type="checkbox" /> <a href="#" class="ico-duibi"></a></div></li>
+          <li data-parent="kczt" data-has-child="true"><a href="#">矿产资源储量</a><div class="tools"><input type="checkbox" /> <a href="#" class="ico-duibi"></a></div></li>
+          <li class="top" data-has-child="true"><a href="#">地环专题</a><div class="tools"><input type="checkbox" /> <a href="#" class="ico-duibi"></a></div></li>
+          <li class="top" id="zhzt"><a href="#">综合管理</a><div class="tools"><input type="checkbox" /> <a href="#" class="ico-duibi"></a></div></li>
+          <li data-parent="zhzt"><a href="#">土地监管</a><div class="tools"><input type="checkbox" /> <a href="#" class="ico-duibi"></a></div></li>
+          <li data-parent="zhzt"><a href="#">矿产监管</a><div class="tools"><input type="checkbox" /> <a href="#" class="ico-duibi"></a></div></li>
+        </ul> -->
+      </div><!-- left -->
+      
+      <div class="right">
+        <div id="toolbar">
+          <div class="city">
+            <a href="#" id="cities" href="#" class="dropdown-toggle" data-toggle="dropdown"><strong>南京市</strong> <b class="caret"></b></a>
+            &nbsp;&nbsp;&nbsp;
+            <!-- <ul class="dropdown-menu" role="menu" aria-labelledby="city">
+            <li class="dropdown-submenu">
+            <a href="#">南京</a>
+            <ul class="dropdown-menu">
+            <li><a href="#">鼓楼</a></li>
+            <li><a href="#">下关</a></li>
+            <li><a href="#">秦淮</a></li>
+            <li class="dropdown-submenu">
+            <a href="#">建邺</a>
+            <ul class="dropdown-menu">
+            <li><a href="#">奥体</a></li>
+            </ul>
+            </li>
+            </ul>
+            </li>
+            <li><a href="#">徐州</a></li>
+            <li><a href="#">连云港</a></li>
+            </ul> -->
+            <div class="dropdown-menu city-menu" role="menu" aria-labelledby="cities" data-gtmap-service="city-chose(a)">
+              <h5><small>当前城市：</small> 南京市</h5>
+              <hr />
+              <a href="#">南京</a>
+              <a href="#">无锡</a>
+              <a href="#">连云港</a>
+              <a href="#">苏州</a>
+              <a href="#">常州</a>
+              <a href="#">镇江</a>
+              <a href="#">盐城</a>
+              <a href="#">淮安</a>
+              <a href="#">宿迁</a>
+              <a href="#">扬州</a>
+              <a href="#">南通</a>
+              <a href="#">泰州</a>
+              <br /><br />
+            </div>
+            </span>
+          </div>
+          <ul class="nav nav-pills opt">
+            <li class="dropdown clearfix" style="position: relative;">
+              <a href="#" data-gtmap-service="measurement">量算</a>
+            </li>
+            <li>
+              <a href="#" data-gtmap-service="search">查询</a>
+            </li>
+            <li class="dropdown clearfix" style="position: relative;">
+              <a id="tools" href="#" class="dropdown-toggle" data-toggle="dropdown"><span>工具 </span><b class="caret"></b></a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="tools">
+                <li>
+                  <a href="#" data-gtmap-service="print">打印</a>
+                </li>
+                <li>
+                  <a href="#" data-gtmap-service="glass">通透镜</a>
+                </li>
+                <li>
+                  <a href="#" data-gtmap-service="location">定位</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#">图例</a>
+            </li>
+            <li>
+              <a href="#" data-gtmap-service="identify">属性识别</a>
+            </li>
+          </ul>
+        </div><!-- toolbar -->
+        
+        <div class="widget">
+          <div id="measureCtn"></div>
+        </div>
+        
+        
+        <div id="map">
+          
+        </div>
+      </div><!--right-->
+    </div><!-- main -->
+    <div id="_infopane">
+                        这是一个infopane
+    </div>
+    <script src="//127.0.0.1:8080/arcgis_js_api/library/3.5/3.5/init.js"></script>
+    <script src="js/lib/jquery-1.10.2.min.js"></script>
+    <script src="js/lib/jq.plugins/bootstrap.js"></script>
+    <script src="js/lib/jq.plugins/plugins.js"></script>
+    <script src="js/lib/jq.plugins/jquery.infopane.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
