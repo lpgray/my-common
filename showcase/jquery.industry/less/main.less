@@ -1,0 +1,117 @@
+@import "func.less";
+
+@body-color: white;
+
+@instrument-border-color: #848484;
+@instrument-background-color: #F0F0F0;
+@instrument-origin-background-color: #333333;
+@instrument-origin-border-color: #282828;
+@pointer-background-color: #009AFF;
+@pointer-border-color: #0783E3;
+@instrument-font-color: #434846;
+@instrument-rect-background-color: #D0D0D0;
+@instrument-rect-border-color: #8F8F8F;
+@instrument-label-font-color: #2C2CE3;
+@instrument-measurement-font-color: #656B7E;
+
+@widget-title-background-color: #BABABA;
+@widget-body-background-color: #E0E0E0;
+
+@lever-1-color: #017EFF;
+@lever-2-color: #80BFFF;
+@lever-3-color: #FFFF00;
+@lever-4-color: #FDB024;
+@lever-5-color: #BF1101;
+@lever-5-color: red;
+
+body{
+  background-color: @body-color;
+}
+h1,h2,h3,h4,h5,h6{
+  margin:0;
+}
+.widget{
+  margin:10px 0;
+}
+.widget .widget-title{
+  background-color: @widget-title-background-color;
+  min-height: 30px;
+}
+.widget .widget-title h1{
+  font-size: 16px;
+  line-height: 30px;
+  padding-left: 10px;
+}
+.widget .widget-body{
+  background-color: @widget-body-background-color;
+  
+}
+.svg-wrap{
+  height: 300px;
+}
+svg{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 20px 17%;
+}
+.default svg circle{
+  stroke: @instrument-border-color;
+  stroke-width: 2px;
+  fill: @instrument-background-color;
+}
+.default svg circle.origin{
+  fill: @instrument-origin-background-color;
+  stroke: @instrument-origin-border-color;
+}
+.default svg path.pointer{
+  fill: @pointer-background-color;
+  stroke: @pointer-border-color;
+}
+.default svg line{
+  stroke: grey;
+  stroke-width: 1px;
+}
+.default svg line.bold{
+  stroke-width: 2px;
+  stroke: black;
+}
+.default svg path.level_1{
+  stroke: @lever-1-color;
+  fill: @lever-1-color;
+}
+.default svg path.level_2{
+  stroke: @lever-2-color;
+  fill: @lever-2-color;
+}
+.default svg path.level_3{
+  stroke: @lever-3-color;
+  fill: @lever-3-color;
+}
+.default svg path.level_4{
+  stroke: @lever-4-color;
+  fill: @lever-4-color;
+}
+.default svg path.level_5{
+  stroke: @lever-5-color;
+  fill: @lever-5-color;
+}
+.default svg text{
+  stroke: @instrument-font-color;
+}
+.default svg text.label{
+  font-family: Arial;
+  font-size: 13px;
+  stroke: none;
+  fill : @instrument-label-font-color;
+}
+.default svg text.measurement{
+  font-family: Arial;
+  font-size: 12px;
+  stroke: none;
+  fill : @instrument-measurement-font-color;
+}
+.default svg rect{
+  stroke: @instrument-rect-border-color;
+  fill: @instrument-rect-background-color;
+}

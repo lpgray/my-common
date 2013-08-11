@@ -1,0 +1,56 @@
+/*
+ * 圆角
+ * @param: 像素值(defult:3)
+ */
+.border-radius( @px:3px, ){
+  border-radius: @px;
+  -webkit-border-radius: @px;
+  -moz-border-radius: @px;
+  -ms-border-radius: @px;
+  -o-border-radius: @px;
+}
+/*
+ * 特定方向的圆角
+ *  
+ */
+.border-radius-direction( @l_t:3px,@r_t:3px,@r_b:3px,@l_b:3px ){
+  border-radius: @l_t @r_t @r_b @l_b;
+  -webkit-border-radius: @l_t @r_t @r_b @l_b;
+  -moz-border-radius: @l_t @r_t @r_b @l_b;
+  -ms-border-radius: @l_t @r_t @r_b @l_b;
+  -o-border-radius: @l_t @r_t @r_b @l_b;
+}
+/*
+ * 盒子阴影
+ * @params: 垂直方向偏移，水平方向偏移，阴影值，长度，颜色
+ */
+.box-shadow(@horizontal:1px, @verticle:1px, @shadow:1px, @length:1px, @color:rgba(0,0,0,1)){
+  box-shadow: @horizontal @verticle @shadow @length @color;
+  -webkit-box-shadow: @horizontal @verticle @shadow @length @color;
+  -moz-box-shadow: @horizontal @verticle @shadow @length @color;
+  -ms-box-shadow: @horizontal @verticle @shadow @length @color;
+  -o-box-shadow: @horizontal @verticle @shadow @length @color;
+}
+/*
+ * 渐变背景纵向
+ * @params: 像素值， 色值
+ */
+.background-img(@top: #0088cc, @bottom: #0077b3){
+  background-image: -moz-linear-gradient(top, @top, @bottom);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@top), to(@bottom));
+  background-image: -webkit-linear-gradient(top, @top, @bottom);
+  background-image: -o-linear-gradient(top, @top, @bottom);
+  background-image: linear-gradient(to bottom, @top, @bottom);
+  background-repeat: repeat-x;
+}
+/*
+ * 过度动画
+ * @params: 
+ */
+.transition(@property: all, @duration: .5s, @timing-func:ease-in, @delay: .5s){
+  transition: @property @duration @timing-func @delay;
+  -webkit-transition: @property @duration @timing-func @delay;
+  -moz-transition: @property @duration @timing-func @delay;
+  -ms-transition: @property @duration @timing-func @delay;
+  -o-transition: @property @duration @timing-func @delay;
+}
