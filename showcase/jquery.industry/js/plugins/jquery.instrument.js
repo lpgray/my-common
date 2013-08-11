@@ -1,23 +1,35 @@
 // 仪表盘插件
 (function($){
 	// 仪表盘类定义
-	var Instrument = function(elem, opts){
-		this.$elem = elem;
-		_this = this;
+	var Instrument = function(id, opts){
+		this.$elem = $('#' + id);
+		this.elem = Raphael(id);
 		this.options = opts;
-		var svgWrap = this.$elem.svg({onLoad: function(svg){
-				svg.circle( opts.origin['x'] , opts.origin['y'] , opts.radius );// 创建表盘
-			}});
-		$(svgWrap).addClass(opts.classStyle);
+		// 创建表盘
+		this.createPanel();
 	}
 	Instrument.prototype = {
-		
+		createPanel : function(){
+			var w = this.$elem.width()
+					, h = this.$elem.height()
+					, x = w > h ? h : w
+					, r = this.options.radius
+					, x = w/2
+					, y = h/2;
+			this.elem.circle( x, y, this.options.radius );
+		}
+		, createScale : function(){
+			
+		}
+		, createPoint : function(){
+			
+		}
 	}
 	
 	// Plugin definition
 	$.fn.instrument = function( options ){
 		var opts = $.extend({}, $.fn.instrument.defaults, options);
-		if( !this.data('_svg') ) this.data( '_svg' , new Instrument(this, opts) );
+		if( !this.data('_svg') ) this.data( '_svg' , new Instrument(this.attr('id'), opts) );
 		return this;
 	}
 	

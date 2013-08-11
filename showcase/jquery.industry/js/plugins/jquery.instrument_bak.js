@@ -8,28 +8,27 @@
 		var svgWrap = this.$elem.svg({onLoad: function(svg){
 				svg.circle( opts.origin['x'] , opts.origin['y'] , opts.radius );// 创建表盘
 				
-				// createScale(svg, opts.radian, opts.origin, 5, opts.radius/1.7, opts.start, opts.end);	// 创建刻度
-// 				
-				// var stripeOpt = {
-						// origin : opts.origin,
-						// radius : opts.radius/1.7 - 7,
-						// width : 5,
-						// radian : opts.radian,
-						// group : opts.group
-					// };
-				// createStripeGroup(svg, stripeOpt);// 创建警示彩带
-// 				
-				// var pointerOpt = {
-						// origin : opts.origin ,
-						// high : opts.radius/1.45,
-						// width : opts.origin_radius - 2,
-					// };
-				// _this.pointer = createPointer(svg , pointerOpt , scale_to_radians( opts.group , opts.initVal , opts.radian  ));	// 创建指针
-				// _this.pointer.val = opts.initVal;
-				// svg.circle(opts.origin['x'] , opts.origin['y'] , opts.origin_radius , {'class':'origin'});// 创建圆心
-// 				
-				// _this.label = createLabel(svg, opts.origin, 70, 55, opts.initVal, opts.measurement);// 创建label	
-			}});
+				createScale(svg, opts.radian, opts.origin, 5, opts.radius/1.7, opts.start, opts.end);	// 创建刻度
+				
+				var stripeOpt = {
+						origin : opts.origin,
+						radius : opts.radius/1.7 - 7,
+						width : 5,
+						radian : opts.radian,
+						group : opts.group
+					};
+				createStripeGroup(svg, stripeOpt);// 创建警示彩带
+				
+				var pointerOpt = {
+						origin : opts.origin ,
+						high : opts.radius/1.45,
+						width : opts.origin_radius - 2,
+					};
+				_this.pointer = createPointer(svg , pointerOpt , scale_to_radians( opts.group , opts.initVal , opts.radian  ));	// 创建指针
+				_this.pointer.val = opts.initVal;
+				svg.circle(opts.origin['x'] , opts.origin['y'] , opts.origin_radius , {'class':'origin'});// 创建圆心
+				
+				_this.label = createLabel(svg, opts.origin, 70, 55, opts.initVal, opts.measurement);// 创建label		}});
 			$(svgWrap).addClass(opts.classStyle);
 	}
 	Instrument.prototype = {
