@@ -1,10 +1,12 @@
 <li id="<%= id %>">
   <a href="#"><%= id %></a>
-  <div class="tools"><input type="checkbox" /> <a href="#" class="ico-duibi"></a></div>
+  <div class="tools">
+    <input data-id="<%= id %>" type="checkbox" checked/>
+    <a href="#" class="ico-duibi"></a>
+  </div>
 </li>
 <% _.each(layerInfos, function(layer){ %>
   <li id="<%= id%><%= layer.id%>" data-parent="<%= id %>"> 
     <a href="#"><%= layer.name %></a>
-    <div class="tools"><input type="checkbox" /> <a href="#" class="ico-duibi"></a></div>
   </li>
 <%});%>
