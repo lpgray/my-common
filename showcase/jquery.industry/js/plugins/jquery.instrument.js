@@ -18,26 +18,34 @@
 					
 			this.origin = { x:x, y:y }
 			
-			this.elem.circle( x, y, this.options.radius );												// 创建表盘
+			this.elem.circle( x, y, r );     // 创建表盘
+			this.elem.circle( x, y, r/10 );  // 创建圆心
+			this.createTriangle();           // 创建初始指针
 			
-			this.createTriangle();																								// 创建初始指针
-			
-			var origin = this.elem.circle( x, y, this.options.origin_radius ); 		// 创建圆心
-					origin.attr({ fill:'#000' });
-					
-			_utils.createScale( this.elem, this.options.radian, this.origin, 10, 50, 0, 100 ); // 创建刻度
+			// 创建刻度
+			_utils.createScale( this.elem, this.options.radian, this.origin, r/10, r/2, 0, 100 ); 
 			
 			// 创建警示彩条
 			this.createStrip();
+			
+			// 创建label
+			this.createLabel();
 		}
 		, createStrip : function(){
-			_utils.createStripe( this.elem, this.options.radian / 2, 177, 35, 10, this.origin );
-			_utils.createStripe( this.elem, 183 , 360 - this.options.radian / 2, 35, 10, this.origin );
+			_utils.createStripe( this.elem, this.options.radian / 2, 178, this.options.radius/2 - this.options.radius/10 - 3, this.options.radius/10, this.origin );
+			_utils.createStripe( this.elem, 182 , 360 - this.options.radian / 2, this.options.radius/2 - this.options.radius/10 - 3, this.options.radius/10, this.origin );
 		}
 		, createTriangle : function(){
-			var path = _utils.calcPathOfTriangle.call( this, this.origin, 50, 5, 20 );
+			var path = _utils.calcPathOfTriangle.call( this, this.origin, this.options.radius/2, this.options.radius/10 - 2, this.options.radian/2 );
 			this.triangle = this.elem.path( path );
-			console.log( this.triangle );
+		}
+		, createLabel : function(){
+		  var rectX = this.origin.x - this.options.radius/4
+		      , rectY = this.origin.y + this.options.radius/2
+		      , width = this.options.radius/2
+		      , height = this.options.radius/6
+		  this.elem.rect(rectX, rectY, width, height, height / 2);
+		  this.elem.text(this.origin.x, rectY + height/2, this.options.label).attr({'font-size': 14});
 		}
 	}
 	
@@ -182,15 +190,14 @@
 	
 	$.fn.instrument.defaults = {
 		origin : {x:100, y:100},	// 原点
-		radius : 100,				// 半径
-		origin_radius : 5,	// 圆心轴半径
+		radius : 150,				// 半径
+		origin_radius : 10,	// 圆心轴半径
 		start : 0,					// 开始刻度
 		end : 100,					// 结束刻度
 		radian : 80,				// 下方开口角度
 		group : [0,20,40,60,80,100],// 刻度分级，用不同颜色的警示彩带标明
 		initVal : 0,				//初始刻度值
-		measurement : '默认LABEL',	//计量单位默认值
-		classStyle : 'default'
+		label : 'DE',	//计量单位默认值
 	}
 	
 }(jQuery));
