@@ -1,18 +1,19 @@
 define(function(require){
-  var modules = [
-    'gtmap/service/city'
-    , 'gtmap/service/glass'
-    , 'gtmap/service/identify'
-    , 'gtmap/service/layer'
-    , 'gtmap/service/location'
-    , 'gtmap/service/measurement'
-    , 'gtmap/service/print'
-    , 'gtmap/service/search'
-  ];
+  
+  var rendered = 0;
   
   return {
-    
     bindHandler : function(){
+      var modules = [
+        'gtmap/service/city'
+        , 'gtmap/service/glass'
+        , 'gtmap/service/identify'
+        , 'gtmap/service/layer'
+        , 'gtmap/service/location'
+        , 'gtmap/service/measurement'
+        , 'gtmap/service/print'
+        , 'gtmap/service/search'
+      ];
       
       require( settings , modules, function(){
         var args = arguments;
@@ -42,8 +43,16 @@ define(function(require){
           }
         }
       });
-      
     }
     
+    , loadServiceTree : function( service ) {
+        require( settings, ['dojo/text!gtmap/template/servicetree.html'], function( tpl ){
+          $('#mapTypesTree').append( _.template( tpl )( service ) );
+          rendered++;
+          if( rendered == services.length ){
+            $('#mapTypesTree').listtree();
+          }
+        });
+      }
   }
 });

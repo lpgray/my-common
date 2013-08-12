@@ -45,26 +45,26 @@ function setNavWithChildrenSelect( obj ){
   clearOverlay();
 }
 
-
 require(settings, ['gtmap/ctrl', 'esri/map'], function(ctrl, Map) {
-	$('#mapTypesTree').listtree();
-
 	map = new Map('map', {
 		logo : false,
-		sliderStyle : 'large'
+		sliderStyle : 'large',
+		zoom : 11
 	});
 	
 	var baseMap = new esri.layers.ArcGISTiledMapServiceLayer("http://www.arcgisonline.cn/ArcGIS/rest/services/ChinaCities_Community_BaseMap_CHN/NanJing_Community_BaseMap_CHN/MapServer");
+	dojo.connect( baseMap, 'onLoad', ctrl.loadServiceTree );
 	var jsMap = new esri.layers.ArcGISDynamicMapServiceLayer(identifyServiceUrl);
-	
-	map.addLayers([baseMap, jsMap]);
+	dojo.connect( jsMap, 'onLoad', ctrl.loadServiceTree );
+	services.push(baseMap, jsMap);
+	map.addLayers(services);
 
 	dojo.connect(map, 'onLoad', function() {
 		ctrl.bindHandler();
 		
 		$.infopane.setText('完成!');
 		$.infopane.hide();
-
+    
 		symbol = new esri.symbol.SimpleMarkerSymbol();
 		symbol.setStyle(esri.symbol.SimpleMarkerSymbol.STYLE_SQUARE);
 		symbol.setSize(10);
