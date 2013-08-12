@@ -169,8 +169,10 @@ a:hover {
   top: 2px;
   *top: -3px;
 }
-#mapTypesTree .ico-duibi:hover
-, #mapTypesTree .ico-duibi.active{
+#mapTypesTree .ico-duibi:hover{
+  opacity: .8;
+}
+#mapTypesTree .ico-duibi.active{
   background-position: 0 -14px;
 }
 
@@ -208,8 +210,18 @@ a:hover {
 }
 
 /*Map*/
-#map {
+.map-wrap {
   height: 100%;
+  width: 100%;
+}
+.map-wrap .map{
+  height: 100%;
+  width: 49.6%;
+  float: left;
+  border: 2px solid #AEC5FF;
+  border-top: 0;
+  border-bottom: 0;
+  box-sizing: boder-content;
 }
 table.esriLargeSliderTL {
   top: 50px;

@@ -20,7 +20,8 @@ var esriRepoUrl = "http://127.0.0.1:8080/arcgis_js_api/library/3.5/3.5/js/esri"
     , identifyParams
     , identifyServiceUrl = "http://www.arcgisonline.cn/ArcGIS/rest/services/Thematic_Drawings/MapServer"
     , identifyRunner
-    , symbol;
+    , symbol
+    , baseMapUrl = "http://www.arcgisonline.cn/ArcGIS/rest/services/ChinaCities_Community_BaseMap_CHN/NanJing_Community_BaseMap_CHN/MapServer";
 
 function clearOverlay(){
   map.graphics.clear();
@@ -46,19 +47,29 @@ function setNavWithChildrenSelect( obj ){
 }
 
 require(settings, ['gtmap/ctrl', 'esri/map'], function(ctrl, Map) {
-	map = new Map('map', {
+	map = new Map('mainMap', {
 		logo : false,
 		sliderStyle : 'large',
 		zoom : 11
 	});
 	
-	var baseMap = new esri.layers.ArcGISTiledMapServiceLayer("http://www.arcgisonline.cn/ArcGIS/rest/services/ChinaCities_Community_BaseMap_CHN/NanJing_Community_BaseMap_CHN/MapServer");
+	var map2 = new Map('mainMap2', {
+    logo : false,
+    sliderStyle : 'large',
+    zoom : 11
+  });
+	
+	var baseMap = new esri.layers.ArcGISTiledMapServiceLayer(baseMapUrl);
 	dojo.connect( baseMap, 'onLoad', ctrl.loadServiceTree );
 	var jsMap = new esri.layers.ArcGISDynamicMapServiceLayer(identifyServiceUrl);
 	dojo.connect( jsMap, 'onLoad', ctrl.loadServiceTree );
 	services.push(baseMap, jsMap);
-	map.addLayers(services);
-
+	
+	map.addLayer(baseMap);
+  
+  var baseMap2 = new esri.layers.ArcGISTiledMapServiceLayer(baseMapUrl)
+  map2.addLayer(baseMap2);
+  
 	dojo.connect(map, 'onLoad', function() {
 		ctrl.bindHandler();
 		
@@ -69,5 +80,12 @@ require(settings, ['gtmap/ctrl', 'esri/map'], function(ctrl, Map) {
 		symbol.setStyle(esri.symbol.SimpleMarkerSymbol.STYLE_SQUARE);
 		symbol.setSize(10);
 		symbol.setColor(new dojo.Color([255, 255, 0, 0.5]));
+		
+		//TEST
+		dojo.connect(map, 'onZoomEnd', function(){
+		  map2.setScale(map.getScale());
+      map2.setExtent(map.extent);
+		});
+		
 	});
 });

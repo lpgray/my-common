@@ -1,7 +1,13 @@
 define(function(){
+  
+  function createSplitMap(){
+    
+  }
+    
     return {
       'layerCompare' : function(){
-        console.log('对比功能启用');
+        var $self = $(this);
+        $self[ $self.hasClass('active') ? 'removeClass' : 'addClass' ]('active');
       }
       , 'layerShowHide' : function(){
         var $self = $(this);
