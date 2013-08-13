@@ -215,13 +215,13 @@ a:hover {
   width: 100%;
 }
 .map-wrap .map{
+  background-color: #fff;
   height: 100%;
-  width: 49.6%;
-  float: left;
-  border: 2px solid #AEC5FF;
+  border: 1px solid #AEC5FF;
   border-top: 0;
   border-bottom: 0;
-  box-sizing: boder-content;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 table.esriLargeSliderTL {
   top: 50px;

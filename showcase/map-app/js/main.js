@@ -1,27 +1,12 @@
 $.infopane.show('地图初始化...');
 
-var esriRepoUrl = "http://127.0.0.1:8080/arcgis_js_api/library/3.5/3.5/js/esri"
-    , dojoRepoUrl = "http://127.0.0.1:8080/arcgis_js_api/library/3.5/3.5/js/dojo/dojo"
-    , dijitRepoUrl = "http://127.0.0.1:8080/arcgis_js_api/library/3.5/3.5/js/dojo/dijit"
-    , dojoxRepoUrl = "http://127.0.0.1:8080/arcgis_js_api/library/3.5/3.5/js/dojo/dojox"
-    , settings = {
-        baseUrl : "./js" , 
-        packages : [
-          { name : "gtmap", location : "gtmap" }
-          , { name : "dojo", location : dojoRepoUrl }
-          , { name : "esri", location : esriRepoUrl }
-          , { name : "dijit", location : dijitRepoUrl }
-          , { name : "dojox", location : dojoxRepoUrl }
-      ]}
-		, map
+var map
     , services = []
-    , measurement
     , identifyTask
     , identifyParams
-    , identifyServiceUrl = "http://www.arcgisonline.cn/ArcGIS/rest/services/Thematic_Drawings/MapServer"
+    , identifyServiceUrl = "http://192.168.0.202:6080/arcgis/rest/services/Utilities/Geometry/GeometryServer"
     , identifyRunner
     , symbol
-    , baseMapUrl = "http://www.arcgisonline.cn/ArcGIS/rest/services/ChinaCities_Community_BaseMap_CHN/NanJing_Community_BaseMap_CHN/MapServer";
 
 function clearOverlay(){
   map.graphics.clear();
@@ -46,29 +31,26 @@ function setNavWithChildrenSelect( obj ){
   clearOverlay();
 }
 
-require(settings, ['gtmap/ctrl', 'esri/map'], function(ctrl, Map) {
+require(['gtmap/ctrl', 'esri/map'], function(ctrl, Map) {
 	map = new Map('mainMap', {
 		logo : false,
-		sliderStyle : 'large',
-		zoom : 11
+		sliderStyle : 'large'
 	});
 	
-	var map2 = new Map('mainMap2', {
-    logo : false,
-    sliderStyle : 'large',
-    zoom : 11
-  });
+	var map1 = new esri.layers.ArcGISDynamicMapServiceLayer("http://192.168.0.202:8080/oms/arcgisrest/道路/JCDL_2013/MapServer");
+	dojo.connect( map1, 'onLoad', ctrl.loadServiceTree );
+	var map2 = new esri.layers.ArcGISDynamicMapServiceLayer("http://192.168.0.202:8080/oms/arcgisrest/行政区/JSXZQ/MapServer");
+	dojo.connect( map2, 'onLoad', ctrl.loadServiceTree );
 	
-	var baseMap = new esri.layers.ArcGISTiledMapServiceLayer(baseMapUrl);
-	dojo.connect( baseMap, 'onLoad', ctrl.loadServiceTree );
-	var jsMap = new esri.layers.ArcGISDynamicMapServiceLayer(identifyServiceUrl);
-	dojo.connect( jsMap, 'onLoad', ctrl.loadServiceTree );
-	services.push(baseMap, jsMap);
-	
-	map.addLayer(baseMap);
+	var map3 = new esri.layers.ArcGISDynamicMapServiceLayer("http://192.168.0.202:8080/oms/arcgisrest/底图/JiangsuIndex/MapServer");
+  dojo.connect( map3, 'onLoad', ctrl.loadServiceTree );
   
-  var baseMap2 = new esri.layers.ArcGISTiledMapServiceLayer(baseMapUrl)
-  map2.addLayer(baseMap2);
+  var map4 = new esri.layers.ArcGISDynamicMapServiceLayer("http://192.168.0.202:8080/oms/arcgisrest/测试/JCDL_TEST/MapServer");
+  dojo.connect( map4, 'onLoad', ctrl.loadServiceTree );
+	
+	services.push(map1, map2, map3, map4);
+	
+	map.addLayers(services);
   
 	dojo.connect(map, 'onLoad', function() {
 		ctrl.bindHandler();
@@ -80,12 +62,6 @@ require(settings, ['gtmap/ctrl', 'esri/map'], function(ctrl, Map) {
 		symbol.setStyle(esri.symbol.SimpleMarkerSymbol.STYLE_SQUARE);
 		symbol.setSize(10);
 		symbol.setColor(new dojo.Color([255, 255, 0, 0.5]));
-		
-		//TEST
-		dojo.connect(map, 'onZoomEnd', function(){
-		  map2.setScale(map.getScale());
-      map2.setExtent(map.extent);
-		});
 		
 	});
 });

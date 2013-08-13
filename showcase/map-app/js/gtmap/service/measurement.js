@@ -1,4 +1,6 @@
 define(['esri/dijit/Measurement'], function( Measure ){
+    var measurement;
+    
     function measureDefinition(){
       measurement = new Measure({
         map : map
@@ -11,6 +13,7 @@ define(['esri/dijit/Measurement'], function( Measure ){
         setNavSelect(this);
         measurement || measureDefinition();
         $('#measureCtn').parent('.widget').fadeIn();
+        $.infopane.animate('量算启用');
       }
     }
   }
