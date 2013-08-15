@@ -3,6 +3,8 @@
 // var instrument3 = $('#J_INSTRUMENT_3').instrument({initVal : 40, start:20, end:100 , group : [20,40,60,80,90,100], measurement : 'HF'});
 var i1 = $('#instrument1').instrument();
 var i2 = $('#instrument2').instrument({radius: 200, label : 'PM'});
+var i2 = $('#instrument3').gauge();
+var i2 = $('#instrument4').gauge({direction : 'vertical'});
 // instrument1.data('_svg').movePointer(40);
 // instrument2.data('_svg').movePointer(63);
 // instrument3.data('_svg').movePointer(80);

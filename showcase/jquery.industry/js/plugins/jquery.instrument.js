@@ -1,4 +1,9 @@
 (function($){
+	var colors = {
+		centerPoint : '#0f0',
+		triangle : '#f00'
+	}
+	
 	// 仪表盘类定义
 	var Instrument = function(id, opts){
 		this.$elem = $('#' + id);
@@ -19,8 +24,11 @@
 			this.origin = { x:x, y:y }
 			
 			this.elem.circle( x, y, r );     // 创建表盘
-			this.elem.circle( x, y, r/10 );  // 创建圆心
+			
 			this.createTriangle();           // 创建初始指针
+			
+			this.center = this.elem.circle( x, y, r/10 );  // 创建圆心
+			this.center.attr({ fill : colors.centerPoint });
 			
 			// 创建刻度
 			_utils.createScale( this.elem, this.options.radian, this.origin, r/10, r/2, 0, 100 ); 
@@ -36,8 +44,22 @@
 			_utils.createStripe( this.elem, 182 , 360 - this.options.radian / 2, this.options.radius/2 - this.options.radius/10 - 3, this.options.radius/10, this.origin );
 		}
 		, createTriangle : function(){
-			var path = _utils.calcPathOfTriangle.call( this, this.origin, this.options.radius/2, this.options.radius/10 - 2, this.options.radian/2 );
+			var self = this
+			    , height = self.options.radius/2
+			    , width = self.options.radius/10 - 2
+			    , path = _utils.calcPathOfTriangle.call( this, this.origin, height, width, this.options.radian/2 );
+			    
 			this.triangle = this.elem.path( path );
+			this.triangle.attr({ fill : colors.triangle });
+			var i = 0;
+			this.triangle.click(function(){
+				console.log(i);
+				if( i == 0)
+					this.animate({ transform :'r45' }, 500);
+				else
+					this.animate({ transform :'r90' }, 500);
+				i++;
+			});
 		}
 		, createLabel : function(){
 		  var rectX = this.origin.x - this.options.radius/4
