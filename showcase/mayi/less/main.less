@@ -50,6 +50,25 @@ ul{
   overflow: hidden;
   clear: both;
 }
+#download, #features, #team{
+  height: 100%;
+}
+.valign{
+    display: table;
+    margin: 0 auto;
+    height: 100%;
+    & > .valign-ctn{
+      display: table-cell;
+      vertical-align: middle;
+      top: 50%;
+      *position:absolute;
+      & > .valign-inner{
+        *position:relative;
+        *top:-50%;
+      }
+   }
+ }
+
 body > header{
   width: 100%;
   background: #1b1b1b;
@@ -86,6 +105,7 @@ body > header{
         margin: 0 1.5em;
         height: 46px;
         line-height: 48px;
+        transition: border .3s ease;
         &:hover{
           color: #fff;
           text-decoration: none;
@@ -101,7 +121,7 @@ body > header{
   }
 }
 
-footer{
+body > footer{
   text-align: center;
   .container{
     height: 216px;
