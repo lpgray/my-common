@@ -24,14 +24,19 @@
 $(document).ready(function(){
 	var $sections = $('body').children('section')
 	   ,$header = $('body').children('header')
-	   ,topMap = {}
+	   ,topMap
 	   ,current
 	   ,$nav = $('header').find('nav');
-	   
-	$sections.each(function(){
-	  var self = $(this);
-	  topMap[self.offset().top] = self.attr('id');
-	});
+	
+	function initTopMap(){
+	  topMap = {}
+    $sections.each(function(){
+      var self = $(this);
+      topMap[self.offset().top] = self.attr('id');
+    });
+	}
+	
+	initTopMap();
 	
 	$header.css({'position':'fixed', 'top':0 , 'margin-top' : 0});
 	
@@ -55,4 +60,6 @@ $(document).ready(function(){
 	    }
 	  }
 	});
+	
+	$(window).resize(initTopMap);
 });
