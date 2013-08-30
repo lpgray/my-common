@@ -1,10 +1,12 @@
-my-common
-=========
+# my-common #
 
-Front-end framework Showcase( Backbone, Requirejs, ArcGIS JavaScript Webapp, Dojo...... etc. )
+## Structure ##
 
-jQuery plugins
+### gtmap snippet ###
+gtmap team front-end code snippet.
+### showcase ###
+- Front-end framework Showcase( Backbone, Requirejs, ArcGIS JavaScript Webapp, Dojo...... etc. )
+- jQuery plugins
+- JavaScript Helper Function.
 
-JavaScript Helper Function
-
-snippets for me and my friends.
+For me and my friends.
