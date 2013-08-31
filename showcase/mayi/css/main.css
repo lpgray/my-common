@@ -227,52 +227,53 @@ body > footer .container {
 #features .bottom-desc {
   color: #c6c6c6;
   line-height: 30px;
-  font-size: 16px;
+  font-size: 20px;
 }
 /* line 11, features.less */
 #features .bottom-desc > span {
   letter-spacing: 10px;
   padding-left: -10px;
+  font-size: 13px;
 }
-/* line 17, features.less */
+/* line 18, features.less */
 #features ul > li {
   list-style: none;
   float: left;
   width: 50%;
 }
-/* line 21, features.less */
+/* line 22, features.less */
 #features ul > li p {
   font-size: 14px;
   line-height: 24px;
 }
-/* line 25, features.less */
+/* line 26, features.less */
 #features ul > li .thumnail {
   width: 282px;
   height: 155px;
 }
-/* line 29, features.less */
+/* line 30, features.less */
 #features ul > li h3 {
   font-size: 26px;
   letter-spacing: 2px;
 }
-/* line 35, features.less */
+/* line 36, features.less */
 #features ul > .task h3 {
   color: #fb5d5d;
 }
-/* line 38, features.less */
+/* line 39, features.less */
 #features ul > .task .thumnail {
   background: url(../img/sprite2.png) 0 -703px no-repeat;
 }
-/* line 42, features.less */
+/* line 43, features.less */
 #features ul > .party {
   width: 40%;
   margin-left: 10%;
 }
-/* line 45, features.less */
+/* line 46, features.less */
 #features ul > .party h3 {
   color: #24b119;
 }
-/* line 48, features.less */
+/* line 49, features.less */
 #features ul > .party .thumnail {
   background: url(../img/sprite2.png) 0 -858px no-repeat;
 }
