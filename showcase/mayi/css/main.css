@@ -1,8 +1,10 @@
+/* line 1, main.less */
 body,
 html {
   font: normal normal 13px 'microsoft yahei';
   height: 100%;
 }
+/* line 5, main.less */
 h1,
 h2,
 h3,
@@ -11,41 +13,55 @@ h5,
 h6 {
   font-weight: normal;
 }
+/* line 8, main.less */
 section {
   position: relative;
   min-height: 100%;
 }
+/* line 12, main.less */
 h2 {
   text-align: center;
   letter-spacing: 10px;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
 }
+/* line 17, main.less */
 p {
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
 }
+/* line 20, main.less */
 a {
   color: #08c;
   text-decoration: none;
 }
+/* line 23, main.less */
 a:hover {
   color: #06C;
   text-decoration: underline;
 }
+/* line 28, main.less */
+.fn-tc {
+  text-align: center;
+}
+/* line 31, main.less */
 ul {
   margin: 0;
 }
+/* line 34, main.less */
 .clearfix {
   *zoom: 1;
 }
+/* line 36, main.less */
 .clearfix:before,
 .clearfix:after {
   display: table;
   content: "";
   line-height: 0;
 }
+/* line 44, main.less */
 .clearfix:after {
   clear: both;
 }
+/* line 48, main.less */
 .container {
   width: 960px;
   margin: 0 auto;
@@ -53,26 +69,31 @@ ul {
   overflow: hidden;
   clear: both;
 }
+/* line 55, main.less */
 #download,
 #features,
 #team {
   height: 100%;
 }
+/* line 58, main.less */
 .valign {
   display: table;
   margin: 0 auto;
   height: 100%;
 }
+/* line 62, main.less */
 .valign > .valign-ctn {
   display: table-cell;
   vertical-align: middle;
   top: 50%;
   *position: absolute;
 }
+/* line 67, main.less */
 .valign > .valign-ctn > .valign-inner {
   *position: relative;
   *top: -50%;
 }
+/* line 74, main.less */
 body > header {
   width: 100%;
   background: #1b1b1b;
@@ -85,25 +106,34 @@ body > header {
   margin-top: -50px;
   z-index: 1000;
 }
+/* line 85, main.less */
 body > header > .container > .brand {
   text-indent: -9999px;
-  width: 120px;
+  width: 140px;
   height: 28px;
   margin-top: 11px;
   display: block;
-  background: url(../img/sprite.png) -840px 0 no-repeat;
+  background: url(../img/sprite2.png) 0 0 no-repeat;
+  opacity: .9;
 }
+/* line 93, main.less */
+body > header > .container > .brand:hover {
+  opacity: 1;
+}
+/* line 97, main.less */
 body > header > .container > nav > ul {
   position: absolute;
   right: 0;
   top: 0;
   margin: 0;
 }
+/* line 102, main.less */
 body > header > .container > nav > ul > li {
   list-style: none;
   float: left;
   padding: 0;
 }
+/* line 106, main.less */
 body > header > .container > nav > ul > li > a {
   display: block;
   color: #C2C2C2;
@@ -114,41 +144,50 @@ body > header > .container > nav > ul > li > a {
   line-height: 48px;
   transition: border .3s ease;
 }
+/* line 115, main.less */
 body > header > .container > nav > ul > li > a:hover {
   color: #fff;
   text-decoration: none;
 }
+/* line 122, main.less */
 body > header > .container > nav > ul > li.active a {
   border-color: #00D3FC;
   color: #fff;
 }
+/* line 130, main.less */
 body > footer {
   text-align: center;
 }
+/* line 132, main.less */
 body > footer .container {
   height: 216px;
   color: #929292;
   background: url(../img/sprite.png) 0 -1146px no-repeat;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
+/* line 1, download.less */
 #download {
-  background-color: #f5f5f5;
+  background: #222222 url(../img/bg.png) center top no-repeat;
 }
+/* line 4, download.less */
 #download #phone {
   width: 353px;
-  height: 406px;
-  background: url(../img/sprite.png) 0 0 no-repeat;
+  height: 455px;
+  background: url(../img/sprite2.png) 0 -248px no-repeat;
   float: left;
 }
+/* line 10, download.less */
 #download #welcome p {
   text-indent: -9999px;
-  width: 436px;
-  height: 95px;
-  background: url(../img/sprite.png) -368px 0 no-repeat;
+  width: 388px;
+  height: 215px;
+  background: url(../img/sprite2.png) 0 -31px no-repeat;
 }
+/* line 16, download.less */
 #download .cell {
   margin: 1px 0 0 480px;
 }
+/* line 19, download.less */
 #download .cell .btns .btn {
   display: inline-block;
   width: 191px;
@@ -159,78 +198,108 @@ body > footer .container {
   *line-height: 0;
   *text-indent: 0;
 }
+/* line 29, download.less */
 #download .cell .btns .andriod {
   background-position: -370px -95px;
 }
+/* line 32, download.less */
 #download .cell .btns .andriod:hover {
   background-position: -370px -157px;
 }
+/* line 35, download.less */
 #download .cell .btns .ios {
   background-position: -560px -95px;
 }
+/* line 38, download.less */
 #download .cell .btns .ios:hover {
   background-position: -560px -157px;
 }
+/* line 1, features.less */
 #features {
-  background-color: #1dabc0;
-  color: #fff;
+  background-color: #fff;
+  color: #222;
 }
+/* line 4, features.less */
+#features p {
+  text-shadow: none;
+}
+/* line 7, features.less */
+#features .bottom-desc {
+  color: #c6c6c6;
+  line-height: 30px;
+  font-size: 16px;
+}
+/* line 11, features.less */
+#features .bottom-desc > span {
+  letter-spacing: 10px;
+  padding-left: -10px;
+}
+/* line 17, features.less */
 #features ul > li {
   list-style: none;
   float: left;
-  margin-left: 80px;
-  margin-bottom: 140px;
-  display: block;
-  width: 236px;
-  height: 263px;
-  background-color: #fff;
-  color: #000;
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+  width: 50%;
 }
-#features ul > li > .thumnail {
-  width: 236px;
+/* line 21, features.less */
+#features ul > li p {
+  font-size: 14px;
+  line-height: 24px;
+}
+/* line 25, features.less */
+#features ul > li .thumnail {
+  width: 282px;
   height: 155px;
-  background: #ddd;
 }
-#features ul > li > h3 {
-  margin: .5em 1em;
+/* line 29, features.less */
+#features ul > li h3 {
+  font-size: 26px;
+  letter-spacing: 2px;
 }
-#features ul > li > p {
-  margin: 0 1em;
-  color: #7A7A7A;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+/* line 35, features.less */
+#features ul > .task h3 {
+  color: #fb5d5d;
 }
-#features ul > li:first-child {
-  margin: 0;
+/* line 38, features.less */
+#features ul > .task .thumnail {
+  background: url(../img/sprite2.png) 0 -703px no-repeat;
 }
-#features .bottom {
-  position: absolute;
-  background: url(../img/sprite.png) 0 -406px no-repeat;
-  width: 798px;
-  height: 134px;
-  bottom: 0;
-  left: 50%;
-  margin-left: -399px;
+/* line 42, features.less */
+#features ul > .party {
+  width: 40%;
+  margin-left: 10%;
 }
+/* line 45, features.less */
+#features ul > .party h3 {
+  color: #24b119;
+}
+/* line 48, features.less */
+#features ul > .party .thumnail {
+  background: url(../img/sprite2.png) 0 -858px no-repeat;
+}
+/* line 1, team.less */
 #team {
   background-color: #fc6580;
   color: #fff;
 }
+/* line 4, team.less */
 #team #teammate {
   width: 960px;
   height: 230px;
   background: url(../img/sprite.png) 0 -545px no-repeat;
 }
+/* line 9, team.less */
 #team p {
   text-align: left;
   max-width: 600px;
   line-height: 1.8em;
   margin: 0 auto;
 }
+/* line 2, recruit.less */
 #recruit #bugao {
   background-color: #2b282a;
   color: #cdcdcd;
 }
+/* line 3, recruit.less */
 #recruit #bugao h1 {
   text-indent: -9999px;
   background: url(../img/sprite.png) 0 -775px no-repeat;
@@ -238,53 +307,65 @@ body > footer .container {
   height: 69px;
   margin: 0 auto;
 }
+/* line 10, recruit.less */
 #recruit #bugao p {
   width: 926px;
   margin: 0 auto;
   font-size: 14px;
   line-height: 1.8em;
 }
+/* line 19, recruit.less */
 #recruit .item {
   position: relative;
 }
+/* line 21, recruit.less */
 #recruit .item h2 {
   text-align: left;
 }
+/* line 24, recruit.less */
 #recruit .item p {
   color: #666;
   font-size: 14px;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
+/* line 29, recruit.less */
 #recruit .item .thumnail {
   background: url(../img/sprite.png) 0 -406px no-repeat;
   width: 344px;
   height: 272px;
 }
+/* line 35, recruit.less */
 #recruit .l1 {
   padding-top: 50px;
 }
+/* line 37, recruit.less */
 #recruit .l1 .thumnail {
   background-position: 0 -845px;
   position: absolute;
   right: 0;
   top: 0;
 }
+/* line 44, recruit.less */
 #recruit .l2 {
   padding-top: 40px;
 }
+/* line 46, recruit.less */
 #recruit .l2 h2,
 #recruit .l2 p {
   text-align: right;
 }
+/* line 49, recruit.less */
 #recruit .l2 .thumnail {
   background-position: -350px -845px;
   position: absolute;
   left: 0;
   top: 0;
 }
+/* line 56, recruit.less */
 #recruit .l3 {
   padding: 40px 0 30px 0;
 }
+/* line 58, recruit.less */
 #recruit .l3 .thumnail {
   background-position: -672px -845px;
   position: absolute;
