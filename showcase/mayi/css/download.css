@@ -1,0 +1,49 @@
+/* line 1, download.less */
+#download {
+  background: #222222 url(../img/bg.png) center top no-repeat;
+}
+/* line 4, download.less */
+#download #phone {
+  width: 353px;
+  height: 455px;
+  background: url(../img/sprite2.png) 0 -248px no-repeat;
+  float: left;
+}
+/* line 10, download.less */
+#download #welcome p {
+  text-indent: -9999px;
+  width: 388px;
+  height: 215px;
+  background: url(../img/sprite2.png) 0 -31px no-repeat;
+}
+/* line 16, download.less */
+#download .cell {
+  margin: 1px 0 0 480px;
+}
+/* line 19, download.less */
+#download .cell .btns .btn {
+  display: inline-block;
+  width: 191px;
+  height: 62px;
+  background: url(../img/sprite.png) 0 0 no-repeat;
+  text-indent: -9999px;
+  *font-size: 0;
+  *line-height: 0;
+  *text-indent: 0;
+}
+/* line 29, download.less */
+#download .cell .btns .andriod {
+  background-position: -370px -95px;
+}
+/* line 32, download.less */
+#download .cell .btns .andriod:hover {
+  background-position: -370px -157px;
+}
+/* line 35, download.less */
+#download .cell .btns .ios {
+  background-position: -560px -95px;
+}
+/* line 38, download.less */
+#download .cell .btns .ios:hover {
+  background-position: -560px -157px;
+}

@@ -25,7 +25,9 @@ a{
     text-decoration: underline;
   }
 }
-
+.fn-tc{
+ text-align: center; 
+}
 ul{
   margin: 0;
 }
@@ -82,11 +84,15 @@ body > header{
   z-index: 1000;
   & > .container > .brand{
     text-indent: -9999px;
-    width: 120px;
+    width: 140px;
     height: 28px;
     margin-top: 11px;
     display: block;
-    background: url(../img/sprite.png) -840px 0 no-repeat;
+    background: url(../img/sprite2.png) 0 0 no-repeat;
+    opacity: .9;
+    &:hover{
+      opacity: 1;
+    }
   }
   & > .container > nav > ul{
     position: absolute;

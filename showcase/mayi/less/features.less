@@ -1,41 +1,54 @@
 #features{
-  background-color: #1dabc0;
-  color: #fff;
-  & ul > li{
-    list-style: none;
-    float: left;
-    margin-left: 80px;
-    margin-bottom: 140px;
-    display: block;
-    width: 236px;
-    height: 263px;
-    background-color: #fff;
-    color: #000;
-    box-shadow: 2px 2px 3px rgba(0,0,0,.5);
-    & > .thumnail{
-      width: 236px;
-      height: 155px;
-      background: #ddd;
-    }
-    & > h3{
-      margin: .5em 1em;
-    }
-    & > p{
-      margin: 0 1em;
-      color: #7A7A7A;
-      text-shadow: 0 1px 0 rgba(0, 0, 0, .1);
-    }
-    &:first-child{
-      margin: 0;
+  background-color: #fff;
+  color: #222;
+  p{
+    text-shadow: none;
+  }
+  .bottom-desc{
+    color: #c6c6c6;
+    line-height: 30px;
+    font-size: 20px;
+    & > span{
+      letter-spacing: 10px;
+      padding-left: -10px;
+      font-size: 13px;
     }
   }
-  & .bottom{
-    position: absolute;
-    background: url(../img/sprite.png) 0 -406px no-repeat;
-    width: 798px;
-    height: 134px;
-    bottom: 0;
-    left: 50%;
-    margin-left: -399px;
+  & ul{
+    & > li{
+      list-style: none;
+      float: left;
+      width: 50%;
+      p{
+        font-size: 14px;
+        line-height: 24px;
+      }
+      .thumnail{
+        width: 282px;
+        height: 155px;
+      }
+      h3{
+        font-size: 26px;
+        letter-spacing: 2px;
+      }
+    }
+    & > .task{
+      h3{
+        color: #fb5d5d;
+      }
+      .thumnail{
+        background: url(../img/sprite2.png) 0 -703px no-repeat; 
+      }
+    }
+    & > .party{
+      width: 40%;
+      margin-left: 10%;
+      h3{
+        color: #24b119;
+      }
+      .thumnail{
+        background: url(../img/sprite2.png) 0 -858px no-repeat;
+      }
+    }
   }
 }
