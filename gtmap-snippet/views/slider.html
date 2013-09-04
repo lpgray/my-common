@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Slider</title>
+	<link rel="stylesheet" href="../css/common/reset.css" />
+	<link rel="stylesheet" href="../css/common/base.css" />
+	<link rel="stylesheet" href="../css/plugins/slider/slider.css" />
+</head>
+<body>
+	<div class="banner">
+      <div class="banner-inner">
+
+        <ul class="slider clearfix">
+          <li style="background: #dcdcdc url(img/banner/banner-1.png) center center no-repeat;">
+            <div class="container">
+              <div class="banner-desc">
+                <img src="img/banner/desc-1.png"/>
+              </div>
+            </div>
+          </li>
+          <li style="background: #04234D url(img/banner/banner-2.png) center center no-repeat;">
+            <a href="#" class="container clearfix">
+            <div class="banner-desc">
+              <img src="img/banner/desc-2.png"/>
+            </div> </a>
+          </li>
+          <li style="background: #4894D6 url(img/banner/banner-3.png) center center no-repeat;">
+            <div class="container">
+              <div class="banner-desc">
+                <img src="img/banner/desc-3.png"/>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <div class="toggles">
+          <a href="#" class="open">open</a>
+          <a href="#" class="cloze">cloze</a>
+          <a href="#" class="cloze">cloze</a>
+        </div>
+
+      </div>
+    </div>
+    <script src="../js/lib/jquery-1.9.1.min.js"></script>
+    <script src="../js/slip/jquery.slider.js"></script>
+    <script>
+      $('.banner').slider();
+    </script>
+</body>
+</html>
