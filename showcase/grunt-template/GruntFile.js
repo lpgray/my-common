@@ -17,7 +17,7 @@ module.exports = function(grunt) {
       },
       dist : {
         src : ['src/plugins/*.js'], 
-        dest : 'dist/plugins.js'
+        dest : 'src/plugins.js'
       }
     },  //
     uglify : {
@@ -25,8 +25,8 @@ module.exports = function(grunt) {
         banner : '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n' // 压缩后的文件声明
       },
       build : {
-        src : 'dist/plugins.js',
-        dest : 'dist/plugins.min.js'// 压缩后的文件
+        src : 'src/plugins.js',
+        dest : 'src/plugins.min.js'// 压缩后的文件
       }
     },
     qunit : {
