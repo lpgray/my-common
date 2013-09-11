@@ -1,8 +1,31 @@
-var Utils = {};
+// Avoid `console` errors in browsers that lack a console.
+(function() {
+    var method;
+    var noop = function () {};
+    var methods = [
+        'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
+        'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
+        'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
+        'timeStamp', 'trace', 'warn'
+    ];
+    var length = methods.length;
+    var console = (window.console = window.console || {});
 
-Utils.hasFeature = function(str){
-	return document.getElementsByTagName('html')[0].className.indexOf(str) > -1;
-};
+    while (length--) {
+        method = methods[length];
+
+        // Only stub undefined methods.
+        if (!console[method]) {
+            console[method] = noop;
+        }
+    }
+}());
+// stop default link behavior
+$(document).on('click', '[href="#"],.disabled', function(e) {
+  e.preventDefault();
+});
+
+var Utils = {};
 
 Utils.filterFileName = function(fullPath){
 	if (fullPath) {
@@ -14,11 +37,11 @@ Utils.filterFileName = function(fullPath){
 		return filename;
 	}
 };
-
+//检测移动终端
 Utils.isMobile = function(){
 	return /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent);
 };
-
+//xml编码，将尖括号转换为可显示文本
 Utils.encodeXML = function(code){
 	return code.replace(/</g,'&lt;').replace(/>/g,'&gt;');
 };
@@ -36,7 +59,7 @@ Utils.multipleToSingle = function(obj, prefix) {
 	}
 	return back;
 };
-/* 获取当前url中的参数值 */
+/* 获取当前url中的参数值  */
 Utils.getUrlParam = function(paramName) {
 	paramValue = "";
 	isFound = false;
@@ -55,7 +78,7 @@ Utils.getUrlParam = function(paramName) {
 	}
 	return paramValue;
 };
-
+// 添加原生getElementsByClassName方法
 document.getElementsByClassName || (document.getElementsByClassName = function(searchClass,node,tag){
 	node = node || document;
 	tag = tag || '*';
@@ -70,4 +93,22 @@ document.getElementsByClassName || (document.getElementsByClassName = function(s
 		}
 	}
 	return returnElements;
+});
+//快捷ajax方法
+function ajax(url, success) {
+  $.ajax({
+    url : url,
+    dataType : 'json',
+    type : 'get',
+    cache : false,
+    success : success,
+    error : function(){
+      console.error(arguments);
+    }
+  });
+}
+// 删除询问
+$(document).on('click', '.remove', function(){
+  var ask = $(this).attr('data-ask') || '确定执行删除操作吗？'
+  return window.confirm(ask);
 });

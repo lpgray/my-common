@@ -1,5 +1,5 @@
 /*! 
- *  gtmap - 2013-09-10
+ *  gtmap - 2013-09-11
  *  Author: zhangyang, Email: rayzy1991@163.com
  *  Copyright (c) 2013 Gtmap Ltd. All Rights Reserved.
  */

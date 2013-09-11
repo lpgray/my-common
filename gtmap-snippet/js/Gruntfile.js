@@ -19,7 +19,7 @@ module.exports = function(grunt) {
 			},
 			dist : {
 				src : ['src/plugins/*.js'], // 合并 
-				dest : 'src/gtis-common.js'// 合并成dest下的GruntDemo.js
+				dest : 'src/gtmap-common.js'// 合并成dest下的GruntDemo.js
 			}
 		},
 		uglify : {
@@ -27,8 +27,8 @@ module.exports = function(grunt) {
 				banner : '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n' // 压缩后的文件声明
 			},
 			build : {
-				src : 'src/gtis-common.js',
-				dest : 'src/gtis-common.min.js'// 压缩后的文件
+				src : 'src/gtmap-common.js',
+				dest : 'src/gtmap-common.min.js'// 压缩后的文件
 			}
 		}
 	});
