@@ -1,18 +1,13 @@
+var Utils = Utils || {};
 Utils.pagin = function(dom, page, size, count, max, pre) {
-	Array.prototype.contains = function(needle) {
-		for (i in this) {
-			if (this[i] == needle)
-				return true;
-		}
-		return false;
-	}
 	var maxnum = 5, 
-		pagin = $(dom), 
-		pagePre = 'page.page', 
-		sizePre = 'page.size', 
-		prev = pagin.children('.prev'), 
-		next = pagin.children('.next'), 
-		href = location.href, prefix = '?';
+  		pagin = $(dom), 
+  		pagePre = 'page.page', 
+  		sizePre = 'page.size', 
+  		prev = pagin.children('.prev'), 
+  		next = pagin.children('.next'), 
+  		href = location.href, 
+  		prefix = '?';
 	
 	if (!pre) {
 		if (href.indexOf('?') > -1 && href.indexOf(pagePre) == -1) {
@@ -36,16 +31,16 @@ Utils.pagin = function(dom, page, size, count, max, pre) {
 	}
 	
 	pagin.children('span').children().remove();
+	
+	var back = '';
 	for ( i = 1; i <= total; i++) {
-		var a = $('<a />').attr({
-			'href' : prefix + pagePre + '=' + i + '&' + sizePre + '=' + size + ''
-		}).html(i);
-		pagin.children('span').append(a);
 		if (i == page) {
-			a.addClass('active');
-			a.attr('href', '#');
+			back += '<a class="active" href="#">'+i+'</a>';
+		}else{
+		  back += '<a href="'+ prefix + pagePre + '=' + i + '&' + sizePre + '=' + size +'">'+i+'</a>';
 		}
 	}
+	pagin.children('span').html(back);
 	
 	prev.attr({
 		'href' : prefix + pagePre + '=' + (page - 1) + '&' + sizePre + '=' + size + ''
@@ -106,5 +101,4 @@ Utils.pagin = function(dom, page, size, count, max, pre) {
 		}
 	}
 	simplify(page);
-	pagin.find('a').addClass('j_pagin_link');
 };

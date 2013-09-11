@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>pagin分页函数测试</title>
+	<link rel="stylesheet" href="css/common/reset.css" />
+	<link rel="stylesheet" href="css/common/base.css" />
+	<style>
+	  .pagin{
+	    -ms-word-break: break-all;
+	    word-break: break-all;
+	  }
+	  .pagin span a{
+	    display: inline-block;
+	    margin: 1em;
+	  }
+	  .pagin a.active{
+	    color: #000;
+	    font-weight: bold;
+	  }
+	</style>
+</head>
+<body>
+  <h1>pagin分页函数测试</h1>
+  <div id="pagin1" class="pagin">
+    <a href="#" class="prev">prev</a><span>
+      
+    </span>
+    <a href="" class="next">next</a>
+  </div>
+  <div id="pagin2" class="pagin">
+    <a href="#" class="prev">prev</a><span>
+      
+    </span>
+    <a href="" class="next">next</a>
+  </div>
+  <div id="pagin3" class="pagin">
+    <a href="#" class="prev">prev</a><span>
+      
+    </span>
+    <a href="" class="next">next</a>
+  </div>
+	<script src="js/lib/jquery-1.9.1.min.js"></script>
+	<script src="js/src/base.js"></script>
+	<script src="js/src/utils/pagin.js"></script>
+	<script>
+	  Utils.pagin('#pagin1', 60, 5, 3000, 10);
+	  Utils.pagin('#pagin2', 430, 5, 3000, 10);
+	  Utils.pagin('#pagin3', 10, 5, 3000, 10);
+	</script>
+</body>
+</html>

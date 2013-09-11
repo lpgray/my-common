@@ -112,3 +112,11 @@ $(document).on('click', '.remove', function(){
   var ask = $(this).attr('data-ask') || '确定执行删除操作吗？'
   return window.confirm(ask);
 });
+//数组contains
+Array.prototype.contains || (Array.prototype.contains = function(needle) {
+    for (i in this) {
+      if (this[i] == needle)
+        return true;
+    }
+    return false;
+});
