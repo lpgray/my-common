@@ -1,0 +1,49 @@
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.clearfix:after {
+  clear: both;
+}
+html, body{
+  width: 100%;
+  position: relative;
+  font-size: 13px;
+  font-family: "microsoft yahei", arial;
+  background-color: #fff;
+}
+body, html{
+  overflow: hidden;
+  background: @mainBgColor;
+}
+img{
+  width: 100%;
+  vertical-align: bottom;
+}
+input[type=text],
+input[type=password]{
+  border: 1px solid #000;
+  padding: .3em;
+}
+button{
+  border: 1px solid #000;
+  padding: .3em;
+}
+/* Function */
+.fn-tc{
+  text-align: center;
+}
+.hide{
+  display: none;
+}
+.font-normal{
+  font: normal normal 12px 'arial','宋体';
+}
+.no-obvious{
+  color: #8E8E8E;
+}
