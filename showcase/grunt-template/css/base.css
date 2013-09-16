@@ -1,3 +1,9 @@
+/*
+ * @name: base.css
+ * @decription: 常用基础设置 css code
+ * @version: 0.1
+ * @creator: lpgray
+ */
 .clearfix {
   *zoom: 1;
 }
@@ -14,29 +20,41 @@ html, body{
   width: 100%;
   position: relative;
   font-size: 13px;
-  font-family: "microsoft yahei", arial;
+  font-family: "宋体", arial;
   background-color: #fff;
-}
-body, html{
-  overflow: hidden;
-  background: @mainBgColor;
 }
 img{
   width: 100%;
   vertical-align: bottom;
 }
 input[type=text],
-input[type=password]{
+input[type=password],
+select{
   border: 1px solid #000;
   padding: .3em;
 }
+input[type=submit],
 button{
   border: 1px solid #000;
   padding: .3em;
 }
+label input[type=checkbox],
+label input[type=radio]{
+  vertical-align: top;
+  display: inline-block;
+  margin-right: 1px;
+  margin-top: 1px;
+  *margin-top: 0;
+}
 /* Function */
 .fn-tc{
   text-align: center;
+}
+.fn-tl{
+  text-align: left;
+}
+.fn-tr{
+  text-align: right;
 }
 .hide{
   display: none;

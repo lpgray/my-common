@@ -7,34 +7,47 @@ module.exports = function(grunt) {
     banner : '/*! <%= pkg.name %> - v<%= pkg.version %> - ' + 
     '<%= grunt.template.today("yyyy-mm-dd") %>\n' + 
     '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>-<%= pkg.author.email %>; */',
-    // Task configuration.
     concat : {
       options : {
         banner : '<%= banner %>',
         stripBanners : true
       },
-      dist : {
-        src : ['src/plugins/*.js'], 
-        dest : 'src/plugins.js'
+      js : {
+        src : ['js/lib/jquery-1.10.2.js', 'js/lib/plugins/**/*.js'], 
+        dest : 'js/src/lib.js'
+      },
+      css : {
+        src : ['css/plugins/**/*.css'], 
+        dest : 'css/plugins.css'
       }
-    },  //
+    },
+    concatcss : {
+      options : {
+        banner : '<%= banner %>',
+        stripBanners : true
+      },
+      dist : {
+        src : ['./css/plugins/**/*.css'], 
+        dest : './css/plugins.css'
+      }
+    },
     uglify : {
       options : {
         banner : '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n' // 压缩后的文件声明
       },
       build : {
-        src : 'src/plugins.js',
-        dest : 'src/plugins.min.js'// 压缩后的文件
+        src : 'js/src/lib.js',
+        dest : 'js/src/lib.min.js'
       }
     },
     qunit : {
-      files: ['test/**/*.html']
+      files: ['js/test/**/*.html']
     },
     jshint: {
-      files: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js']
+      files: ['Gruntfile.js', 'js/src/**/*.js', 'js/test/**/*.js']
     },
     watch : {
-      files: ['src/**/*.js', 'test/**/*.js'],
+      files: ['js/src/**/*.js', 'js/test/**/*.js'],
       tasks: ['jshint']
     }
   });
