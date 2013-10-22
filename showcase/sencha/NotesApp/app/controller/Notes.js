@@ -1,19 +1,21 @@
 Ext.define("NotesApp.controller.Notes", {
   extend : "Ext.app.Controller",
+  requires : "Ext.MessageBox",
   config : {
     refs : {
       // newNoteBtn : "#new-note-btn"
-      notesListContainer : "noteslistcontainer",
-      noteEditor : "noteeditor"
+      notesList : "noteslistview",
+      noteEditor : "noteeditorview",
     },
     control : {
-      noteEditor : {
-        saveNoteCommand : "onSaveNoteCommand",
-        backCommand : "onBackCommand"
-      },
-      notesListContainer : {
+      notesList : {
         newNoteCommand : "onNewNoteCommand",
         editNoteCommand : "onEditNoteCommand"
+      },
+      noteEditor : {
+        saveNoteCommand : "onSaveNoteCommand",
+        delCommand : "onDeleteNoteCommand",
+        backCommand : "onBackCommand"
       }
     }
   },
@@ -33,25 +35,22 @@ Ext.define("NotesApp.controller.Notes", {
     
     this.activateNoteEditor(newNote);
   },
-  
   onEditNoteCommand : function(list, record) {
-    var noteEditor = this.getNoteEditor();
-    noteEditor.setRecord(record);
-    Ext.Viewport.animateActiveItem(noteEditor, this.slideLeftTransition);
+    // var noteEditor = this.getNoteEditor();
+    // noteEditor.setRecord(record);
+    // Ext.Viewport.animateActiveItem(noteEditor, this.slideLeftTransition);
+    this.activateNoteEditor(record);
   },
-  
   onBackCommand : function(){
-     console.debug('back...');
+     // console.debug('back...');
      this.activateNoteList();
   },
-  
   onSaveNoteCommand : function(){
-      console.log("onSaveNoteCommand");
-
+      // console.log("onSaveNoteCommand");
       var noteEditor = this.getNoteEditor();
   
-      var currentNote = noteEditor.getRecord();
-      var newValues = noteEditor.getValues();
+      var currentNote = noteEditor.getRecord(); // 已经set过的record
+      var newValues = noteEditor.getValues(); // 获取fieldsSet对象
   
       // Update the current note's fields with form values.
       currentNote.set("title", newValues.title);
@@ -75,22 +74,29 @@ Ext.define("NotesApp.controller.Notes", {
   
       notesStore.sort([{ property: 'dateCreated', direction: 'DESC'}]);
   
-      this.activateNotesList();
+      this.activateNoteList();
+  },
+  onDeleteNoteCommand : function(){
+    var noteEditor = this.getNoteEditor();
+    var currentNote = noteEditor.getRecord();
+    var notesStore = Ext.getStore("Notes");
+    
+    notesStore.remove(currentNote);
+    notesStore.sync();
+    this.activateNoteList();
   },
   
   activateNoteEditor: function (record) {
-    console.debug( record );
+    // console.debug( record );
     var noteEditor = this.getNoteEditor();
     noteEditor.setRecord(record); // load() is deprecated.
     Ext.Viewport.animateActiveItem(noteEditor, this.slideLeftTransition);
   },
-  
   activateNoteList : function(){
-    Ext.Viewport.animateActiveItem(this.getNotesListContainer(), this.slideRightTransition);
+    Ext.Viewport.animateActiveItem(this.getNotesList(), this.slideRightTransition);
   },
   
   slideLeftTransition: { type: 'slide', direction: 'left' },
-  
   slideRightTransition: { type: 'slide', direction: 'right' },
   
   launch : function() {
