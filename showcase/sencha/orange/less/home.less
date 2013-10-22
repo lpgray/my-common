@@ -3,22 +3,36 @@
 
 @color-btn-def-s: #F9F9F9;
 @color-btn-def-e: #ECEBEB;
+@color-btn-mai-s: #FEAB55;
+@color-btn-mai-e: #E86F17;
 
 @color-tab-act-s: #F4F3F3;
 @color-tab-act-e: #fff;
 
-@header-height: 6%;
-@body-height: 93%;
+@header-height: 48px;
+@body-height: 620px;
 
 @nav-selc-def-s: #FDFDFD;
 @nav-selc-def-e: #F7F7F8;
 
+@card-orange-s: #FAB62C;
+@card-orange-e: #FA970F;
+
+@card-red-s: #E77141;
+@card-red-e: #DC5932;
+
+@card-green-s: #C2E636;
+@card-green-e: #A8DE53;
+
+@card-gray-s: #D0D7DF;
+@card-gray-e: #B9C4CF;
+
 body, html{
-  margin: 0;
+  width: 1280px;
+  margin: 0 auto;
   padding: 0;
   height: 100%;
-  overflow: hidden;
-  font: normal normal 12px 'Arial';
+  font: normal normal 12px 'arial';
 }
 
 .btn{
@@ -31,6 +45,17 @@ body, html{
   text-align: center;
   color: #000;
   box-shadow: 0 0 3px rgba(0,0,0,.1) inset;
+}
+.btn_main{
+  background-image: -moz-linear-gradient(top, @color-btn-mai-s, @color-btn-mai-e);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@color-btn-mai-s), to(@color-btn-mai-e));
+  background-image: -webkit-linear-gradient(top, @color-btn-mai-s, @color-btn-mai-e);
+  background-image: -o-linear-gradient(top, @color-btn-mai-s, @color-btn-mai-e);
+  background-image: linear-gradient(to bottom, @color-btn-mai-s, @color-btn-mai-e);
+  border: 1px solid #C37934;
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,.2);
+  border-radius: 4px;
 }
 .tabwrap > a{
   background: #ccc;
@@ -71,7 +96,7 @@ header{
     margin: 0;
     padding: 0;
     height: 100%;
-    line-height: normal;
+    line-height: 48px;
     text-align: center;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
   }
@@ -102,7 +127,7 @@ div.body{
   & > nav{
     position: absolute;
     height: 100%;
-    width: 28%;
+    width: 27%;
     border-right: 1px solid #E8E8E8;
     left: 0;
     top: 0;
@@ -181,18 +206,97 @@ div.body{
   }
   
   & > .main{
-    margin: 0 239px 0 28.5%;
+    margin: 0 239px 0 27.5%;
+    position: relative;
+    height: 100%;
     & > .cards{
       & > .card{
         width: 32%;
         float: left;
         border: 1px solid #eee;
         border-radius: 4px;
-        margin: 0 .5% .5% 0;
+        margin: 0 .8% 10px 0;
         & > .card-inner{
-          height: 64px;
+          height: 84px;
+          background: #ccc;
+          border-radius: 4px;
+          margin: 5px;
+          position: relative;
+          color: #fff;
+          box-shadow: 0 1px 0 rgba(255,255,255,.5) inset, 0 0 2px rgba(0,0,0,.3);
+          & > .left{
+            position: absolute;
+            width: 40%;
+            text-align: center;
+            & > .icon{
+              height: 40px;
+            }
+          }
+          & > .right{
+            margin-top: 22px;
+            text-align: right;
+            padding-right: 10px;
+            & > strong{
+              font-size: 2.2em;
+            }
+          }
+        }
+        & > .voice{
+           background-image: -moz-linear-gradient(top, @card-orange-s, @card-orange-e);
+            background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@card-orange-s), to(@card-orange-e));
+            background-image: -webkit-linear-gradient(top, @card-orange-s, @card-orange-e);
+            background-image: -o-linear-gradient(top, @card-orange-s, @card-orange-e);
+            background-image: linear-gradient(to bottom, @card-orange-s, @card-orange-e);
+        }
+        & > .data{
+           background-image: -moz-linear-gradient(top, @card-red-s, @card-red-e);
+            background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@card-red-s), to(@card-red-e));
+            background-image: -webkit-linear-gradient(top, @card-red-s, @card-red-e);
+            background-image: -o-linear-gradient(top, @card-red-s, @card-red-e);
+            background-image: linear-gradient(to bottom, @card-red-s, @card-red-e);
+        }
+        & > .sms{
+           background-image: -moz-linear-gradient(top, @card-green-s, @card-green-e);
+            background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@card-green-s), to(@card-green-e));
+            background-image: -webkit-linear-gradient(top, @card-green-s, @card-green-e);
+            background-image: -o-linear-gradient(top, @card-green-s, @card-green-e);
+            background-image: linear-gradient(to bottom, @card-green-s, @card-green-e);
+        }
+        & > .recurring{
+           background-image: -moz-linear-gradient(top, @card-gray-s, @card-gray-e);
+            background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@card-gray-s), to(@card-gray-e));
+            background-image: -webkit-linear-gradient(top, @card-gray-s, @card-gray-e);
+            background-image: -o-linear-gradient(top, @card-gray-s, @card-gray-e);
+            background-image: linear-gradient(to bottom, @card-gray-s, @card-gray-e);
+            
         }
       }
+    }
+    & > .desc{
+      & > h2{
+        font-size: 1.4em;
+        margin: 0;
+        padding: 0;
+        line-height: 20px;
+      }
+      & > p{
+        font-size: 1.4em;
+        font-weight: bold;
+        margin: 0;
+        padding: 0;
+      }
+    }
+    & > .btn_main{
+      width: 160px;
+      text-align: center;
+      font-size: 1.4em;
+      padding: 6px 0;
+      bottom: 20px;
+      display: block;
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      margin-left: -80px;
     }
   }
   & > .contrasts{
@@ -202,5 +306,55 @@ div.body{
     border-left: 1px solid #E8E8E8;
     right: 0;
     top: 0;
+    & > .clearfix{
+       height: 90%;
+       width: 90%;
+       margin: 5% auto;
+       position: relative;
+       & > .contrast-section{
+         width: 48%;
+         margin: 2px;
+         float: left;
+         height: 50%;
+         background: #F7F8FA;
+         border-radius: 4px;
+         box-shadow: 0 0 3px rgba(0,0,0,.3) inset;
+       }
+       & > .do-bg{
+         position: absolute;
+         width: 130px;
+         height: 130px;
+         border-radius: 65px;
+         background: #fff;
+         box-shadow: 0 0 3px rgba(0,0,0,.2);
+         top: 50%;
+         left: 50%;
+         margin-top: -65px;
+         margin-left: -65px;
+         & > .do-wrap{
+           width: 100px;
+           height: 100px;
+           margin-top: 15px;
+           margin-left: 15px;
+           border-radius: 50px;
+           background: #EAEBEB;
+           box-shadow: 0 1px 3px rgba(0,0,0,.5) inset;
+           & > .dovs{
+             width: 80px;
+             height: 80px;
+             margin-top: 10px;
+             margin-left: 10px;
+             background: #fff;
+             box-shadow: 0 2px 3px rgba(0,0,0,.5);
+             border: 0;
+             border-radius: 40px;
+             color: #A7A7A7;
+             font-size: 2.3em;
+             font-weight: bold;
+             text-shadow: 0 -1px 0px rgba(0,0,0,.8);
+           }
+         }
+       }
+    }
   }
 }
