@@ -56,6 +56,7 @@ body, html{
   color: #fff;
   box-shadow: 0 1px 2px rgba(0,0,0,.2);
   border-radius: 4px;
+  text-shadow: 0 1px 0 rgba(0,0,0,.2);
 }
 .tabwrap > a{
   background: #ccc;
@@ -80,6 +81,50 @@ body, html{
   }
 }
 
+.ico{
+  display: inline-block;
+  background-image: url(../img/icons.png);
+  background-repeat: no-repeat;
+  &.ico_back{
+    width: 40px;
+    height: 38px;
+    background-position: -15px -217px;
+    text-indent: -9999px;
+  }
+  &.ico_face{
+    width: 26px;
+    height: 26px;
+    background-position: -16px -320px;
+    vertical-align: middle;
+  }
+  &.ico_chart{
+    width: 40px;
+    height: 38px;
+    background-position: -15px -262px;
+    text-indent: -9999px;
+  }
+  &.ico_voice{
+    width: 40px;
+    height: 38px;
+    background-position: -15px -56px;
+  }
+  &.ico_domestic{
+    width: 40px;
+    height: 38px;
+    background-position: -12px -106px;
+  }
+  &.ico_sms{
+    width: 40px;
+    height: 38px;
+    background-position: -15px -4px;
+  }
+  &.ico_database{
+    width: 40px;
+    height: 38px;
+    background-position: -13px -158px;
+  }
+}
+
 header{
   height: @header-height;
   background-image: -moz-linear-gradient(top, @color-header-bg-s, @color-header-bg-e);
@@ -100,7 +145,7 @@ header{
     text-align: center;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
   }
-  & > .left_panel, & > .btn_chart{
+  & > .left_panel, & > .ico_chart{
     position: absolute;
     top: 0;
   }
@@ -109,13 +154,17 @@ header{
     border: 0;
     display: inline-block;
   }
-  & > .left_panel > .btn_back{
-    
+  & > .left_panel{
+    top: 4px;
+  }
+  & > .left_panel > .ico_back{
+    margin-left: 10px;
   }
   & > .left_panel > .profile{
     display: inline-block;
+    text-shadow: 0 1px 0 rgba(0,0,0, .3);
   }
-  & > .btn_chart{
+  & > .ico_chart{
     right: 10px;
   }
 }
@@ -228,8 +277,8 @@ div.body{
             position: absolute;
             width: 40%;
             text-align: center;
-            & > .icon{
-              height: 40px;
+            & > p{
+              margin: 0;
             }
           }
           & > .right{
@@ -299,6 +348,7 @@ div.body{
       margin-left: -80px;
     }
   }
+  
   & > .contrasts{
     position: absolute;
     height: 100%;
