@@ -1,12 +1,16 @@
 Ext.application({
   name : "Notes",
-  views: ["NotesList"],
+  views: ["NotesList", "NoteEditor"],
+  controllers: ["Notes"],
   models : ["Note"],
-  store : ["Notes"],
+  stores : ["Notes"],
   launch : function() {
-    var articleview = {
-      xtype : "articleview"
-    }
-    Ext.Viewport.add(articleview);
+    var notesListView = {
+      xtype : "notesListView"
+    };
+    var noteEditorView = {
+      xtype : "noteEditorView"
+    };
+    Ext.Viewport.add([notesListView, noteEditorView]);
   }
 });

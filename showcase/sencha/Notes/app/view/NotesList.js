@@ -1,6 +1,6 @@
 Ext.define('Notes.view.NotesList',{
   extend : 'Ext.Container',
-  alias : 'widget.articleview',
+  alias : 'widget.notesListView',
   config : {
     layout : {
       type : 'fit'
@@ -14,17 +14,33 @@ Ext.define('Notes.view.NotesList',{
           { xtype : 'spacer' },
           {
             xtype : 'button',
-            text : '创建'
+            text : '创建',
+            itemId : 'btnCreate'
           }
         ]
       },
       {
         xtype : 'list',
-        itemTpl : '<strong>{title}</strong><p>{content}</p>',
-        loadingText : '正在加载日记...',
-        emptyText : '没有日记',
-        store : 'notesStore'
+        itemTpl : '<b>{title}</b><p>{content}</p>',
+        store : 'notesStore',
+        itemId : 'J_noteList'
+      }
+    ],
+    listeners : [
+      {
+        delegate : '#btnCreate',
+        event : 'tap',
+        fn : 'onBtnCreateTap'
+      },
+      {
+        delegate : '#J_noteList',
+        event : '',
+        fn : 'onNoteItemTap'
       }
     ]
+  },
+  // Event获取并发布
+  onBtnCreateTap : function(){
+    this.fireEvent('newNoteCommand', this);
   }
 });
