@@ -34,7 +34,7 @@ Ext.define('Notes.view.NotesList',{
       },
       {
         delegate : '#J_noteList',
-        event : '',
+        event : 'itemsingletap',
         fn : 'onNoteItemTap'
       }
     ]
@@ -42,5 +42,8 @@ Ext.define('Notes.view.NotesList',{
   // Event获取并发布
   onBtnCreateTap : function(){
     this.fireEvent('newNoteCommand', this);
+  },
+  onNoteItemTap : function(list, index, target, record, e, eOpts){
+  	this.fireEvent('editNoteCommand', this, record);
   }
 });

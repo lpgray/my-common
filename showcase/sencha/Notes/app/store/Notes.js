@@ -1,5 +1,6 @@
 Ext.define('Notes.store.Notes', {
   extend : 'Ext.data.Store',
+  require : 'Ext.data.proxy.LocalStorage',
   config : {
     storeId : 'notesStore',
     model : 'Notes.model.Note',
@@ -11,7 +12,7 @@ Ext.define('Notes.store.Notes', {
     // ]
     proxy : {
       type : "localstorage",
-      id : "note"
+      id : "notes"
     }
   }
 });

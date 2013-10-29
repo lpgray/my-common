@@ -7,7 +7,8 @@ Ext.define('Notes.controller.Notes', {
     },
     control : {
       notesListView : {
-        newNoteCommand : 'createNewNote'
+        newNoteCommand : 'createNewNote',
+        editNoteCommand : 'editNote'
       },
       noteEditorView : {
         saveNoteCommand : 'saveNote',
@@ -20,21 +21,16 @@ Ext.define('Notes.controller.Notes', {
   createNewNote : function(){
     var noteEditor = this.getNoteEditorView();
     var newNote = Ext.create('Notes.model.Note',{
+      // id : new Date().getTime().toString(),
       title : '',
       content : ''
     });
-    console.debug(newNote);
+    
     noteEditor.setRecord(newNote);
-    Ext.Viewport.animateActiveItem(noteEditor, {
-      type : 'slide',
-      direction : 'left'
-    });
+    this.animateView(1, 'left');
   },
   backView : function(){
-    Ext.Viewport.animateActiveItem(0, {
-      type : 'slide',
-      direction : 'right'
-    });
+  	this.animateView(0, 'right');
   },
   saveNote : function(){
     var note = this.getNoteEditorView().getRecord();
@@ -42,7 +38,9 @@ Ext.define('Notes.controller.Notes', {
     var store = Ext.getStore('notesStore');
     note.set('title', value.title);
     note.set('content', value.content);
+    console.debug(note);
     store.add(note);
+    store.sync();
     this.backView();
   },
   removeNote : function(){
@@ -51,6 +49,18 @@ Ext.define('Notes.controller.Notes', {
     store.remove( note );
     store.sync();
     this.backView();
+  },
+  editNote : function(list, record){
+  	var editView = this.getNoteEditorView();
+  	editView.setRecord(record);
+  	this.animateView(1, 'left');
+  },
+  // 切换视图
+  animateView : function( idx, direction ){
+  	Ext.Viewport.animateActiveItem(idx, {
+      type : 'slide',
+      direction : direction
+    });
   },
   // 初始化
   init : function(){
