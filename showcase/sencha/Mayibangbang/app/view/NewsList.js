@@ -29,6 +29,7 @@ Ext.define('mybb.view.NewsList', {
 					{ id : '2', avator : 'img/face.jpg', nickName : '蚂蚁帮帮' },
 					{ id : '3', avator : 'img/miao.jpg', nickName : '小猫小猫笑嘻嘻' }
 				],
+				disableSelection : true,
 				itemTpl : '<div class="c-news-item c-news-item-wrap">' + 
 							'<div class="c-news-item-left">' + 
 								'<i class="c-avator" style="background-image: url({avator});"></i>' + 
