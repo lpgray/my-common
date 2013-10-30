@@ -1,0 +1,17 @@
+.x-tabbar{
+    background-color: #fff;
+    height: 50px;
+    border: 0;
+    box-shadow: 0 -2px 2px rgba(0,0,0,.3);
+    z-index: 1000;
+    position: relative;
+}
+.x-tab{
+    height: 100%;
+    width: 25%;
+    border: 0;
+    background-color: #fff;
+}
+.x-tab-pressed{
+    background-color: #eee;
+}

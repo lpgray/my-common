@@ -1,10 +1,10 @@
 Ext.application({
 	name : 'mybb',
-	views : ['NewsList'],
+	views : ['Main', 'NewsList'],
 	launch : function(){
-		var newsView = {
-			xtype : 'newslistview'
-		}
-		Ext.Viewport.add(newsView);
+		var mainView = {
+		  xtype : 'mainview'
+		};
+		Ext.Viewport.add([mainView]);
 	}
-})
+});
