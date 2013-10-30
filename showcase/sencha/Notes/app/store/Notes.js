@@ -13,6 +13,13 @@ Ext.define('Notes.store.Notes', {
     proxy : {
       type : "localstorage",
       id : "notes"
+    },
+    grouper : {
+      groupFn : function( record ){
+        var date2 = record.data.createdAt;
+        return date2.getFullYear() + '年' + (date2.getMonth() + 1) + '月' + date2.getDate() + '日';
+      },
+      sortProperty : 'createdAt'
     }
   }
 });

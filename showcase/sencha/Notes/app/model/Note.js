@@ -5,7 +5,8 @@ Ext.define('Notes.model.Note', {
     fields : [
       { name : 'id' , type : 'int' },
       { name : 'title', type : 'string' },
-      { name : 'content', type : 'string' }
+      { name : 'content', type : 'string' },
+      { name : 'createdAt', type : 'date' }
     ]
   }
 });

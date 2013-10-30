@@ -23,7 +23,10 @@ Ext.define('Notes.view.NotesList',{
         xtype : 'list',
         itemTpl : '<b>{title}</b><p>{content}</p>',
         store : 'notesStore',
-        itemId : 'J_noteList'
+        itemId : 'J_noteList',
+        disableSelection : true,
+        itemCls : 'n-note-item',
+        grouped : true
       }
     ],
     listeners : [

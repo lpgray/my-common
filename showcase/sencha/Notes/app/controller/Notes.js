@@ -23,7 +23,8 @@ Ext.define('Notes.controller.Notes', {
     var newNote = Ext.create('Notes.model.Note',{
       // id : new Date().getTime().toString(),
       title : '',
-      content : ''
+      content : '',
+      createdAt : new Date()
     });
     
     noteEditor.setRecord(newNote);
