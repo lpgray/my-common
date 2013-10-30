@@ -1,19 +1,27 @@
-.x-toolbar.c-toolbar{
+.x-toolbar{
     background-color : #fff;
-    border-bottom: 0;
-    border-top: 0;
     box-shadow: 0 2px 2px rgba(0,0,0,.3);
     z-index: 1000;
+    height: 40px;
 }
-.x-toolbar.c-toolbar .x-title{
-    font-size : 20px;
+.x-toolbar.x-docked-top{
+    border: 0;
 }
-.x-toolbar.c-toolbar .x-button{
+.x-toolbar .x-title{
+    font-size : 1.6em;
+}
+.x-toolbar .x-button{
     height: 100%;
+    width: 40px;
     border: 0;
     background-color: #fff;
 }
-.x-toolbar.x-docked-bottom.c-toolbar{
-    height: 50px;
-    box-shadow: 0 -2px 2px rgba(0,0,0,.3);
+.x-toolbar .x-button:first-child{
+    border-right: 1px solid #e2e2e2;
+}
+.x-toolbar .x-button:last-child{
+    border-left: 1px solid #e2e2e2;
+}
+.x-toolbar .x-button.x-button-pressing{
+    background-color: #eee;
 }

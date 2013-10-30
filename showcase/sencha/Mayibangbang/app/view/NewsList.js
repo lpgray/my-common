@@ -10,16 +10,15 @@ Ext.define('mybb.view.NewsList', {
 				xtype : 'toolbar',
 				docked : 'top',
 				title : '最新周边',
-				cls : 'c-toolbar',
 				items : [
 					{
 						xtype : 'button',
-						text : '创建'
+						iconCls : 'ic_header_plus'
 					},
 					{ xtype : 'spacer' },
 					{
 						xtype : 'button',
-						text : '刷新'
+						iconCls : 'ic_header_flush'
 					}
 				]
 			},

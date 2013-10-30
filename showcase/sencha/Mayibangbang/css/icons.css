@@ -1,0 +1,32 @@
+.ic_footer_home {
+    width: 26px;
+    height: 26px;
+    background: url(../img/iconsp24.png) no-repeat 0 0px;
+}
+.ic_footer_more {
+    width: 28px;
+    height: 26px;
+    background: url(../img/iconsp24.png) no-repeat -36px 0px;
+}
+.ic_footer_msg {
+    width: 24px;
+    height: 26px;
+    background: url(../img/iconsp24.png) no-repeat -76px 0px;
+}
+.ic_footer_profile {
+    width: 24px;
+    height: 26px;
+    background: url(../img/iconsp24.png) no-repeat -118px 0px;
+}
+.ic_header_plus {
+    width: 28px;
+    height: 28px;
+    background-image: url(../img/icons/ic_header_plus.png);
+    background-size : 40px;
+}
+.ic_header_flush {
+    width: 28px;
+    height: 28px;
+    background-image: url(../img/icons/ic_header_flush.png);
+    background-size : 40px;
+}

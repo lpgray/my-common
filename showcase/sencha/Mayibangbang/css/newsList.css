@@ -34,8 +34,9 @@
 }
 .c-news-item h2.c-nickname {
 	color: #2772EF;
-	font-weight: normal;
-	margin: 5px 0;
+	font-weight: bold;
+	font-size: 1.2em;
+	margin: 0;
 }
 .c-news-item .c-distance, .c-news-item .c-sent-time {
 	color: #C2C2C2;

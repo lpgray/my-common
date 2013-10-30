@@ -6,12 +6,39 @@
     z-index: 1000;
     position: relative;
 }
+.x-tabbar  > .x-layout-box > .x-layout-box-item{
+    display: block !important;
+}
 .x-tab{
     height: 100%;
     width: 25%;
     border: 0;
     background-color: #fff;
+    display: block;
+    padding-top: 6px;
 }
 .x-tab-pressed{
     background-color: #eee;
+}
+.x-tab > .x-button-icon {
+    margin: 0 auto;
+}
+.x-tab > .x-button-label{
+    font-size: 12px;
+    height: 1em;
+    line-height: 1em;
+    width: 100%;
+    margin-top: 4px;
+}
+#ext-tab-1 > .x-button-label{
+    color: #ED7979;
+}
+#ext-tab-2 > .x-button-label{
+    color: #5DCB51;
+}
+#ext-tab-3 > .x-button-label{
+    color: #4682D4;
+}
+#ext-tab-4 > .x-button-label{
+    color: #848484;
 }
