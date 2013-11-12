@@ -18,16 +18,16 @@
 }
 .c-news-item .c-news-item-left{
 	position: absolute;
-	width: 70px;
+	width: 46px;
 }
 .c-news-item .c-news-item-right{
-	margin-left: 70px;
+	margin-left: 46px;
 }
 .c-news-item .c-avator {
-	height: 56px;
-	width: 56px;
+	height: 36px;
+	width: 36px;
 	display: block;
-	background-size: 56px;
+	background-size: 36px;
 	background-position: center center;
 	border-radius: 28px;
 	margin-left: 5px;
