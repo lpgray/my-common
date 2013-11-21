@@ -1,0 +1,9 @@
+{
+    "name": "nodejs-lesson-1",
+    "version": "0.1.0",
+    "description": "nodejs lesson 1",
+    "dependencies": {
+        "formidable": "latest"
+    },
+    "author": "lpgray"
+}
