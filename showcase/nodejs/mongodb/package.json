@@ -1,10 +1,9 @@
 {
     "name": "MongodbDemo",
-    "version": "0.1",
+    "version": "0.1.0",
     "description": "nodejs : mongodb + express demo",
     "dependencies": {
-        "express": "latest",
-        "mongodb": "latest"
+        "mongojs": "0.9.7"
     },
     "author": "lpgray"
 }
