@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>XHR2测试</title>
+</head>
+<body>
+	<script>
+	var client = new XMLHttpRequest();
+	
+	if(client.upload) // 是否是XHR2标准的判断标志
+		console.info('支持 XHR2 标准');
+	
+	client.timeout = 100; // 10秒超时
+	client.ontimeout = function(){ // 超时处理
+		console.info('请求超时');
+	}
+
+	client.onloaded = function(a){ // onreadystatechange
+		console.info(client.status);
+	}
+
+	client.open('GET', 'response2.json');
+	client.send();
+	</script>
+</body>
+</html>
