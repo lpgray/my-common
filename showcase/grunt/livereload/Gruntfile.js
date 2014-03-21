@@ -18,7 +18,7 @@ module.exports = function(grunt) {
       },
       dist: {
         src: ['src/<%= pkg.name %>.js'],
-        dest: 'build/<%= pkg.name %>.js'
+        dest: 'dist/<%= pkg.name %>.js'
       }
     },
     uglify: {
@@ -27,7 +27,7 @@ module.exports = function(grunt) {
       },
       dist: {
         src: '<%= concat.dist.dest %>',
-        dest: 'build/<%= pkg.name %>.min.js'
+        dest: 'dist/<%= pkg.name %>.min.js'
       }
     },
     jshint: {
@@ -40,8 +40,8 @@ module.exports = function(grunt) {
       // lib_test: {
       //   src: ['lib/**/*.js', 'test/**/*.js']
       // }
-      devjs: {
-        src : ['dev/test.js']
+      dev: {
+        src : ['src/**/*.js']
       }
     },
     watch: {
@@ -62,7 +62,7 @@ module.exports = function(grunt) {
       // },
       livereload: {
         options: {livereload: true},
-        files: ['dev/test.js', 'index.html']
+        files: ['src/**/*.js', 'src/**/*.html']
       }
     },
     connect: {

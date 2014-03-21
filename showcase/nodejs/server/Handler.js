@@ -50,10 +50,21 @@ var show = function(req, resp){
 	});
 }
 
+var readfile = function(req, resp){
+	var lazy = require('lazy');
+	var fs = require('fs');
+	new lazy(fs.createReadStream('tmp/imgs_result.txt'))
+		.lines
+		.forEach(function(line){
+			console.log(line.toString());
+		});
+}
+
 var handles = {}
 handles["/"] = index;
 handles['/index'] = index;
 handles['/upload'] = upload;
 handles['/show'] = show;
+handles['/readfile'] = readfile;
 
 exports.handles = handles;
