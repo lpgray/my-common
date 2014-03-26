@@ -54,8 +54,8 @@ s{position:absolute;display:block;width:0;height:0;line-height:0;font-size:0;bor
 
 body{color:#333;background:url(../img/bg.png) #fff;}
 a{color:#333;}
-a:hover{color:#33b5e5;}
-.wrapper{position:relative;z-index:1;width:960px;margin:0 auto;*zoom:1;overflow:hidden;}
+a:hover{color:#97BA0C;}
+.wrapper{position:relative;z-index:1;width:960px;margin:0 auto;*zoom:1;}
 .wrapper.wide{width:1100px;}
 .wrapper.overflow{overflow:visible;}
 .wrapper:after{display:block;height:0;clear:both;content:" ";}
