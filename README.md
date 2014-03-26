@@ -1,4 +1,4 @@
-# my-common #
+# Snippets #
 
 ## Architecture ##
 
