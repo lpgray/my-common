@@ -10,6 +10,45 @@ isSafari = /safari/gi.test(platform) && !/chrome/gi.test(platform);
 isIDeviceWechat = isIDevice && /micromessenger/gi.test(platform);
 isAndroidWechat = isAndroid && /micromessenger/gi.test(platform);
 
+var partners = [
+    {
+        name : '中国电信'
+    },
+    {
+        name : '中国电信'
+    },
+    {
+        name : '中国电信'
+    },
+    {
+        name : '中国电信'
+    },
+    {
+        name : '中国电信'
+    },
+    {
+        name : '中国电信'
+    },
+    {
+        name : '中国电信'
+    },
+    {
+        name : '中国电信'
+    },
+    {
+        name : '中国电信'
+    },
+    {
+        name : '中国电信'
+    },
+    {
+        name : '中国电信'
+    },
+    {
+        name : '中国电信'
+    }
+];
+
 var lastPage = 0
     , currentPage = 1
     , totalPage = 0
@@ -151,129 +190,193 @@ $(function() {
             goToPage(targetPage, "fade");
     });
 
-    var $page1 = $('#page-1')
-        , $drawer = $page1.find('.modules-box')
-        , $itemsInDrawer = $page1.find('.modules')
-        , $drawerTrig = $page1.find('.collapsible-arrow')
-        , $lis = $drawer.find('.modules-list').find('li');
-    function openDrawer(){
-        if ($drawer.hasClass("on")) {
-            $drawer.removeAttr("style").removeClass("on");
-            $itemsInDrawer.removeClass("wrapper");
-        } else {
-            $drawer.height($lis.height() * 5 - 50).addClass("on");
-            $itemsInDrawer.addClass("wrapper")
+    (function(){
+        var $page1 = $('#page-1')
+            , $drawer = $page1.find('.modules-box')
+            , $itemsInDrawer = $page1.find('.modules')
+            , $drawerTrig = $page1.find('.collapsible-arrow')
+            , $lis = $drawer.find('.modules-list').find('li')
+            , $descs = $('.mudules-description').children();
+        function openDrawer(idx){
+            if ($drawer.hasClass("on")) {
+                $drawer.removeAttr("style").removeClass("on");
+                $itemsInDrawer.removeClass("wrapper");
+            } else {
+                $drawer.height($lis.height() * 4 - 50).addClass("on");
+                $itemsInDrawer.addClass("wrapper")
+            }
         }
-    }
-    $drawerTrig.click(openDrawer);
-
-
-    var $page2 = $('#page-2')
-        , $page2selection = $page2.find('.desc')
-        , $page2layers = $page2.find('.layer')
-        , $pag2layersWrapper = $page2.find('.page2-device');
-    pageEvents[2] = function(){
-        loopWithPause($page2selection, function(idx, item){
-            $(item).addClass('animate');
-            if(idx === $page2selection.length-1){
-                $.each($page2layers, function(idx, layer){
-                    idx++;
-                    $(layer).addClass('layer'+idx+'-active');
-                });
-                setTimeout(function(){
-                    activeTriggerAndLayer(0);
-                }, 1000);
-            }
-        }, 100);
-    }
-    function activeTriggerAndLayer(idx){
-        $page2.find('.desc').eq(idx).addClass('active').siblings().removeClass('active');
-        $.each($page2layers, function(i, item){
-            if(i>=idx){
-                i++;
-                $(item).removeClass('layer' + i + '-ignore');
-            }else{
-                i++;
-                $(item).addClass('layer' + i + '-ignore');
-            }
+        function showDesc(idx){
+            $descs.eq(idx).addClass('active').siblings().removeClass('active');
+        }
+        $drawerTrig.click(function(){
+            openDrawer();
+            showDesc(0);
         });
-    }
-    $page2selection.mouseover(function(){
-        activeTriggerAndLayer($(this).index());
-    });
-    pageReverts[2] = function(){
-        $page2selection.removeClass('active animate');
-        $page2layers.each(function(idx, item){
-            idx++;
-            $(item).removeClass('layer' + idx + '-ignore layer' + idx + '-active active');
+        $lis.click(function(){
+            var $self = $(this);
+            var idx = $self.index();
+            if(!$drawer.hasClass("on")){
+                openDrawer(idx);
+            }
+            showDesc(idx);
+            $self.addClass('active').siblings().removeClass('active');
         });
-    }
+    }());
 
+    (function(){
+        var $page2 = $('#page-2')
+            , $page2selection = $page2.find('.desc')
+            , $page2layers = $page2.find('.layer')
+            , $pag2layersWrapper = $page2.find('.page2-device');
+        pageEvents[2] = function(){
+            loopWithPause($page2selection, function(idx, item){
+                $(item).addClass('animate');
+                if(idx === $page2selection.length-1){
+                    $.each($page2layers, function(idx, layer){
+                        idx++;
+                        $(layer).addClass('layer'+idx+'-active');
+                    });
+                    setTimeout(function(){
+                        activeTriggerAndLayer(0);
+                    }, 1000);
+                }
+            }, 100);
+        }
+        function activeTriggerAndLayer(idx){
+            $page2.find('.desc').eq(idx).addClass('active').siblings().removeClass('active');
+            $.each($page2layers, function(i, item){
+                if(i>=idx){
+                    i++;
+                    $(item).removeClass('layer' + i + '-ignore');
+                }else{
+                    i++;
+                    $(item).addClass('layer' + i + '-ignore');
+                }
+            });
+        }
+        $page2selection.mouseover(function(){
+            activeTriggerAndLayer($(this).index());
+        });
+        pageReverts[2] = function(){
+            $page2selection.removeClass('active animate');
+            $page2layers.each(function(idx, item){
+                idx++;
+                $(item).removeClass('layer' + idx + '-ignore layer' + idx + '-active active');
+            });
+        }
+    }());
 
-    var $page3 = $('#page-3')
-        , $timelineLis = $page.find('.timeline li')
-        , timelineLen = $timelineLis.length
-        , $dot = $page3.find('span.dot')
-        , page3Timer = 0
-        , page3AutoRun = 0
-        , page3pause = 0
-        , page3Current = 0;
-    function activeDotAndTimeline(idx) {
-        var $target = $timelineLis.eq(idx);
-        $dot.stop().animate({
-            left: $target.offset().left + $target.width() / 2 - $dot.width() / 2
-        }, 500);
-        $target.addClass("current").siblings().removeClass("current");
-    }
-    $timelineLis.mouseover(function(){
-        var self = this;
-        clearTimeout(page3Timer);
-        page3Timer = setTimeout(function(){
-            page3Current = $(self).index()
-            activeDotAndTimeline(page3Current);
-        }, 500);
-        page3pause = 1;
-    }).mouseout(function(){
-        clearTimeout(page3Timer);
-        page3pause = 0;
-    });
-    pageEvents[3] = function(){
-        pageReverts[3]();
-        activeDotAndTimeline(page3Current);
-        page3Current++;
-        page3AutoRun = setInterval(function(){
-            if(page3pause){
-                return;
-            }
-
-            if(page3Current >= $timelineLis.length){
-                page3Current = 0;
-            }
-
+    (function(){
+        var $page3 = $('#page-3')
+            , $timelineLis = $page.find('.timeline li')
+            , timelineLen = $timelineLis.length
+            , $dot = $page3.find('span.dot')
+            , page3Timer = 0
+            , page3AutoRun = 0
+            , page3pause = 0
+            , page3Current = 0;
+        function activeDotAndTimeline(idx) {
+            var $target = $timelineLis.eq(idx);
+            $dot.stop().animate({
+                left: $target.offset().left + $target.width() / 2 - $dot.width() / 2
+            }, 500);
+            $target.addClass("current").siblings().removeClass("current");
+        }
+        $timelineLis.mouseover(function(){
+            var self = this;
+            clearTimeout(page3Timer);
+            page3Timer = setTimeout(function(){
+                page3Current = $(self).index()
+                activeDotAndTimeline(page3Current);
+            }, 500);
+            page3pause = 1;
+        }).mouseout(function(){
+            clearTimeout(page3Timer);
+            page3pause = 0;
+        });
+        pageEvents[3] = function(){
+            pageReverts[3]();
             activeDotAndTimeline(page3Current);
             page3Current++;
-        }, 2000);
-    };
-    pageReverts[3] = function(){
-        page3pause = 0;
-        clearInterval(page3AutoRun);
-    }
+            page3AutoRun = setInterval(function(){
+                if(page3pause){
+                    return;
+                }
 
-    var $page4descs = $('.page4-desc');
-    pageEvents[4] = function(){
-        setTimeout(function(){
-            loopWithPause($page4descs, function(idx, item){
+                if(page3Current >= $timelineLis.length){
+                    page3Current = 0;
+                }
+
+                activeDotAndTimeline(page3Current);
+                page3Current++;
+            }, 2000);
+        };
+        pageReverts[3] = function(){
+            page3pause = 0;
+            clearInterval(page3AutoRun);
+        }
+    }());
+
+    (function(){
+        var $page4descs = $('.page4-desc')
+            , page4timer = 0;
+        pageEvents[4] = function(){
+            page4timer = setTimeout(function(){
+                loopWithPause($page4descs, function(idx, item){
+                    idx++;
+                    $(item).addClass('page4-desc' + idx + '-animate');
+                }, 300);
+            }, 1200);
+        };
+        pageReverts[4] = function(){
+            $.each($page4descs, function(idx, item){
                 idx++;
-                $(item).addClass('page4-desc' + idx + '-animate');
-            }, 300);
-        }, 1200);
-    };
-    pageReverts[4] = function(){
-        $.each($page4descs, function(idx, item){
-            idx++;
-            $(item).removeClass('page4-desc' + idx + '-animate');
+                $(item).removeClass('page4-desc' + idx + '-animate');
+            });
+            clearTimeout(page4timer);
+        }
+    }());
+
+    (function(){
+        var $partnersWrapper = $('#page-5').find('.partners');
+        var tmpl = '';
+        $.each(partners, function(idx, item) {
+            tmpl += '<li class="p5-logo logo-' + idx + '"><a href="###">' + item.name + '</a></li>';
         });
-    }
+        $partnersWrapper.html(tmpl);
+    }());
+    
+    (function(){
+        var $mapCtn = $('#J_mapCtn')
+            , mapInited = 0
+            , map;
+        // $mapCtn.click(function() {
+            if (mapInited) {
+                return false;
+            }
+            mapInited = 1;
+            map = new BMap.Map('J_mapCtn');
+            map.enableDragging();
+            map.centerAndZoom(new BMap.Point(118.819224,31.950503), 32);
+            var marker = new BMap.Marker(new BMap.Point(118.819224,31.950503));
+            var control = new BMap.ZoomControl({
+                anchor : BMAP_ANCHOR_TOP_LEFT
+            });
+            var opts = {      
+                width : 100,     // 信息窗口宽度      
+                height: 80,     // 信息窗口高度      
+                title : "泛赢科技"  // 信息窗口标题     
+            }
+            var infoWindow = new BMap.InfoWindow("地址：XX路XX号 <br /> 电话：025-52123550", opts);  // 创建信息窗口对象      
+            
+            map.addOverlay(marker);
+            marker.addEventListener('click', function(){
+                map.openInfoWindow(infoWindow, marker.getPosition());      // 打开信息窗口
+            });
+            // map.addControl(control);
+        // });
+    }());
 });
 function resetPage(e) {
     var e = e || $("div.page");

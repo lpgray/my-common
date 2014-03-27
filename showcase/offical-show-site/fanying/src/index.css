@@ -7,6 +7,7 @@ body {
 	background: #000;
 	font-family: "Helvetica Neue",Helvetica,tahoma,arial,"Hiragino Sans GB", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Micro Hei Mono", "WenQuanYi Zen Hei", "WenQuanYi Zen Hei", "Apple LiGothic Medium", "SimHei", "ST Heiti", "WenQuanYi Zen Hei Sharp";
 }
+
 .fade-in {
 	opacity: 1;
 	filter: alpha(opacity=100);
@@ -571,49 +572,34 @@ body {
 	background-position: -352px 0;
 }
 #page-1 .modules-list li#module-5 .icon {
-	background-position: 0 -88px;
+	background-position: -440px 0;
 }
 #page-1 .modules-list li#module-6 .icon {
-	background-position: -88px -88px;
+	background-position: -528px 0;
 }
 #page-1 .modules-list li#module-7 .icon {
-	background-position: -176px -88px;
+	background-position: -616px 0;
 }
 #page-1 .modules-list li#module-8 .icon {
-	background-position: -264px -88px;
+	background-position: -704px 0;
 }
 #page-1 .modules-list li#module-9 .icon {
-	background-position: -352px -88px;
+	background-position: -792px 0;
 }
 #page-1 .modules-list li#module-10 .icon {
-	background-position: 0 -176px;
+	background-position: -880px 0;
 }
 #page-1 .modules-list li#module-11 .icon {
-	background-position: -88px -176px;
+	background-position: -968px 0;
 }
 #page-1 .modules-list li#module-12 .icon {
-	background-position: -176px -176px;
+	background-position: -1056px 0;
 }
 #page-1 .modules-list li#module-13 .icon {
-	background-position: -264px -176px;
+	background-position: -1144px 0;
 }
 #page-1 .modules-list li#module-14 .icon {
-	background-position: -352px -176px;
-}
-#page-1 .modules-list li#module-15 .icon {
-	background-position: 0 -264px;
-}
-#page-1 .modules-list li#module-16 .icon {
-	background-position: -88px -264px;
-}
-#page-1 .modules-list li#module-17 .icon {
-	background-position: -176px -264px;
-}
-#page-1 .modules-list li#module-18 .icon {
-	background-position: -264px -264px;
-}
-#page-1 .modules-list li#module-19 .icon {
-	background-position: -352px -264px;
+	background-position: -1232px 0;
 }
 #page-1 .modules-list .icon {
 	position: relative;
@@ -621,11 +607,7 @@ body {
 	width: 88px;
 	height: 88px;
 	margin: auto;
-	background:url(img/p1-modules-icons.png) no-repeat;
-	background-image:-webkit-image-set(url(img/p1-modules-icons.png) 1x, url(img/p1-modules-icons-2x.png) 2x);
-	background-image:   -moz-image-set(url(img/p1-modules-icons.png) 1x, url(img/p1-modules-icons-2x.png) 2x);
-	background-image:    -ms-image-set(url(img/p1-modules-icons.png) 1x, url(img/p1-modules-icons-2x.png) 2x);
-	background-image:     -o-image-set(url(img/p1-modules-icons.png) 1x, url(img/p1-modules-icons-2x.png) 2x);
+	background:url(imgs/p1-icons.png) no-repeat;
 	background-size: auto;
 }
 #page-1 .modules-list li a .name-en {
@@ -767,7 +749,7 @@ body {
 	position: absolute;
 	left: 0;
 	width: 100%;
-	height: 179px;
+	height: 178px;
 	opacity: 0;
 	top: 25px;
 	transition: all .6s ease .5s;
@@ -980,12 +962,12 @@ body {
 	background: #000;
 	color: #fff;
 }
-.block-blue {
+.block-green {
 	background: #3b9ac6;
 	color: #fff;
 }
 .block-black a,
-.block-blue a {
+.block-green a {
 	color: #fff;
 }
 
@@ -1049,7 +1031,7 @@ body {
 	width: 170px;
 	height: 90px;
 	line-height: 26px;
-	color: #888;
+	color: #444;
 	position: absolute;
 	top: 0;
 	z-index: 3;
@@ -1137,29 +1119,136 @@ body {
 
 #page-5{
 	background: #000 url(imgs/bg-3.png) center center no-repeat;
+	text-align: center;
 }
 #page-5 h1 {
-	padding: 20px 0;
+	padding: 40px 0;
 	color: #fff;
 }
-
-
-
-
-
-
-
-
-#page-6 .download-top {
+.p5-content .p5-logo{
+	display: block;
+	width: 86px;
+	height: 86px;
+	background-image: url(imgs/page5.png);
+	background-repeat: no-repeat;
+	opacity: 0;
+	-webkit-transform : scale(.2);
+}
+.page5-loaded .p5-content .p5-logo{
+	transition: all .5s;
+	opacity: 1;
+	-webkit-transform : scale(1);
+}
+.page5-loaded .p5-content .p5-logo:hover{
+	-webkit-transform : scale(1.1);
+	transition: all .2s;
+}
+#page-5 ul{
 	text-align: center;
-	height: 50%;
+}
+#page-5 li{
+	display: inline-block;
+	width: 86px;
+	height: 86px;
+	margin: 0 74px 60px 74px;
+	float: left;
+}
+#page-5 li a{
+	display: block;
+	width: 100%;
+	padding-top: 90px;
+	cursor: default;
+	text-decoration: none;
+}
+#page-5 .logo-0{
+	background-position: 0 -1px;
+}
+#page-5 .logo-1{
+	background-position: -86px -1px;
+}
+#page-5 .logo-2{
+	background-position: -172px -1px;
+}
+#page-5 .logo-3{
+	background-position: -258px -1px;
+}
+#page-5 .logo-4{
+	background-position: 0 -87px;
+}
+#page-5 .logo-5{
+	background-position: -86px -87px;
+}
+#page-5 .logo-6{
+	background-position: -172px -87px;
+}
+#page-5 .logo-7{
+	background-position: -258px -87px;
+}
+#page-5 .logo-8{
+	background-position: 0 -174px;
+}
+#page-5 .logo-9{
+	background-position: -86px -174px;
+}
+#page-5 .logo-10{
+	background-position: -172px -174px;
+}
+#page-5 .logo-11{
+	background-position: -258px -174px;
+}
+
+
+
+
+
+
+
+.page6-top {
+	text-align: center;
+	height: 60%;
 	background: #fff;
 }
-#page-6 .download-main {
-	height: 50%;
+.page6-main {
+	height: 40%;
 	background: #5A8100;
 }
-
+.page6-main h2{
+	font-size: 20px;
+	margin-top: 50px;
+}
+.page6-main p{
+	font-size: 12px;
+	margin-top: 10px;
+}
+.btn{
+	margin-top: 20px;
+	border-radius: 4px;
+	border: 2px solid #fff;
+	padding: 8px 8px;
+	text-decoration: none;
+	display: inline-block;
+}
+a.btn:hover{
+	text-decoration: none;
+	color: #5A8100;
+	background-color: #fff;
+}
+.page6-main img{
+	width: 132px;
+	margin-bottom: 10px;
+}
+.page6-main .cell-left{
+	float: left;
+	margin-right: 20px;
+}
+.page6-main .cell-right{
+	float: right;
+	margin-top: 50px;
+}
+.page6-main .cell-right p{
+	font-size: 12px;
+	margin-top: 0;
+}
 
 
 
