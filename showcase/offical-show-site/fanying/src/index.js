@@ -1,8 +1,10 @@
 var platform = navigator.userAgent.toLowerCase()
     , winWidth
-    , winHeight;
+    , winHeight
+    , ieVersion;
 isIE6 = $.browser.msie && $.browser.version == "6.0" && !$.support.style;
 isIE7 = $.browser.msie && $.browser.version == "7.0" && !$.support.style;
+isIE9 = $.browser.msie && $.browser.version == "9.0" && !$.support.style;
 isIDevice = /iphone|ipod|ipad/gi.test(platform);
 isIPad = /ipad/gi.test(platform);
 isAndroid = /android/gi.test(platform);
@@ -144,7 +146,7 @@ function goToPage(targetPage, mode) {
             lastPage = currentPage;
             $targetPage.addClass('page'+targetPage+'-loaded');
             pageEvents[targetPage] && pageEvents[targetPage].call();
-        }, 1200);
+        }, 800);
     }
 }
 $(function() {
@@ -164,7 +166,6 @@ $(function() {
     $(window).resize(function() {
         resetPage()
     });
-    goToPage(currentPage);
     totalPage = $(".page").length;
     
     var e = 1;
@@ -199,11 +200,12 @@ $(function() {
             , $descs = $('.mudules-description').children();
         function openDrawer(idx){
             if ($drawer.hasClass("on")) {
-                $drawer.removeAttr("style").removeClass("on");
+                $drawer.removeClass("on").attr('style','');
                 $itemsInDrawer.removeClass("wrapper");
+                $lis.removeClass('active');
             } else {
                 $drawer.height($lis.height() * 4 - 50).addClass("on");
-                $itemsInDrawer.addClass("wrapper")
+                $itemsInDrawer.addClass("wrapper");
             }
         }
         function showDesc(idx){
@@ -222,29 +224,33 @@ $(function() {
             showDesc(idx);
             $self.addClass('active').siblings().removeClass('active');
         });
+
+        if($.browser.version < 10){
+            var $device = $page1.find('.page1-device')
+                , $title = $page1.find('.page1-title')
+                , $desc = $page1.find('.page1-desc');
+            $device.css('display', 'none');
+            $title.css('display', 'none');
+            $desc.css('display', 'none');
+            pageEvents[1] = function(){
+                $device.fadeIn(400);
+                $title.fadeIn(400);
+                $desc.fadeIn(400);
+            }
+            pageReverts[1] = function(){
+                $device.css('display', 'none');
+                $title.css('display', 'none');
+                $desc.css('display', 'none');
+            }
+        }
     }());
 
     (function(){
         var $page2 = $('#page-2')
             , $page2selection = $page2.find('.desc')
-            , $page2layers = $page2.find('.layer')
-            , $pag2layersWrapper = $page2.find('.page2-device');
-        pageEvents[2] = function(){
-            loopWithPause($page2selection, function(idx, item){
-                $(item).addClass('animate');
-                if(idx === $page2selection.length-1){
-                    $.each($page2layers, function(idx, layer){
-                        idx++;
-                        $(layer).addClass('layer'+idx+'-active');
-                    });
-                    setTimeout(function(){
-                        activeTriggerAndLayer(0);
-                    }, 1000);
-                }
-            }, 100);
-        }
+            , $page2layers = $page2.find('.layer');
         function activeTriggerAndLayer(idx){
-            $page2.find('.desc').eq(idx).addClass('active').siblings().removeClass('active');
+            $page2selection.eq(idx).addClass('active').siblings().removeClass('active');
             $.each($page2layers, function(i, item){
                 if(i>=idx){
                     i++;
@@ -258,12 +264,50 @@ $(function() {
         $page2selection.mouseover(function(){
             activeTriggerAndLayer($(this).index());
         });
-        pageReverts[2] = function(){
-            $page2selection.removeClass('active animate');
-            $page2layers.each(function(idx, item){
-                idx++;
-                $(item).removeClass('layer' + idx + '-ignore layer' + idx + '-active active');
-            });
+        if($.browser.version < 10){
+            $page2selection.css('opacity', '0');
+            pageEvents[2] = function(){
+                loopWithPause($page2selection, function(idx, item){
+                    $(item).animate({
+                        top : 0,
+                        opacity : 1   
+                    });
+                    if(idx === $page2selection.length-1){
+                        loopWithPause($page2layers, function(idx, layer){
+                            var top = -150 + (idx*40);
+                            $(layer).animate({
+                                top : top
+                            });
+                        }, 200);
+                    }
+                }, 100);
+            }
+            pageReverts[2] = function(){
+                $page2selection.css('opacity', '0');
+                $page2layers.css('top', 0);
+            }    
+        }else{
+            pageEvents[2] = function(){
+                loopWithPause($page2selection, function(idx, item){
+                    $(item).addClass('animate');
+                    if(idx === $page2selection.length-1){
+                        $.each($page2layers, function(idx, layer){
+                            idx++;
+                            $(layer).addClass('layer'+idx+'-active');
+                        });
+                        setTimeout(function(){
+                            activeTriggerAndLayer(0);
+                        }, 1000);
+                    }
+                }, 100);
+            }
+            pageReverts[2] = function(){
+                $page2selection.removeClass('active animate');
+                $page2layers.each(function(idx, item){
+                    idx++;
+                    $(item).removeClass('layer' + idx + '-ignore layer' + idx + '-active active');
+                });
+            }
         }
     }());
 
@@ -319,39 +363,86 @@ $(function() {
     }());
 
     (function(){
-        var $page4descs = $('.page4-desc')
+        var $page4 = $('#page-4')
+            , $page4descs = $page4.find('.page4-desc')
             , page4timer = 0;
-        pageEvents[4] = function(){
-            page4timer = setTimeout(function(){
-                loopWithPause($page4descs, function(idx, item){
-                    idx++;
-                    $(item).addClass('page4-desc' + idx + '-animate');
-                }, 300);
-            }, 1200);
-        };
-        pageReverts[4] = function(){
-            $.each($page4descs, function(idx, item){
-                idx++;
-                $(item).removeClass('page4-desc' + idx + '-animate');
-            });
-            clearTimeout(page4timer);
+        if($.browser.version < 10){
+            var $page4circle = $page4.find('.page4-circle')
+                , $page4shadow = $page4.find('.page4-shadow');
+
+            $page4descs.css('opacity', 0);
+            $page4circle.css('display', 'none');
+            $page4shadow.css('display', 'none');
+            
+            pageEvents[4] = function(){
+                page4timer = setTimeout(function(){
+                    loopWithPause($page4descs, function(idx, item){
+                        idx++;
+                        if(idx === 1 || idx === 4){
+                            $(item).animate({
+                                'opacity' : 1,
+                                'left' : -220
+                            });
+                        }else{
+                            $(item).animate({
+                                'opacity' : 1,
+                                'left' : '90%'
+                            });
+                        }
+                    }, 300);
+                }, 1000);
+                $page4circle.fadeIn();
+                $page4shadow.fadeIn();
+            };
+            pageReverts[4] = function(){
+                $page4descs.css('opacity', 0);
+                $page4circle.css('display', 'none');
+                $page4shadow.css('display', 'none');
+                clearTimeout(page4timer);
+            };
+        }else{
+            pageEvents[4] = function(){
+                page4timer = setTimeout(function(){
+                    loopWithPause($page4descs, function(idx, item){
+                        idx++;
+                        $(item).addClass('page4-desc' + idx + '-animate');
+                    }, 300);
+                }, 1000);
+            };
+            pageReverts[4] = function(){
+                setTimeout(function(){
+                    $.each($page4descs, function(idx, item){
+                        idx++;
+                        $(item).removeClass('page4-desc' + idx + '-animate');
+                    });
+                }, 1200);
+                clearTimeout(page4timer);
+            };
         }
     }());
 
     (function(){
-        var $partnersWrapper = $('#page-5').find('.partners');
+        var $partners = $('#page-5').find('.partners');
         var tmpl = '';
         $.each(partners, function(idx, item) {
             tmpl += '<li class="p5-logo logo-' + idx + '"><a href="###">' + item.name + '</a></li>';
         });
-        $partnersWrapper.html(tmpl);
+        // $partners.html(tmpl); p5-logo-active
+        pageEvents[5] = function(){
+            loopWithPause($partners.children(), function(idx, item){
+                $(item).addClass('p5-logo-active');
+            }, 16);
+        }
+        pageReverts[5] = function(){
+            $partners.children().removeClass('p5-logo-active');
+        }
     }());
     
     (function(){
         var $mapCtn = $('#J_mapCtn')
             , mapInited = 0
             , map;
-        // $mapCtn.click(function() {
+        pageEvents[6] = function() {
             if (mapInited) {
                 return false;
             }
@@ -366,7 +457,7 @@ $(function() {
             var opts = {      
                 width : 100,     // 信息窗口宽度      
                 height: 80,     // 信息窗口高度      
-                title : "泛赢科技"  // 信息窗口标题     
+                title : "泛盈科技"  // 信息窗口标题     
             }
             var infoWindow = new BMap.InfoWindow("地址：XX路XX号 <br /> 电话：025-52123550", opts);  // 创建信息窗口对象      
             
@@ -375,7 +466,7 @@ $(function() {
                 map.openInfoWindow(infoWindow, marker.getPosition());      // 打开信息窗口
             });
             // map.addControl(control);
-        // });
+        };
     }());
 });
 function resetPage(e) {

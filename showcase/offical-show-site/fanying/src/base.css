@@ -51,6 +51,8 @@ s{position:absolute;display:block;width:0;height:0;line-height:0;font-size:0;bor
 body{color:#333;background:url(../img/bg.png) #fff;}
 a{color:#333;}
 a:hover{color:#97BA0C;}
+a.link-bg{background-color: #97BA0C;color: #333;}
+a.link-bg:hover{background-color: #AAD10D; text-decoration: none;}
 .wrapper{position:relative;z-index:1;width:960px;margin:0 auto;*zoom:1;}
 .wrapper.wide{width:1100px;}
 .wrapper.overflow{overflow:visible;}
