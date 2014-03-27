@@ -972,13 +972,6 @@ body {
 
 
 
-
-
-
-
-
-
-
 .block-white {
 	background: #fff;
 	color: #333;
@@ -1012,7 +1005,126 @@ body {
 #page-4 h1 {
 	padding: 40px 0;
 }
-
+.page4-inner{
+	width: 350px;
+	margin: 0 auto;
+	height: 400px;
+	position: relative;
+}
+.page4-inner h2{
+	font-size: 28px;
+	text-align: center;
+	position: relative;
+	top: 120px;
+	z-index: 2;
+	opacity: 0;
+}
+.page4-circle{
+	background: url(imgs/page4.png) 0 0 no-repeat;
+	width: 100%;
+	height: 345px;
+	position: absolute;
+	top: 0;
+	left: -16px;
+	z-index: 3;
+	-webkit-transform: rotate(-720deg);
+	-moz-transform: rotate(-720deg);
+	-ms-transform: rotate(-720deg);
+	-o-transform: rotate(-720deg);
+	transform: rotate(-720deg);
+	opacity: 0;
+}
+.page4-shadow{
+	background: url(imgs/page4.png) 0 -345px no-repeat;
+	width: 100%;
+	height: 345px;
+	position: absolute;
+	top: 2px;
+	left: -18px;
+	z-index: 1;
+	opacity: 0;
+}
+.page4-desc{
+	font-size: 16px;
+	width: 170px;
+	height: 90px;
+	line-height: 26px;
+	color: #888;
+	position: absolute;
+	top: 0;
+	z-index: 3;
+	background-image: url(imgs/page4.png);
+	background-repeat: no-repeat;
+	opacity: 0;
+}
+.page4-desc1{
+	left: -240px;
+	padding-right: 60px;
+	background-position: 0 -681px;
+}
+.page4-desc1-animate{
+	opacity: 1;
+	transition: all .5s;
+	left: -220px;
+}
+.page4-desc2{
+	text-align: right;
+	padding-left: 60px;
+	background-position: 0 -914px;
+	left: 100%;
+}
+.page4-desc2-animate{
+	opacity: 1;
+	transition: all .5s;
+	left: 90%;
+}
+.page4-desc3{
+	top: 240px;
+	left: 100%;
+	text-align: right;
+	padding-left: 60px;
+	background-position: 0 -844px;
+}
+.page4-desc3-animate{
+	opacity: 1;
+	transition: all .5s;
+	left: 90%;
+}
+.page4-desc4{
+	top: 240px;
+	left: -240px;
+	padding-right: 60px;
+	background-position: 0 -770px;
+}
+.page4-desc4-animate{
+	opacity: 1;
+	transition: all .5s;
+	left: -220px;
+}
+.page4-article{
+	width: 800px;
+	margin: 0 auto;
+	font-size: 16px;
+	line-height: 26px;
+	text-align: center;
+}
+.page4-loaded .page4-circle{
+	-webkit-transform: rotate(0);
+	-moz-transform: rotate(0);
+	-ms-transform: rotate(0);
+	-o-transform: rotate(0);
+	transform: rotate(0);
+	transition: all .8s ease-in-out 0;
+	opacity: 1;
+}
+.page4-loaded .page4-shadow{
+	transition: all .5s ease-in-out .5s;
+	opacity: 1;
+}
+.page4-loaded .page4-inner h2{
+	opacity: 1;
+	transition: all 1s ease-in-out .8s;
+}
 
 
 

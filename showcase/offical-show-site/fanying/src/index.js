@@ -258,6 +258,22 @@ $(function() {
         page3pause = 0;
         clearInterval(page3AutoRun);
     }
+
+    var $page4descs = $('.page4-desc');
+    pageEvents[4] = function(){
+        setTimeout(function(){
+            loopWithPause($page4descs, function(idx, item){
+                idx++;
+                $(item).addClass('page4-desc' + idx + '-animate');
+            }, 300);
+        }, 1200);
+    };
+    pageReverts[4] = function(){
+        $.each($page4descs, function(idx, item){
+            idx++;
+            $(item).removeClass('page4-desc' + idx + '-animate');
+        });
+    }
 });
 function resetPage(e) {
     var e = e || $("div.page");
