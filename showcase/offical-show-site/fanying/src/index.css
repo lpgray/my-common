@@ -112,7 +112,7 @@ body {
 #page-indicator {
 	position: absolute;
 	z-index: 9999;
-	right: 30px;
+	right: 60px;
 	top: 42%;
 	width: 20px;
 }
@@ -165,7 +165,21 @@ body {
 	opacity: 1;
 	filter: alpha(opacity=100);
 }
-
+#pageDrawer{
+	width: 26px;
+	height: 120px;
+	position: fixed;
+	top: 43%;
+	left: 100%;
+	margin-left: -26px;
+	z-index: 10;
+}
+#pageDrawer a{
+	display: block;
+	padding: 18px 8px;
+	border-radius: 5px 0 0 5px;
+	font-weight: bold;
+}
 
 
 

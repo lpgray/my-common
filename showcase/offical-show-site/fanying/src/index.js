@@ -144,7 +144,7 @@ function goToPage(targetPage, mode) {
             lastPage = currentPage;
             $targetPage.addClass('page'+targetPage+'-loaded');
             pageEvents[targetPage] && pageEvents[targetPage].call();
-        }, 1200);
+        }, 800);
     }
 }
 $(function() {
@@ -327,13 +327,15 @@ $(function() {
                     idx++;
                     $(item).addClass('page4-desc' + idx + '-animate');
                 }, 300);
-            }, 1200);
+            }, 1000);
         };
         pageReverts[4] = function(){
-            $.each($page4descs, function(idx, item){
-                idx++;
-                $(item).removeClass('page4-desc' + idx + '-animate');
-            });
+            setTimeout(function(){
+                $.each($page4descs, function(idx, item){
+                    idx++;
+                    $(item).removeClass('page4-desc' + idx + '-animate');
+                });
+            }, 1200);
             clearTimeout(page4timer);
         }
     }());
@@ -344,14 +346,14 @@ $(function() {
         $.each(partners, function(idx, item) {
             tmpl += '<li class="p5-logo logo-' + idx + '"><a href="###">' + item.name + '</a></li>';
         });
-        $partnersWrapper.html(tmpl);
+        // $partnersWrapper.html(tmpl);
     }());
     
     (function(){
         var $mapCtn = $('#J_mapCtn')
             , mapInited = 0
             , map;
-        // $mapCtn.click(function() {
+        pageEvents[6] = function() {
             if (mapInited) {
                 return false;
             }
@@ -366,7 +368,7 @@ $(function() {
             var opts = {      
                 width : 100,     // 信息窗口宽度      
                 height: 80,     // 信息窗口高度      
-                title : "泛赢科技"  // 信息窗口标题     
+                title : "泛盈科技"  // 信息窗口标题     
             }
             var infoWindow = new BMap.InfoWindow("地址：XX路XX号 <br /> 电话：025-52123550", opts);  // 创建信息窗口对象      
             
@@ -375,7 +377,7 @@ $(function() {
                 map.openInfoWindow(infoWindow, marker.getPosition());      // 打开信息窗口
             });
             // map.addControl(control);
-        // });
+        };
     }());
 });
 function resetPage(e) {
