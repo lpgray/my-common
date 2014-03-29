@@ -250,7 +250,7 @@ body {
 	left: 0;
 	background: #000;
 	width: 100%;
-	height: 160px;
+	height: 150px;
 	-webkit-transition: height .3s;
 	   -moz-transition: height .3s;
 	    -ms-transition: height .3s;
@@ -259,6 +259,16 @@ body {
 }
 #page-1 .modules-box a {
 	-webkit-touch-callout: none;
+}
+#page-1 .modules-box .hide-trigger{
+	height: 160px;
+	width: 50%;
+	position: absolute;
+	top: 0;
+	z-index: 0;
+}
+#page-1 .modules-box .hide-trigger-right{
+	left: 50%;
 }
 #page-1 .collapsible-arrow {
 	position: absolute;
@@ -287,6 +297,9 @@ body {
 	    -ms-transform: scaleY(-1);
 	     -o-transform: scaleY(-1);
 	        transform: scaleY(-1);
+}
+#page-1 .modules-box.on .hide-trigger{
+	display: none;
 }
 #page-1 .modules {
 	text-align: center;
@@ -699,7 +712,7 @@ body {
 .page2-desc-wrapper a.desc{
 	margin-bottom: 15px;
 	display: block;
-	cursor: default;
+	cursor: pointer;
 	opacity: 0;
 	position: relative;
 	top: 20px;
@@ -855,7 +868,7 @@ body {
 	    -ms-transition: color .3s linear;
 	     -o-transition: color .3s linear;
 	        transition: color .3s linear;
-	cursor: default;
+	cursor: pointer;
 }
 #page-3 .timeline li:hover{
 	color: #BBB;
@@ -1053,6 +1066,7 @@ body {
 	background-image: url(imgs/page4.png);
 	background-repeat: no-repeat;
 	opacity: 0;
+	cursor: pointer;
 }
 .page4-desc p{
 	position: relative;
@@ -1062,7 +1076,6 @@ body {
 .page4-desc:hover p{
 	color: #000;
 	top: -5px;
-	cursor: default;
 }
 .page4-desc1{
 	left: -240px;
