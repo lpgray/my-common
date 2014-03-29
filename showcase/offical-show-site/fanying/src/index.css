@@ -382,10 +382,6 @@ body {
 	color: #777;
 	top: 35px;
 	background:url(img/p1-modules-circle.png) no-repeat center 0;
-	background-image:-webkit-image-set(url(img/p1-modules-circle.png) 1x, url(img/p1-modules-circle-2x.png) 2x);
-	background-image:   -moz-image-set(url(img/p1-modules-circle.png) 1x, url(img/p1-modules-circle-2x.png) 2x);
-	background-image:    -ms-image-set(url(img/p1-modules-circle.png) 1x, url(img/p1-modules-circle-2x.png) 2x);
-	background-image:     -o-image-set(url(img/p1-modules-circle.png) 1x, url(img/p1-modules-circle-2x.png) 2x);
 	-webkit-transition: top .2s linear;
 	   -moz-transition: top .2s linear;
 	    -ms-transition: top .2s linear;
@@ -407,10 +403,6 @@ body {
 	height: 88px;
 	font-size: 0;
 	background:url(img/p1-module-bg-0-home.png) no-repeat center center;
-	background-image:-webkit-image-set(url(img/p1-module-bg-0-home.png) 1x, url(img/p1-module-bg-0-home-2x.png) 2x);
-	background-image:   -moz-image-set(url(img/p1-module-bg-0-home.png) 1x, url(img/p1-module-bg-0-home-2x.png) 2x);
-	background-image:    -ms-image-set(url(img/p1-module-bg-0-home.png) 1x, url(img/p1-module-bg-0-home-2x.png) 2x);
-	background-image:     -o-image-set(url(img/p1-module-bg-0-home.png) 1x, url(img/p1-module-bg-0-home-2x.png) 2x);
 	background-size: 0 0;
 	opacity: 0;
 	filter: alpha(opacity=0);
@@ -422,129 +414,57 @@ body {
 }
 #page-1 .modules-list li#module-1 a .circle {
 	background:url(img/p1-module-bg-1-news.png) no-repeat center center;
-	background-image:-webkit-image-set(url(img/p1-module-bg-1-news.png) 1x, url(img/p1-module-bg-1-news-2x.png) 2x);
-	background-image:   -moz-image-set(url(img/p1-module-bg-1-news.png) 1x, url(img/p1-module-bg-1-news-2x.png) 2x);
-	background-image:    -ms-image-set(url(img/p1-module-bg-1-news.png) 1x, url(img/p1-module-bg-1-news-2x.png) 2x);
-	background-image:     -o-image-set(url(img/p1-module-bg-1-news.png) 1x, url(img/p1-module-bg-1-news-2x.png) 2x);
 }
 #page-1 .modules-list li#module-2 a .circle {
 	background:url(img/p1-module-bg-2-gov.png) no-repeat center center;
-	background-image:-webkit-image-set(url(img/p1-module-bg-2-gov.png) 1x, url(img/p1-module-bg-2-gov-2x.png) 2x);
-	background-image:   -moz-image-set(url(img/p1-module-bg-2-gov.png) 1x, url(img/p1-module-bg-2-gov-2x.png) 2x);
-	background-image:    -ms-image-set(url(img/p1-module-bg-2-gov.png) 1x, url(img/p1-module-bg-2-gov-2x.png) 2x);
-	background-image:     -o-image-set(url(img/p1-module-bg-2-gov.png) 1x, url(img/p1-module-bg-2-gov-2x.png) 2x);
 }
 #page-1 .modules-list li#module-3 a .circle {
 	background:url(img/p1-module-bg-3-topic.png) no-repeat center center;
-	background-image:-webkit-image-set(url(img/p1-module-bg-3-topic.png) 1x, url(img/p1-module-bg-3-topic-2x.png) 2x);
-	background-image:   -moz-image-set(url(img/p1-module-bg-3-topic.png) 1x, url(img/p1-module-bg-3-topic-2x.png) 2x);
-	background-image:    -ms-image-set(url(img/p1-module-bg-3-topic.png) 1x, url(img/p1-module-bg-3-topic-2x.png) 2x);
-	background-image:     -o-image-set(url(img/p1-module-bg-3-topic.png) 1x, url(img/p1-module-bg-3-topic-2x.png) 2x);
 }
 #page-1 .modules-list li#module-4 a .circle {
 	background:url(img/p1-module-bg-4-research.png) no-repeat center center;
-	background-image:-webkit-image-set(url(img/p1-module-bg-4-research.png) 1x, url(img/p1-module-bg-4-research-2x.png) 2x);
-	background-image:   -moz-image-set(url(img/p1-module-bg-4-research.png) 1x, url(img/p1-module-bg-4-research-2x.png) 2x);
-	background-image:    -ms-image-set(url(img/p1-module-bg-4-research.png) 1x, url(img/p1-module-bg-4-research-2x.png) 2x);
-	background-image:     -o-image-set(url(img/p1-module-bg-4-research.png) 1x, url(img/p1-module-bg-4-research-2x.png) 2x);
 }
 #page-1 .modules-list li#module-5 a .circle {
 	background:url(img/p1-module-bg-5-market.png) no-repeat center center;
-	background-image:-webkit-image-set(url(img/p1-module-bg-5-market.png) 1x, url(img/p1-module-bg-5-market-2x.png) 2x);
-	background-image:   -moz-image-set(url(img/p1-module-bg-5-market.png) 1x, url(img/p1-module-bg-5-market-2x.png) 2x);
-	background-image:    -ms-image-set(url(img/p1-module-bg-5-market.png) 1x, url(img/p1-module-bg-5-market-2x.png) 2x);
-	background-image:     -o-image-set(url(img/p1-module-bg-5-market.png) 1x, url(img/p1-module-bg-5-market-2x.png) 2x);
 }
 #page-1 .modules-list li#module-6 a .circle {
 	background:url(img/p1-module-bg-6-live.png) no-repeat center center;
-	background-image:-webkit-image-set(url(img/p1-module-bg-6-live.png) 1x, url(img/p1-module-bg-6-live-2x.png) 2x);
-	background-image:   -moz-image-set(url(img/p1-module-bg-6-live.png) 1x, url(img/p1-module-bg-6-live-2x.png) 2x);
-	background-image:    -ms-image-set(url(img/p1-module-bg-6-live.png) 1x, url(img/p1-module-bg-6-live-2x.png) 2x);
-	background-image:     -o-image-set(url(img/p1-module-bg-6-live.png) 1x, url(img/p1-module-bg-6-live-2x.png) 2x);
 }
 #page-1 .modules-list li#module-7 a .circle {
 	background:url(img/p1-module-bg-7-vod.png) no-repeat center center;
-	background-image:-webkit-image-set(url(img/p1-module-bg-7-vod.png) 1x, url(img/p1-module-bg-7-vod-2x.png) 2x);
-	background-image:   -moz-image-set(url(img/p1-module-bg-7-vod.png) 1x, url(img/p1-module-bg-7-vod-2x.png) 2x);
-	background-image:    -ms-image-set(url(img/p1-module-bg-7-vod.png) 1x, url(img/p1-module-bg-7-vod-2x.png) 2x);
-	background-image:     -o-image-set(url(img/p1-module-bg-7-vod.png) 1x, url(img/p1-module-bg-7-vod-2x.png) 2x);
 }
 #page-1 .modules-list li#module-8 a .circle {
 	background:url(img/p1-module-bg-8-photo.png) no-repeat center center;
-	background-image:-webkit-image-set(url(img/p1-module-bg-8-photo.png) 1x, url(img/p1-module-bg-8-photo-2x.png) 2x);
-	background-image:   -moz-image-set(url(img/p1-module-bg-8-photo.png) 1x, url(img/p1-module-bg-8-photo-2x.png) 2x);
-	background-image:    -ms-image-set(url(img/p1-module-bg-8-photo.png) 1x, url(img/p1-module-bg-8-photo-2x.png) 2x);
-	background-image:     -o-image-set(url(img/p1-module-bg-8-photo.png) 1x, url(img/p1-module-bg-8-photo-2x.png) 2x);
 }
 #page-1 .modules-list li#module-9 a .circle {
 	background:url(img/p1-module-bg-9-transport.png) no-repeat center center;
-	background-image:-webkit-image-set(url(img/p1-module-bg-9-transport.png) 1x, url(img/p1-module-bg-9-transport-2x.png) 2x);
-	background-image:   -moz-image-set(url(img/p1-module-bg-9-transport.png) 1x, url(img/p1-module-bg-9-transport-2x.png) 2x);
-	background-image:    -ms-image-set(url(img/p1-module-bg-9-transport.png) 1x, url(img/p1-module-bg-9-transport-2x.png) 2x);
-	background-image:     -o-image-set(url(img/p1-module-bg-9-transport.png) 1x, url(img/p1-module-bg-9-transport-2x.png) 2x);
 }
 #page-1 .modules-list li#module-10 a .circle {
 	background:url(img/p1-module-bg-10-bus.png) no-repeat center center;
-	background-image:-webkit-image-set(url(img/p1-module-bg-10-bus.png) 1x, url(img/p1-module-bg-10-bus-2x.png) 2x);
-	background-image:   -moz-image-set(url(img/p1-module-bg-10-bus.png) 1x, url(img/p1-module-bg-10-bus-2x.png) 2x);
-	background-image:    -ms-image-set(url(img/p1-module-bg-10-bus.png) 1x, url(img/p1-module-bg-10-bus-2x.png) 2x);
-	background-image:     -o-image-set(url(img/p1-module-bg-10-bus.png) 1x, url(img/p1-module-bg-10-bus-2x.png) 2x);
 }
 #page-1 .modules-list li#module-11 a .circle {
 	background:url(img/p1-module-bg-11-traffic.png) no-repeat center center;
-	background-image:-webkit-image-set(url(img/p1-module-bg-11-traffic.png) 1x, url(img/p1-module-bg-11-traffic-2x.png) 2x);
-	background-image:   -moz-image-set(url(img/p1-module-bg-11-traffic.png) 1x, url(img/p1-module-bg-11-traffic-2x.png) 2x);
-	background-image:    -ms-image-set(url(img/p1-module-bg-11-traffic.png) 1x, url(img/p1-module-bg-11-traffic-2x.png) 2x);
-	background-image:     -o-image-set(url(img/p1-module-bg-11-traffic.png) 1x, url(img/p1-module-bg-11-traffic-2x.png) 2x);
 }
 #page-1 .modules-list li#module-12 a .circle {
 	background:url(img/p1-module-bg-12-reading.png) no-repeat center center;
-	background-image:-webkit-image-set(url(img/p1-module-bg-12-reading.png) 1x, url(img/p1-module-bg-12-reading-2x.png) 2x);
-	background-image:   -moz-image-set(url(img/p1-module-bg-12-reading.png) 1x, url(img/p1-module-bg-12-reading-2x.png) 2x);
-	background-image:    -ms-image-set(url(img/p1-module-bg-12-reading.png) 1x, url(img/p1-module-bg-12-reading-2x.png) 2x);
-	background-image:     -o-image-set(url(img/p1-module-bg-12-reading.png) 1x, url(img/p1-module-bg-12-reading-2x.png) 2x);
 }
 #page-1 .modules-list li#module-13 a .circle {
 	background:url(img/p1-module-bg-13-weibo.png) no-repeat center center;
-	background-image:-webkit-image-set(url(img/p1-module-bg-13-weibo.png) 1x, url(img/p1-module-bg-13-weibo-2x.png) 2x);
-	background-image:   -moz-image-set(url(img/p1-module-bg-13-weibo.png) 1x, url(img/p1-module-bg-13-weibo-2x.png) 2x);
-	background-image:    -ms-image-set(url(img/p1-module-bg-13-weibo.png) 1x, url(img/p1-module-bg-13-weibo-2x.png) 2x);
-	background-image:     -o-image-set(url(img/p1-module-bg-13-weibo.png) 1x, url(img/p1-module-bg-13-weibo-2x.png) 2x);
 }
 #page-1 .modules-list li#module-14 a .circle {
 	background:url(img/p1-module-bg-14-weather.png) no-repeat center center;
-	background-image:-webkit-image-set(url(img/p1-module-bg-14-weather.png) 1x, url(img/p1-module-bg-14-weather-2x.png) 2x);
-	background-image:   -moz-image-set(url(img/p1-module-bg-14-weather.png) 1x, url(img/p1-module-bg-14-weather-2x.png) 2x);
-	background-image:    -ms-image-set(url(img/p1-module-bg-14-weather.png) 1x, url(img/p1-module-bg-14-weather-2x.png) 2x);
-	background-image:     -o-image-set(url(img/p1-module-bg-14-weather.png) 1x, url(img/p1-module-bg-14-weather-2x.png) 2x);
 }
 #page-1 .modules-list li#module-15 a .circle {
 	background:url(img/p1-module-bg-15-bicycle.png) no-repeat center center;
-	background-image:-webkit-image-set(url(img/p1-module-bg-15-bicycle.png) 1x, url(img/p1-module-bg-15-bicycle-2x.png) 2x);
-	background-image:   -moz-image-set(url(img/p1-module-bg-15-bicycle.png) 1x, url(img/p1-module-bg-15-bicycle-2x.png) 2x);
-	background-image:    -ms-image-set(url(img/p1-module-bg-15-bicycle.png) 1x, url(img/p1-module-bg-15-bicycle-2x.png) 2x);
-	background-image:     -o-image-set(url(img/p1-module-bg-15-bicycle.png) 1x, url(img/p1-module-bg-15-bicycle-2x.png) 2x);
 }
 #page-1 .modules-list li#module-16 a .circle {
 	background:url(img/p1-module-bg-16-theater.png) no-repeat center center;
-	background-image:-webkit-image-set(url(img/p1-module-bg-16-theater.png) 1x, url(img/p1-module-bg-16-theater-2x.png) 2x);
-	background-image:   -moz-image-set(url(img/p1-module-bg-16-theater.png) 1x, url(img/p1-module-bg-16-theater-2x.png) 2x);
-	background-image:    -ms-image-set(url(img/p1-module-bg-16-theater.png) 1x, url(img/p1-module-bg-16-theater-2x.png) 2x);
-	background-image:     -o-image-set(url(img/p1-module-bg-16-theater.png) 1x, url(img/p1-module-bg-16-theater-2x.png) 2x);
 }
 #page-1 .modules-list li#module-17 a .circle {
 	background:url(img/p1-module-bg-17-contribute.png) no-repeat center center;
-	background-image:-webkit-image-set(url(img/p1-module-bg-17-contribute.png) 1x, url(img/p1-module-bg-17-contribute-2x.png) 2x);
-	background-image:   -moz-image-set(url(img/p1-module-bg-17-contribute.png) 1x, url(img/p1-module-bg-17-contribute-2x.png) 2x);
-	background-image:    -ms-image-set(url(img/p1-module-bg-17-contribute.png) 1x, url(img/p1-module-bg-17-contribute-2x.png) 2x);
-	background-image:     -o-image-set(url(img/p1-module-bg-17-contribute.png) 1x, url(img/p1-module-bg-17-contribute-2x.png) 2x);
 }
 #page-1 .modules-list li#module-18 a .circle {
 	background:url(img/p1-module-bg-18-travel.png) no-repeat center center;
-	background-image:-webkit-image-set(url(img/p1-module-bg-18-travel.png) 1x, url(img/p1-module-bg-18-travel-2x.png) 2x);
-	background-image:   -moz-image-set(url(img/p1-module-bg-18-travel.png) 1x, url(img/p1-module-bg-18-travel-2x.png) 2x);
-	background-image:    -ms-image-set(url(img/p1-module-bg-18-travel.png) 1x, url(img/p1-module-bg-18-travel-2x.png) 2x);
-	background-image:     -o-image-set(url(img/p1-module-bg-18-travel.png) 1x, url(img/p1-module-bg-18-travel-2x.png) 2x);
 }
 #page-1 .modules-list li a .circle {
 	background-size: 0 0!important;
