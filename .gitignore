@@ -1,3 +1,6 @@
 node_modules
 ST2
 bower_components
+*.rar
+*.psd
+*.zip
