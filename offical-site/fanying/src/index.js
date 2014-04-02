@@ -1,62 +1,50 @@
-var platform = navigator.userAgent.toLowerCase()
-    , winWidth
+var winWidth
     , winHeight
-    , ieVersion;
-isIE6 = $.browser.msie && $.browser.version == "6.0" && !$.support.style;
-isIE7 = $.browser.msie && $.browser.version == "7.0" && !$.support.style;
-isIE9 = $.browser.msie && $.browser.version == "9.0" && !$.support.style;
-isIDevice = /iphone|ipod|ipad/gi.test(platform);
-isIPad = /ipad/gi.test(platform);
-isAndroid = /android/gi.test(platform);
-isSafari = /safari/gi.test(platform) && !/chrome/gi.test(platform);
-isIDeviceWechat = isIDevice && /micromessenger/gi.test(platform);
-isAndroidWechat = isAndroid && /micromessenger/gi.test(platform);
-
-var partners = [
-    {
-        name : '中国电信'
-    },
-    {
-        name : 'SIEMENS'
-    },
-    {
-        name : 'Atos'
-    },
-    {
-        name : '太平洋保险'
-    },
-    {
-        name : '凤凰传媒'
-    },
-    {
-        name : 'HELLA'
-    },
-    {
-        name : '东南大学'
-    },
-    {
-        name : '苏源高科'
-    },
-    {
-        name : '话机世界'
-    },
-    {
-        name : '江苏教育频道'
-    },
-    {
-        name : '平安银行'
-    },
-    {
-        name : '凤凰出版社'
-    }
-];
-
-var lastPage = 0
+    , partners = [
+        {
+            name : '中国电信'
+        },
+        {
+            name : 'SIEMENS'
+        },
+        {
+            name : 'Atos'
+        },
+        {
+            name : '太平洋保险'
+        },
+        {
+            name : '凤凰传媒'
+        },
+        {
+            name : 'HELLA'
+        },
+        {
+            name : '东南大学'
+        },
+        {
+            name : '苏源高科'
+        },
+        {
+            name : '话机世界'
+        },
+        {
+            name : '江苏教育频道'
+        },
+        {
+            name : '平安银行'
+        },
+        {
+            name : '凤凰出版社'
+        }
+    ]
+    , lastPage = 0
     , currentPage = 1
     , totalPage = 0
     , pageTransition = true
     , pageEvents = {}
-    , pageReverts = {};
+    , pageReverts = {}
+    , $header = $('#J_Header');
 
 function goToPage(targetPage, mode) {
     var $targetPage = $("#page-" + targetPage);
@@ -67,8 +55,7 @@ function goToPage(targetPage, mode) {
     }
 
     if (mode == "slide" && lastPage != targetPage) {
-        $page.animate({top: -winHeight * (targetPage - 1)}, 1000)
-        
+        $page.animate({top: -winHeight * (targetPage - 1)}, 1300)
     } else if (mode == "fade" && lastPage != targetPage) {
         $pages.addClass("absolute").hide();
         $page.removeClass("animate").css({
@@ -82,6 +69,7 @@ function goToPage(targetPage, mode) {
     } else {
         $page.css({top: -winHeight * (targetPage - 1)});
     }
+
     if (lastPage != targetPage) {
         currentPage = targetPage;
         $indicators.eq(currentPage - 1).addClass("current").siblings().removeClass("current");
@@ -92,26 +80,31 @@ function goToPage(targetPage, mode) {
             lastPage = currentPage;
             $targetPage.addClass('page'+targetPage+'-loaded');
             pageEvents[targetPage] && pageEvents[targetPage].call();
+            if(targetPage === 1){
+                $header.removeClass('header-black');
+            }else{
+                $header.addClass('header-black');
+            }
+            $header.find('li').removeClass('active');
+            $header.find('a[data-rel='+targetPage+']').parent().addClass('active');
         }, 800);
     }
 }
 
-function resetPage(e) {
-    var e = e || $("div.page");
+function resetPage() {
+    var $pages = $("div.page");
     window.scrollTo(0, 0);
     setTimeout(function() {
-        if (!isAndroid)
-            window.scrollTo(0, 0);
         winWidth = $(window).width();
         winHeight = $(window).height();
-        e.height(winHeight);
+        $pages.height(winHeight);
         totalPage = $(".page:visible").length;
         goToPage(currentPage);
         
-        if (winWidth > winHeight) {
-            $("body").addClass("horizontal")
-        } else {
-            $("body").removeClass("horizontal")
+        if (winHeight < 700) {
+            $('body').addClass('body-small')
+        }else{
+            $('body').removeClass('body-small')
         }
     }, 100);
 }
@@ -144,7 +137,6 @@ function loopWithPause(arr, func, time){
 }
 
 $(function() {
-
     $page = $("#page");
     $pages = $(".page");
     $indicators = $("#page-indicator li");
@@ -178,8 +170,8 @@ $(function() {
         }
     });
     
-    $("#page-indicator li, #site-navigation li").click(function() {
-        var targetPage = parseInt($(this).find("a").attr("rel"));
+    $("#page-indicator [data-rel], #J_Header [data-rel]").click(function() {
+        var targetPage = parseInt($(this).attr("data-rel"));
         if (!pageTransition)
             goToPage(targetPage, "fade");
     });
@@ -293,7 +285,7 @@ $(function() {
                 }
             });
         }
-        $page2selection.mouseover(function(){
+        $page2selection.click(function(){
             activeTriggerAndLayer($(this).index());
         });
         if($.browser.version < 10){
