@@ -140,10 +140,6 @@ $(function() {
     $page = $("#page");
     $pages = $(".page");
     $indicators = $("#page-indicator li");
-
-    if (window.isIE6 || window.isIE7) {
-        $("body").addClass("ieLow")
-    }
     
     winWidth = $(window).width();
     winHeight = $(window).height();
@@ -193,7 +189,7 @@ $(function() {
                 $itemsInDrawer.removeClass("wrapper");
                 $lis.removeClass('active');
             } else {
-                $drawer.height($lis.height() * 4 - 50).addClass("on");
+                $drawer.height($lis.height() * 5 - 100).addClass("on");
                 $itemsInDrawer.addClass("wrapper");
             }
         }
@@ -389,7 +385,16 @@ $(function() {
     (function(){
         var $page4 = $('#page-4')
             , $page4descs = $page4.find('.page4-desc')
-            , page4timer = 0;
+            , page4timer = 0
+            , $jsItem = $page.find('.j_p4item');
+        
+        $page4.find('[data-rel]').mouseover(function(){
+            var id = $(this).attr('data-rel')
+            $('#J_p4desc_' + id).addClass('j_active_' + id);
+        }).mouseout(function(){
+            $jsItem.removeClass('j_active_' + $(this).attr('data-rel'));
+        });
+
         if($.browser.version < 10){
             var $page4circle = $page4.find('.page4-circle')
                 , $page4shadow = $page4.find('.page4-shadow');

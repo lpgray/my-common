@@ -2699,1446 +2699,204 @@
         return p
     })
 })(window);
-/**
-* DD_belatedPNG: Adds IE6 support: PNG images for CSS background-image and HTML <IMG/>.
-* Author: Drew Diller
-* Email: drew.diller@gmail.com
-* URL: http://www.dillerdesign.com/experiment/DD_belatedPNG/
-* Version: 0.0.8a
-* Licensed under the MIT License: http://dillerdesign.com/experiment/DD_belatedPNG/#license
-*
-* Example usage:
-* DD_belatedPNG.fix('.png_bg'); // argument is a CSS selector
-* DD_belatedPNG.fixPng( someNode ); // argument is an HTMLDomElement
-**/
-if ($.browser.msie && ($.browser.version == '6.0') && !$.support.style) {
-    var DD_belatedPNG = {ns: "DD_belatedPNG",imgSize: {},delay: 10,nodesFixed: 0,createVmlNameSpace: function() {
-            if (document.namespaces && !document.namespaces[this.ns]) {
-                document.namespaces.add(this.ns, "urn:schemas-microsoft-com:vml")
-            }
-        },createVmlStyleSheet: function() {
-            var b, a;
-            b = document.createElement("style");
-            b.setAttribute("media", "screen");
-            document.documentElement.firstChild.insertBefore(b, document.documentElement.firstChild.firstChild);
-            if (b.styleSheet) {
-                b = b.styleSheet;
-                b.addRule(this.ns + "\\:*", "{behavior:url(#default#VML)}");
-                b.addRule(this.ns + "\\:shape", "position:absolute;");
-                b.addRule("img." + this.ns + "_sizeFinder", "behavior:none; border:none; position:absolute; z-index:-1; top:-10000px; visibility:hidden;");
-                this.screenStyleSheet = b;
-                a = document.createElement("style");
-                a.setAttribute("media", "print");
-                document.documentElement.firstChild.insertBefore(a, document.documentElement.firstChild.firstChild);
-                a = a.styleSheet;
-                a.addRule(this.ns + "\\:*", "{display: none !important;}");
-                a.addRule("img." + this.ns + "_sizeFinder", "{display: none !important;}")
-            }
-        },readPropertyChange: function() {
-            var b, c, a;
-            b = event.srcElement;
-            if (!b.vmlInitiated) {
-                return
-            }
-            if (event.propertyName.search("background") != -1 || event.propertyName.search("border") != -1) {
-                DD_belatedPNG.applyVML(b)
-            }
-            if (event.propertyName == "style.display") {
-                c = (b.currentStyle.display == "none") ? "none" : "block";
-                for (a in b.vml) {
-                    if (b.vml.hasOwnProperty(a)) {
-                        b.vml[a].shape.style.display = c
-                    }
-                }
-            }
-            if (event.propertyName.search("filter") != -1) {
-                DD_belatedPNG.vmlOpacity(b)
-            }
-        },vmlOpacity: function(b) {
-            if (b.currentStyle.filter.search("lpha") != -1) {
-                var a = b.currentStyle.filter;
-                a = parseInt(a.substring(a.lastIndexOf("=") + 1, a.lastIndexOf(")")), 10) / 100;
-                b.vml.color.shape.style.filter = b.currentStyle.filter;
-                b.vml.image.fill.opacity = a
-            }
-        },handlePseudoHover: function(a) {
-            setTimeout(function() {
-                DD_belatedPNG.applyVML(a)
-            }, 1)
-        },fix: function(a) {
-            if (this.screenStyleSheet) {
-                var c, b;
-                c = a.split(",");
-                for (b = 0; b < c.length; b++) {
-                    this.screenStyleSheet.addRule(c[b], "behavior:expression(DD_belatedPNG.fixPng(this))")
-                }
-            }
-        },applyVML: function(a) {
-            a.runtimeStyle.cssText = "";
-            this.vmlFill(a);
-            this.vmlOffsets(a);
-            this.vmlOpacity(a);
-            if (a.isImg) {
-                this.copyImageBorders(a)
-            }
-        },attachHandlers: function(i) {
-            var d, c, g, e, b, f;
-            d = this;
-            c = {resize: "vmlOffsets",move: "vmlOffsets"};
-            if (i.nodeName == "A") {
-                e = {mouseleave: "handlePseudoHover",mouseenter: "handlePseudoHover",focus: "handlePseudoHover",blur: "handlePseudoHover"};
-                for (b in e) {
-                    if (e.hasOwnProperty(b)) {
-                        c[b] = e[b]
-                    }
-                }
-            }
-            for (f in c) {
-                if (c.hasOwnProperty(f)) {
-                    g = function() {
-                        d[c[f]](i)
-                    };
-                    i.attachEvent("on" + f, g)
-                }
-            }
-            i.attachEvent("onpropertychange", this.readPropertyChange)
-        },giveLayout: function(a) {
-            a.style.zoom = 1;
-            if (a.currentStyle.position == "static") {
-                a.style.position = "relative"
-            }
-        },copyImageBorders: function(b) {
-            var c, a;
-            c = {borderStyle: true,borderWidth: true,borderColor: true};
-            for (a in c) {
-                if (c.hasOwnProperty(a)) {
-                    b.vml.color.shape.style[a] = b.currentStyle[a]
-                }
-            }
-        },vmlFill: function(e) {
-            if (!e.currentStyle) {
-                return
-            } else {
-                var d, f, g, b, a, c;
-                d = e.currentStyle
-            }
-            for (b in e.vml) {
-                if (e.vml.hasOwnProperty(b)) {
-                    e.vml[b].shape.style.zIndex = d.zIndex
-                }
-            }
-            e.runtimeStyle.backgroundColor = "";
-            e.runtimeStyle.backgroundImage = "";
-            f = true;
-            if (d.backgroundImage != "none" || e.isImg) {
-                if (!e.isImg) {
-                    e.vmlBg = d.backgroundImage;
-                    e.vmlBg = e.vmlBg.substr(5, e.vmlBg.lastIndexOf('")') - 5)
-                } else {
-                    e.vmlBg = e.src
-                }
-                g = this;
-                if (!g.imgSize[e.vmlBg]) {
-                    a = document.createElement("img");
-                    g.imgSize[e.vmlBg] = a;
-                    a.className = g.ns + "_sizeFinder";
-                    a.runtimeStyle.cssText = "behavior:none; position:absolute; left:-10000px; top:-10000px; border:none; margin:0; padding:0;";
-                    c = function() {
-                        this.width = this.offsetWidth;
-                        this.height = this.offsetHeight;
-                        g.vmlOffsets(e)
-                    };
-                    a.attachEvent("onload", c);
-                    a.src = e.vmlBg;
-                    a.removeAttribute("width");
-                    a.removeAttribute("height");
-                    document.body.insertBefore(a, document.body.firstChild)
-                }
-                e.vml.image.fill.src = e.vmlBg;
-                f = false
-            }
-            e.vml.image.fill.on = !f;
-            e.vml.image.fill.color = "none";
-            e.vml.color.shape.style.backgroundColor = d.backgroundColor;
-            e.runtimeStyle.backgroundImage = "none";
-            e.runtimeStyle.backgroundColor = "transparent"
-        },vmlOffsets: function(d) {
-            var h, n, a, e, g, m, f, l, j, i, k;
-            h = d.currentStyle;
-            n = {W: d.clientWidth + 1,H: d.clientHeight + 1,w: this.imgSize[d.vmlBg].width,h: this.imgSize[d.vmlBg].height,L: d.offsetLeft,T: d.offsetTop,bLW: d.clientLeft,bTW: d.clientTop};
-            a = (n.L + n.bLW == 1) ? 1 : 0;
-            e = function(b, p, q, c, s, u) {
-                b.coordsize = c + "," + s;
-                b.coordorigin = u + "," + u;
-                b.path = "m0,0l" + c + ",0l" + c + "," + s + "l0," + s + " xe";
-                b.style.width = c + "px";
-                b.style.height = s + "px";
-                b.style.left = p + "px";
-                b.style.top = q + "px"
-            };
-            e(d.vml.color.shape, (n.L + (d.isImg ? 0 : n.bLW)), (n.T + (d.isImg ? 0 : n.bTW)), (n.W - 1), (n.H - 1), 0);
-            e(d.vml.image.shape, (n.L + n.bLW), (n.T + n.bTW), (n.W), (n.H), 1);
-            g = {X: 0,Y: 0};
-            if (d.isImg) {
-                g.X = parseInt(h.paddingLeft, 10) + 1;
-                g.Y = parseInt(h.paddingTop, 10) + 1
-            } else {
-                for (j in g) {
-                    if (g.hasOwnProperty(j)) {
-                        this.figurePercentage(g, n, j, h["backgroundPosition" + j])
-                    }
-                }
-            }
-            d.vml.image.fill.position = (g.X / n.W) + "," + (g.Y / n.H);
-            m = h.backgroundRepeat;
-            f = {T: 1,R: n.W + a,B: n.H,L: 1 + a};
-            l = {X: {b1: "L",b2: "R",d: "W"},Y: {b1: "T",b2: "B",d: "H"}};
-            if (m != "repeat" || d.isImg) {
-                i = {T: (g.Y),R: (g.X + n.w),B: (g.Y + n.h),L: (g.X)};
-                if (m.search("repeat-") != -1) {
-                    k = m.split("repeat-")[1].toUpperCase();
-                    i[l[k].b1] = 1;
-                    i[l[k].b2] = n[l[k].d]
-                }
-                if (i.B > n.H) {
-                    i.B = n.H
-                }
-                d.vml.image.shape.style.clip = "rect(" + i.T + "px " + (i.R + a) + "px " + i.B + "px " + (i.L + a) + "px)"
-            } else {
-                d.vml.image.shape.style.clip = "rect(" + f.T + "px " + f.R + "px " + f.B + "px " + f.L + "px)"
-            }
-        },figurePercentage: function(d, c, f, a) {
-            var b, e;
-            e = true;
-            b = (f == "X");
-            switch (a) {
-                case "left":
-                case "top":
-                    d[f] = 0;
-                    break;
-                case "center":
-                    d[f] = 0.5;
-                    break;
-                case "right":
-                case "bottom":
-                    d[f] = 1;
-                    break;
-                default:
-                    if (a.search("%") != -1) {
-                        d[f] = parseInt(a, 10) / 100
-                    } else {
-                        e = false
-                    }
-            }
-            d[f] = Math.ceil(e ? ((c[b ? "W" : "H"] * d[f]) - (c[b ? "w" : "h"] * d[f])) : parseInt(a, 10));
-            if (d[f] % 2 === 0) {
-                d[f]++
-            }
-            return d[f]
-        },fixPng: function(c) {
-            c.style.behavior = "none";
-            var g, b, f, a, d;
-            if (c.nodeName == "BODY" || c.nodeName == "TD" || c.nodeName == "TR") {
-                return
-            }
-            c.isImg = false;
-            if (c.nodeName == "IMG") {
-                if (c.src.toLowerCase().search(/\.png$/) != -1) {
-                    c.isImg = true;
-                    c.style.visibility = "hidden"
-                } else {
-                    return
-                }
-            } else {
-                if (c.currentStyle.backgroundImage.toLowerCase().search(".png") == -1) {
-                    return
-                }
-            }
-            g = DD_belatedPNG;
-            c.vml = {color: {},image: {}};
-            b = {shape: {},fill: {}};
-            for (a in c.vml) {
-                if (c.vml.hasOwnProperty(a)) {
-                    for (d in b) {
-                        if (b.hasOwnProperty(d)) {
-                            f = g.ns + ":" + d;
-                            c.vml[a][d] = document.createElement(f)
-                        }
-                    }
-                    c.vml[a].shape.stroked = false;
-                    c.vml[a].shape.appendChild(c.vml[a].fill);
-                    c.parentNode.insertBefore(c.vml[a].shape, c)
-                }
-            }
-            c.vml.image.shape.fillcolor = "none";
-            c.vml.image.fill.type = "tile";
-            c.vml.color.fill.on = false;
-            g.attachHandlers(c);
-            g.giveLayout(c);
-            g.giveLayout(c.offsetParent);
-            c.vmlInitiated = true;
-            g.applyVML(c)
-        }};
-    try {
-        document.execCommand("BackgroundImageCache", false, true)
-    } catch (r) {
-    }
-    DD_belatedPNG.createVmlNameSpace();
-    DD_belatedPNG.createVmlStyleSheet();
-}
-/*
- * jScrollPane - v2.0.0beta11 - 2011-07-04
- * http://jscrollpane.kelvinluck.com/
- *
- * Copyright (c) 2010 Kelvin Luck
- * Dual licensed under the MIT and GPL licenses.
- */
-(function(b, a, c) {
-    b.fn.jScrollPane = function(e) {
-        function d(D, O) {
-            var az, Q = this, Y, ak, v, am, T, Z, y, q, aA, aF, av, i, I, h, j, aa, U, aq, X, t, A, ar, af, an, G, l, au, ay, x, aw, aI, f, L, aj = true, P = true, aH = false, k = false, ap = D.clone(false, false).empty(), ac = b.fn.mwheelIntent ? "mwheelIntent.jsp" : "mousewheel.jsp";
-            aI = D.css("paddingTop") + " " + D.css("paddingRight") + " " + D.css("paddingBottom") + " " + D.css("paddingLeft");
-            f = (parseInt(D.css("paddingLeft"), 10) || 0) + (parseInt(D.css("paddingRight"), 10) || 0);
-            function at(aR) {
-                var aM, aO, aN, aK, aJ, aQ, aP = false, aL = false;
-                az = aR;
-                if (Y === c) {
-                    aJ = D.scrollTop();
-                    aQ = D.scrollLeft();
-                    D.css({overflow: "hidden",padding: 0});
-                    ak = D.innerWidth() + f;
-                    v = D.innerHeight();
-                    D.width(ak);
-                    Y = b('<div class="jspPane" />').css("padding", aI).append(D.children());
-                    am = b('<div class="jspContainer" />').css({width: ak + "px",height: v + "px"}).append(Y).appendTo(D)
-                } else {
-                    D.css("width", "");
-                    aP = az.stickToBottom && K();
-                    aL = az.stickToRight && B();
-                    aK = D.innerWidth() + f != ak || D.outerHeight() != v;
-                    if (aK) {
-                        ak = D.innerWidth() + f;
-                        v = D.innerHeight();
-                        am.css({width: ak + "px",height: v + "px"})
-                    }
-                    if (!aK && L == T && Y.outerHeight() == Z) {
-                        D.width(ak);
-                        return
-                    }
-                    L = T;
-                    Y.css("width", "");
-                    D.width(ak);
-                    am.find(">.jspVerticalBar,>.jspHorizontalBar").remove().end()
-                }
-                Y.css("overflow", "auto");
-                if (aR.contentWidth) {
-                    T = aR.contentWidth
-                } else {
-                    T = Y[0].scrollWidth
-                }
-                Z = Y[0].scrollHeight;
-                Y.css("overflow", "");
-                y = T / ak;
-                q = Z / v;
-                aA = q > 1;
-                aF = y > 1;
-                if (!(aF || aA)) {
-                    D.removeClass("jspScrollable");
-                    Y.css({top: 0,width: am.width() - f});
-                    n();
-                    E();
-                    R();
-                    w();
-                    ai()
-                } else {
-                    D.addClass("jspScrollable");
-                    aM = az.maintainPosition && (I || aa);
-                    if (aM) {
-                        aO = aD();
-                        aN = aB()
-                    }
-                    aG();
-                    z();
-                    F();
-                    if (aM) {
-                        N(aL ? (T - ak) : aO, false);
-                        M(aP ? (Z - v) : aN, false)
-                    }
-                    J();
-                    ag();
-                    ao();
-                    if (az.enableKeyboardNavigation) {
-                        S()
-                    }
-                    if (az.clickOnTrack) {
-                        p()
-                    }
-                    C();
-                    if (az.hijackInternalLinks) {
-                        m()
-                    }
-                }
-                if (az.autoReinitialise && !aw) {
-                    aw = setInterval(function() {
-                        at(az)
-                    }, az.autoReinitialiseDelay)
-                } else {
-                    if (!az.autoReinitialise && aw) {
-                        clearInterval(aw)
-                    }
-                }
-                aJ && D.scrollTop(0) && M(aJ, false);
-                aQ && D.scrollLeft(0) && N(aQ, false);
-                D.trigger("jsp-initialised", [aF || aA])
-            }
-            function aG() {
-                if (aA) {
-                    am.append(b('<div class="jspVerticalBar" />').append(b('<div class="jspCap jspCapTop" />'), b('<div class="jspTrack" />').append(b('<div class="jspDrag" />').append(b('<div class="jspDragTop" />'), b('<div class="jspDragBottom" />'))), b('<div class="jspCap jspCapBottom" />')));
-                    U = am.find(">.jspVerticalBar");
-                    aq = U.find(">.jspTrack");
-                    av = aq.find(">.jspDrag");
-                    if (az.showArrows) {
-                        ar = b('<a class="jspArrow jspArrowUp" />').bind("mousedown.jsp", aE(0, -1)).bind("click.jsp", aC);
-                        af = b('<a class="jspArrow jspArrowDown" />').bind("mousedown.jsp", aE(0, 1)).bind("click.jsp", aC);
-                        if (az.arrowScrollOnHover) {
-                            ar.bind("mouseover.jsp", aE(0, -1, ar));
-                            af.bind("mouseover.jsp", aE(0, 1, af))
-                        }
-                        al(aq, az.verticalArrowPositions, ar, af)
-                    }
-                    t = v;
-                    am.find(">.jspVerticalBar>.jspCap:visible,>.jspVerticalBar>.jspArrow").each(function() {
-                        t -= b(this).outerHeight()
-                    });
-                    av.hover(function() {
-                        av.addClass("jspHover")
-                    }, function() {
-                        av.removeClass("jspHover")
-                    }).bind("mousedown.jsp", function(aJ) {
-                        b("html").bind("dragstart.jsp selectstart.jsp", aC);
-                        av.addClass("jspActive");
-                        var s = aJ.pageY - av.position().top;
-                        b("html").bind("mousemove.jsp", function(aK) {
-                            V(aK.pageY - s, false)
-                        }).bind("mouseup.jsp mouseleave.jsp", ax);
-                        return false
-                    });
-                    o()
-                }
-            }
-            function o() {
-                aq.height(t + "px");
-                I = 0;
-                X = az.verticalGutter + aq.outerWidth();
-                Y.width(ak - X - f);
-                try {
-                    if (U.position().left === 0) {
-                        Y.css("margin-left", X + "px")
-                    }
-                } catch (s) {
-                }
-            }
-            function z() {
-                if (aF) {
-                    am.append(b('<div class="jspHorizontalBar" />').append(b('<div class="jspCap jspCapLeft" />'), b('<div class="jspTrack" />').append(b('<div class="jspDrag" />').append(b('<div class="jspDragLeft" />'), b('<div class="jspDragRight" />'))), b('<div class="jspCap jspCapRight" />')));
-                    an = am.find(">.jspHorizontalBar");
-                    G = an.find(">.jspTrack");
-                    h = G.find(">.jspDrag");
-                    if (az.showArrows) {
-                        ay = b('<a class="jspArrow jspArrowLeft" />').bind("mousedown.jsp", aE(-1, 0)).bind("click.jsp", aC);
-                        x = b('<a class="jspArrow jspArrowRight" />').bind("mousedown.jsp", aE(1, 0)).bind("click.jsp", aC);
-                        if (az.arrowScrollOnHover) {
-                            ay.bind("mouseover.jsp", aE(-1, 0, ay));
-                            x.bind("mouseover.jsp", aE(1, 0, x))
-                        }
-                        al(G, az.horizontalArrowPositions, ay, x)
-                    }
-                    h.hover(function() {
-                        h.addClass("jspHover")
-                    }, function() {
-                        h.removeClass("jspHover")
-                    }).bind("mousedown.jsp", function(aJ) {
-                        b("html").bind("dragstart.jsp selectstart.jsp", aC);
-                        h.addClass("jspActive");
-                        var s = aJ.pageX - h.position().left;
-                        b("html").bind("mousemove.jsp", function(aK) {
-                            W(aK.pageX - s, false)
-                        }).bind("mouseup.jsp mouseleave.jsp", ax);
-                        return false
-                    });
-                    l = am.innerWidth();
-                    ah()
-                }
-            }
-            function ah() {
-                am.find(">.jspHorizontalBar>.jspCap:visible,>.jspHorizontalBar>.jspArrow").each(function() {
-                    l -= b(this).outerWidth()
-                });
-                G.width(l + "px");
-                aa = 0
-            }
-            function F() {
-                if (aF && aA) {
-                    var aJ = G.outerHeight(), s = aq.outerWidth();
-                    t -= aJ;
-                    b(an).find(">.jspCap:visible,>.jspArrow").each(function() {
-                        l += b(this).outerWidth()
-                    });
-                    l -= s;
-                    v -= s;
-                    ak -= aJ;
-                    G.parent().append(b('<div class="jspCorner" />').css("width", aJ + "px"));
-                    o();
-                    ah()
-                }
-                if (aF) {
-                    Y.width((am.outerWidth() - f) + "px")
-                }
-                Z = Y.outerHeight();
-                q = Z / v;
-                if (aF) {
-                    au = Math.ceil(1 / y * l);
-                    if (au > az.horizontalDragMaxWidth) {
-                        au = az.horizontalDragMaxWidth
-                    } else {
-                        if (au < az.horizontalDragMinWidth) {
-                            au = az.horizontalDragMinWidth
-                        }
-                    }
-                    h.width(au + "px");
-                    j = l - au;
-                    ae(aa)
-                }
-                if (aA) {
-                    A = Math.ceil(1 / q * t);
-                    if (A > az.verticalDragMaxHeight) {
-                        A = az.verticalDragMaxHeight
-                    } else {
-                        if (A < az.verticalDragMinHeight) {
-                            A = az.verticalDragMinHeight
-                        }
-                    }
-                    av.height(A + "px");
-                    i = t - A;
-                    ad(I)
-                }
-            }
-            function al(aK, aM, aJ, s) {
-                var aO = "before", aL = "after", aN;
-                if (aM == "os") {
-                    aM = /Mac/.test(navigator.platform) ? "after" : "split"
-                }
-                if (aM == aO) {
-                    aL = aM
-                } else {
-                    if (aM == aL) {
-                        aO = aM;
-                        aN = aJ;
-                        aJ = s;
-                        s = aN
-                    }
-                }
-                aK[aO](aJ)[aL](s)
-            }
-            function aE(aJ, s, aK) {
-                return function() {
-                    H(aJ, s, this, aK);
-                    this.blur();
-                    return false
-                }
-            }
-            function H(aM, aL, aP, aO) {
-                aP = b(aP).addClass("jspActive");
-                var aN, aK, aJ = true, s = function() {
-                    if (aM !== 0) {
-                        Q.scrollByX(aM * az.arrowButtonSpeed)
-                    }
-                    if (aL !== 0) {
-                        Q.scrollByY(aL * az.arrowButtonSpeed)
-                    }
-                    aK = setTimeout(s, aJ ? az.initialDelay : az.arrowRepeatFreq);
-                    aJ = false
-                };
-                s();
-                aN = aO ? "mouseout.jsp" : "mouseup.jsp";
-                aO = aO || b("html");
-                aO.bind(aN, function() {
-                    aP.removeClass("jspActive");
-                    aK && clearTimeout(aK);
-                    aK = null;
-                    aO.unbind(aN)
-                })
-            }
-            function p() {
-                w();
-                if (aA) {
-                    aq.bind("mousedown.jsp", function(aO) {
-                        if (aO.originalTarget === c || aO.originalTarget == aO.currentTarget) {
-                            var aM = b(this), aP = aM.offset(), aN = aO.pageY - aP.top - I, aK, aJ = true, s = function() {
-                                var aS = aM.offset(), aT = aO.pageY - aS.top - A / 2, aQ = v * az.scrollPagePercent, aR = i * aQ / (Z - v);
-                                if (aN < 0) {
-                                    if (I - aR > aT) {
-                                        Q.scrollByY(-aQ)
-                                    } else {
-                                        V(aT)
-                                    }
-                                } else {
-                                    if (aN > 0) {
-                                        if (I + aR < aT) {
-                                            Q.scrollByY(aQ)
-                                        } else {
-                                            V(aT)
-                                        }
-                                    } else {
-                                        aL();
-                                        return
-                                    }
-                                }
-                                aK = setTimeout(s, aJ ? az.initialDelay : az.trackClickRepeatFreq);
-                                aJ = false
-                            }, aL = function() {
-                                aK && clearTimeout(aK);
-                                aK = null;
-                                b(document).unbind("mouseup.jsp", aL)
-                            };
-                            s();
-                            b(document).bind("mouseup.jsp", aL);
-                            return false
-                        }
-                    })
-                }
-                if (aF) {
-                    G.bind("mousedown.jsp", function(aO) {
-                        if (aO.originalTarget === c || aO.originalTarget == aO.currentTarget) {
-                            var aM = b(this), aP = aM.offset(), aN = aO.pageX - aP.left - aa, aK, aJ = true, s = function() {
-                                var aS = aM.offset(), aT = aO.pageX - aS.left - au / 2, aQ = ak * az.scrollPagePercent, aR = j * aQ / (T - ak);
-                                if (aN < 0) {
-                                    if (aa - aR > aT) {
-                                        Q.scrollByX(-aQ)
-                                    } else {
-                                        W(aT)
-                                    }
-                                } else {
-                                    if (aN > 0) {
-                                        if (aa + aR < aT) {
-                                            Q.scrollByX(aQ)
-                                        } else {
-                                            W(aT)
-                                        }
-                                    } else {
-                                        aL();
-                                        return
-                                    }
-                                }
-                                aK = setTimeout(s, aJ ? az.initialDelay : az.trackClickRepeatFreq);
-                                aJ = false
-                            }, aL = function() {
-                                aK && clearTimeout(aK);
-                                aK = null;
-                                b(document).unbind("mouseup.jsp", aL)
-                            };
-                            s();
-                            b(document).bind("mouseup.jsp", aL);
-                            return false
-                        }
-                    })
-                }
-            }
-            function w() {
-                if (G) {
-                    G.unbind("mousedown.jsp")
-                }
-                if (aq) {
-                    aq.unbind("mousedown.jsp")
-                }
-            }
-            function ax() {
-                b("html").unbind("dragstart.jsp selectstart.jsp mousemove.jsp mouseup.jsp mouseleave.jsp");
-                if (av) {
-                    av.removeClass("jspActive")
-                }
-                if (h) {
-                    h.removeClass("jspActive")
-                }
-            }
-            function V(s, aJ) {
-                if (!aA) {
-                    return
-                }
-                if (s < 0) {
-                    s = 0
-                } else {
-                    if (s > i) {
-                        s = i
-                    }
-                }
-                if (aJ === c) {
-                    aJ = az.animateScroll
-                }
-                if (aJ) {
-                    Q.animate(av, "top", s, ad)
-                } else {
-                    av.css("top", s);
-                    ad(s)
-                }
-            }
-            function ad(aJ) {
-                if (aJ === c) {
-                    aJ = av.position().top
-                }
-                am.scrollTop(0);
-                I = aJ;
-                var aM = I === 0, aK = I == i, aL = aJ / i, s = -aL * (Z - v);
-                if (aj != aM || aH != aK) {
-                    aj = aM;
-                    aH = aK;
-                    D.trigger("jsp-arrow-change", [aj, aH, P, k])
-                }
-                u(aM, aK);
-                Y.css("top", s);
-                D.trigger("jsp-scroll-y", [-s, aM, aK]).trigger("scroll")
-            }
-            function W(aJ, s) {
-                if (!aF) {
-                    return
-                }
-                if (aJ < 0) {
-                    aJ = 0
-                } else {
-                    if (aJ > j) {
-                        aJ = j
-                    }
-                }
-                if (s === c) {
-                    s = az.animateScroll
-                }
-                if (s) {
-                    Q.animate(h, "left", aJ, ae)
-                } else {
-                    h.css("left", aJ);
-                    ae(aJ)
-                }
-            }
-            function ae(aJ) {
-                if (aJ === c) {
-                    aJ = h.position().left
-                }
-                am.scrollTop(0);
-                aa = aJ;
-                var aM = aa === 0, aL = aa == j, aK = aJ / j, s = -aK * (T - ak);
-                if (P != aM || k != aL) {
-                    P = aM;
-                    k = aL;
-                    D.trigger("jsp-arrow-change", [aj, aH, P, k])
-                }
-                r(aM, aL);
-                Y.css("left", s);
-                D.trigger("jsp-scroll-x", [-s, aM, aL]).trigger("scroll")
-            }
-            function u(aJ, s) {
-                if (az.showArrows) {
-                    ar[aJ ? "addClass" : "removeClass"]("jspDisabled");
-                    af[s ? "addClass" : "removeClass"]("jspDisabled")
-                }
-            }
-            function r(aJ, s) {
-                if (az.showArrows) {
-                    ay[aJ ? "addClass" : "removeClass"]("jspDisabled");
-                    x[s ? "addClass" : "removeClass"]("jspDisabled")
-                }
-            }
-            function M(s, aJ) {
-                var aK = s / (Z - v);
-                V(aK * i, aJ)
-            }
-            function N(aJ, s) {
-                var aK = aJ / (T - ak);
-                W(aK * j, s)
-            }
-            function ab(aW, aR, aK) {
-                var aO, aL, aM, s = 0, aV = 0, aJ, aQ, aP, aT, aS, aU;
-                try {
-                    aO = b(aW)
-                } catch (aN) {
-                    return
-                }
-                aL = aO.outerHeight();
-                aM = aO.outerWidth();
-                am.scrollTop(0);
-                am.scrollLeft(0);
-                while (!aO.is(".jspPane")) {
-                    s += aO.position().top;
-                    aV += aO.position().left;
-                    aO = aO.offsetParent();
-                    if (/^body|html$/i.test(aO[0].nodeName)) {
-                        return
-                    }
-                }
-                aJ = aB();
-                aP = aJ + v;
-                if (s < aJ || aR) {
-                    aS = s - az.verticalGutter
-                } else {
-                    if (s + aL > aP) {
-                        aS = s - v + aL + az.verticalGutter
-                    }
-                }
-                if (aS) {
-                    M(aS, aK)
-                }
-                aQ = aD();
-                aT = aQ + ak;
-                if (aV < aQ || aR) {
-                    aU = aV - az.horizontalGutter
-                } else {
-                    if (aV + aM > aT) {
-                        aU = aV - ak + aM + az.horizontalGutter
-                    }
-                }
-                if (aU) {
-                    N(aU, aK)
-                }
-            }
-            function aD() {
-                return -Y.position().left
-            }
-            function aB() {
-                return -Y.position().top
-            }
-            function K() {
-                var s = Z - v;
-                return (s > 20) && (s - aB() < 10)
-            }
-            function B() {
-                var s = T - ak;
-                return (s > 20) && (s - aD() < 10)
-            }
-            function ag() {
-                am.unbind(ac).bind(ac, function(aM, aN, aL, aJ) {
-                    var aK = aa, s = I;
-                    Q.scrollBy(aL * az.mouseWheelSpeed, -aJ * az.mouseWheelSpeed, false);
-                    return aK == aa && s == I
-                })
-            }
-            function n() {
-                am.unbind(ac)
-            }
-            function aC() {
-                return false
-            }
-            function J() {
-                Y.find(":input,a").unbind("focus.jsp").bind("focus.jsp", function(s) {
-                    ab(s.target, false)
-                })
-            }
-            function E() {
-                Y.find(":input,a").unbind("focus.jsp")
-            }
-            function S() {
-                var s, aJ, aL = [];
-                aF && aL.push(an[0]);
-                aA && aL.push(U[0]);
-                Y.focus(function() {
-                    D.focus()
-                });
-                D.attr("tabindex", 0).unbind("keydown.jsp keypress.jsp").bind("keydown.jsp", function(aO) {
-                    if (aO.target !== this && !(aL.length && b(aO.target).closest(aL).length)) {
-                        return
-                    }
-                    var aN = aa, aM = I;
-                    switch (aO.keyCode) {
-                        case 40:
-                        case 38:
-                        case 34:
-                        case 32:
-                        case 33:
-                        case 39:
-                        case 37:
-                            s = aO.keyCode;
-                            aK();
-                            break;
-                        case 35:
-                            M(Z - v);
-                            s = null;
-                            break;
-                        case 36:
-                            M(0);
-                            s = null;
-                            break
-                    }
-                    aJ = aO.keyCode == s && aN != aa || aM != I;
-                    return !aJ
-                }).bind("keypress.jsp", function(aM) {
-                    if (aM.keyCode == s) {
-                        aK()
-                    }
-                    return !aJ
-                });
-                if (az.hideFocus) {
-                    D.css("outline", "none");
-                    if ("hideFocus" in am[0]) {
-                        D.attr("hideFocus", true)
-                    }
-                } else {
-                    D.css("outline", "");
-                    if ("hideFocus" in am[0]) {
-                        D.attr("hideFocus", false)
-                    }
-                }
-                function aK() {
-                    var aN = aa, aM = I;
-                    switch (s) {
-                        case 40:
-                            Q.scrollByY(az.keyboardSpeed, false);
-                            break;
-                        case 38:
-                            Q.scrollByY(-az.keyboardSpeed, false);
-                            break;
-                        case 34:
-                        case 32:
-                            Q.scrollByY(v * az.scrollPagePercent, false);
-                            break;
-                        case 33:
-                            Q.scrollByY(-v * az.scrollPagePercent, false);
-                            break;
-                        case 39:
-                            Q.scrollByX(az.keyboardSpeed, false);
-                            break;
-                        case 37:
-                            Q.scrollByX(-az.keyboardSpeed, false);
-                            break
-                    }
-                    aJ = aN != aa || aM != I;
-                    return aJ
-                }
-            }
-            function R() {
-                D.attr("tabindex", "-1").removeAttr("tabindex").unbind("keydown.jsp keypress.jsp")
-            }
-            function C() {
-                if (location.hash && location.hash.length > 1) {
-                    var aL, aJ, aK = escape(location.hash);
-                    try {
-                        aL = b(aK)
-                    } catch (s) {
-                        return
-                    }
-                    if (aL.length && Y.find(aK)) {
-                        if (am.scrollTop() === 0) {
-                            aJ = setInterval(function() {
-                                if (am.scrollTop() > 0) {
-                                    ab(aK, true);
-                                    b(document).scrollTop(am.position().top);
-                                    clearInterval(aJ)
-                                }
-                            }, 50)
-                        } else {
-                            ab(aK, true);
-                            b(document).scrollTop(am.position().top)
-                        }
-                    }
-                }
-            }
-            function ai() {
-                b("a.jspHijack").unbind("click.jsp-hijack").removeClass("jspHijack")
-            }
-            function m() {
-                ai();
-                b("a[href^=#]").addClass("jspHijack").bind("click.jsp-hijack", function() {
-                    var s = this.href.split("#"), aJ;
-                    if (s.length > 1) {
-                        aJ = s[1];
-                        if (aJ.length > 0 && Y.find("#" + aJ).length > 0) {
-                            ab("#" + aJ, true);
-                            return false
-                        }
-                    }
-                })
-            }
-            function ao() {
-                var aK, aJ, aM, aL, aN, s = false;
-                am.unbind("touchstart.jsp touchmove.jsp touchend.jsp click.jsp-touchclick").bind("touchstart.jsp", function(aO) {
-                    var aP = aO.originalEvent.touches[0];
-                    aK = aD();
-                    aJ = aB();
-                    aM = aP.pageX;
-                    aL = aP.pageY;
-                    aN = false;
-                    s = true
-                }).bind("touchmove.jsp", function(aR) {
-                    if (!s) {
-                        return
-                    }
-                    var aQ = aR.originalEvent.touches[0], aP = aa, aO = I;
-                    Q.scrollTo(aK + aM - aQ.pageX, aJ + aL - aQ.pageY);
-                    aN = aN || Math.abs(aM - aQ.pageX) > 5 || Math.abs(aL - aQ.pageY) > 5;
-                    return aP == aa && aO == I
-                }).bind("touchend.jsp", function(aO) {
-                    s = false
-                }).bind("click.jsp-touchclick", function(aO) {
-                    if (aN) {
-                        aN = false;
-                        return false
-                    }
-                })
-            }
-            function g() {
-                var s = aB(), aJ = aD();
-                D.removeClass("jspScrollable").unbind(".jsp");
-                D.replaceWith(ap.append(Y.children()));
-                ap.scrollTop(s);
-                ap.scrollLeft(aJ)
-            }
-            b.extend(Q, {reinitialise: function(aJ) {
-                    aJ = b.extend({}, az, aJ);
-                    at(aJ)
-                },scrollToElement: function(aK, aJ, s) {
-                    ab(aK, aJ, s)
-                },scrollTo: function(aK, s, aJ) {
-                    N(aK, aJ);
-                    M(s, aJ)
-                },scrollToX: function(aJ, s) {
-                    N(aJ, s)
-                },scrollToY: function(s, aJ) {
-                    M(s, aJ)
-                },scrollToPercentX: function(aJ, s) {
-                    N(aJ * (T - ak), s)
-                },scrollToPercentY: function(aJ, s) {
-                    M(aJ * (Z - v), s)
-                },scrollBy: function(aJ, s, aK) {
-                    Q.scrollByX(aJ, aK);
-                    Q.scrollByY(s, aK)
-                },scrollByX: function(s, aK) {
-                    var aJ = aD() + Math[s < 0 ? "floor" : "ceil"](s), aL = aJ / (T - ak);
-                    W(aL * j, aK)
-                },scrollByY: function(s, aK) {
-                    var aJ = aB() + Math[s < 0 ? "floor" : "ceil"](s), aL = aJ / (Z - v);
-                    V(aL * i, aK)
-                },positionDragX: function(s, aJ) {
-                    W(s, aJ)
-                },positionDragY: function(aJ, s) {
-                    V(aJ, s)
-                },animate: function(aJ, aM, s, aL) {
-                    var aK = {};
-                    aK[aM] = s;
-                    aJ.animate(aK, {duration: az.animateDuration,easing: az.animateEase,queue: false,step: aL})
-                },getContentPositionX: function() {
-                    return aD()
-                },getContentPositionY: function() {
-                    return aB()
-                },getContentWidth: function() {
-                    return T
-                },getContentHeight: function() {
-                    return Z
-                },getPercentScrolledX: function() {
-                    return aD() / (T - ak)
-                },getPercentScrolledY: function() {
-                    return aB() / (Z - v)
-                },getIsScrollableH: function() {
-                    return aF
-                },getIsScrollableV: function() {
-                    return aA
-                },getContentPane: function() {
-                    return Y
-                },scrollToBottom: function(s) {
-                    V(i, s)
-                },hijackInternalLinks: function() {
-                    m()
-                },destroy: function() {
-                    g()
-                }});
-            at(O)
-        }
-        e = b.extend({}, b.fn.jScrollPane.defaults, e);
-        b.each(["mouseWheelSpeed", "arrowButtonSpeed", "trackClickSpeed", "keyboardSpeed"], function() {
-            e[this] = e[this] || e.speed
-        });
-        return this.each(function() {
-            var f = b(this), g = f.data("jsp");
-            if (g) {
-                g.reinitialise(e)
-            } else {
-                g = new d(f, e);
-                f.data("jsp", g)
-            }
-        })
-    };
-    b.fn.jScrollPane.defaults = {showArrows: false,maintainPosition: true,stickToBottom: false,stickToRight: false,clickOnTrack: true,autoReinitialise: false,autoReinitialiseDelay: 500,verticalDragMinHeight: 0,verticalDragMaxHeight: 99999,horizontalDragMinWidth: 0,horizontalDragMaxWidth: 99999,contentWidth: c,animateScroll: false,animateDuration: 300,animateEase: "linear",hijackInternalLinks: false,verticalGutter: 4,horizontalGutter: 4,mouseWheelSpeed: 0,arrowButtonSpeed: 0,arrowRepeatFreq: 50,arrowScrollOnHover: false,trackClickSpeed: 0,trackClickRepeatFreq: 70,verticalArrowPositions: "split",horizontalArrowPositions: "split",enableKeyboardNavigation: true,hideFocus: false,keyboardSpeed: 0,initialDelay: 300,speed: 30,scrollPagePercent: 0.8}
-})(jQuery, this);
-/*!
- * jQuery Cookie Plugin v1.3
- * https://github.com/carhartl/jquery-cookie
- *
- * Copyright 2011, Klaus Hartl
- * Dual licensed under the MIT or GPL Version 2 licenses.
- * http://www.opensource.org/licenses/mit-license.php
- * http://www.opensource.org/licenses/GPL-2.0
- */
-(function(e, h, j) {
-    function k(b) {
-        return b
-    }
-    function l(b) {
-        return decodeURIComponent(b.replace(m, " "))
-    }
-    var m = /\+/g, d = e.cookie = function(b, c, a) {
-        if (c !== j) {
-            a = e.extend({}, d.defaults, a);
-            null === c && (a.expires = -1);
-            if ("number" === typeof a.expires) {
-                var f = a.expires, g = a.expires = new Date;
-                g.setDate(g.getDate() + f)
-            }
-            c = d.json ? JSON.stringify(c) : String(c);
-            return h.cookie = [encodeURIComponent(b), "=", d.raw ? c : encodeURIComponent(c), a.expires ? "; expires=" + a.expires.toUTCString() : "", a.path ? "; path=" + a.path : "", a.domain ? "; domain=" + 
-                a.domain : "", a.secure ? "; secure" : ""].join("")
-        }
-        c = d.raw ? k : l;
-        a = h.cookie.split("; ");
-        f = 0;
-        for (g = a.length; f < g; f++) {
-            var i = a[f].split("=");
-            if (c(i.shift()) === b)
-                return b = c(i.join("=")), d.json ? JSON.parse(b) : b
-        }
-        return null
-    };
-    d.defaults = {};
-    e.removeCookie = function(b, c) {
-        return null !== e.cookie(b) ? (e.cookie(b, null, c), !0) : !1
-    }
-})(jQuery, document);
-/*! Copyright (c) 2013 Brandon Aaron (http://brandonaaron.net)
+/*! Copyright (c) 2013 Brandon Aaron (http://brandon.aaron.sh)
  * Licensed under the MIT License (LICENSE.txt).
  *
- * Thanks to: http://adomas.org/javascript-mouse-wheel/ for some pointers.
- * Thanks to: Mathias Bank(http://www.mathias-bank.de) for a scope bug fix.
- * Thanks to: Seamus Leahy for adding deltaX and deltaY
+ * Version: 3.1.9
  *
- * Version: 3.1.3
- *
- * Requires: 1.2.2+
+ * Requires: jQuery 1.2.2+
  */
-(function(e) {
-    if (typeof define === "function" && define.amd) {
-        define(["jquery"], e)
-    } else if (typeof exports === "object") {
-        module.exports = e
+
+(function (factory) {
+    if ( typeof define === 'function' && define.amd ) {
+        // AMD. Register as an anonymous module.
+        define(['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        // Node/CommonJS style for Browserify
+        module.exports = factory;
     } else {
-        e(jQuery)
+        // Browser globals
+        factory(jQuery);
     }
-})(function(e) {
-    var t = ["wheel", "mousewheel", "DOMMouseScroll", "MozMousePixelScroll"];
-    var n = "onwheel" in document || document.documentMode >= 9 ? ["wheel"] : ["mousewheel", "DomMouseScroll", "MozMousePixelScroll"];
-    var l, o;
-    if (e.event.fixHooks) {
-        for (var i = t.length; i; ) {
-            e.event.fixHooks[t[--i]] = e.event.mouseHooks
+}(function ($) {
+
+    var toFix  = ['wheel', 'mousewheel', 'DOMMouseScroll', 'MozMousePixelScroll'],
+        toBind = ( 'onwheel' in document || document.documentMode >= 9 ) ?
+                    ['wheel'] : ['mousewheel', 'DomMouseScroll', 'MozMousePixelScroll'],
+        slice  = Array.prototype.slice,
+        nullLowestDeltaTimeout, lowestDelta;
+
+    if ( $.event.fixHooks ) {
+        for ( var i = toFix.length; i; ) {
+            $.event.fixHooks[ toFix[--i] ] = $.event.mouseHooks;
         }
     }
-    e.event.special.mousewheel = {setup: function() {
-            if (this.addEventListener) {
-                for (var e = n.length; e; ) {
-                    this.addEventListener(n[--e], s, false)
+
+    var special = $.event.special.mousewheel = {
+        version: '3.1.9',
+
+        setup: function() {
+            if ( this.addEventListener ) {
+                for ( var i = toBind.length; i; ) {
+                    this.addEventListener( toBind[--i], handler, false );
                 }
             } else {
-                this.onmousewheel = s
+                this.onmousewheel = handler;
             }
-        },teardown: function() {
-            if (this.removeEventListener) {
-                for (var e = n.length; e; ) {
-                    this.removeEventListener(n[--e], s, false)
+            // Store the line height and page height for this particular element
+            $.data(this, 'mousewheel-line-height', special.getLineHeight(this));
+            $.data(this, 'mousewheel-page-height', special.getPageHeight(this));
+        },
+
+        teardown: function() {
+            if ( this.removeEventListener ) {
+                for ( var i = toBind.length; i; ) {
+                    this.removeEventListener( toBind[--i], handler, false );
                 }
             } else {
-                this.onmousewheel = null
+                this.onmousewheel = null;
             }
-        }};
-    e.fn.extend({mousewheel: function(e) {
-            return e ? this.bind("mousewheel", e) : this.trigger("mousewheel")
-        },unmousewheel: function(e) {
-            return this.unbind("mousewheel", e)
-        }});
-    function s(t) {
-        var n = t || window.event, i = [].slice.call(arguments, 1), s = 0, h = 0, a = 0, u = 0, f = 0, r;
-        t = e.event.fix(n);
-        t.type = "mousewheel";
-        if (n.wheelDelta) {
-            s = n.wheelDelta
+        },
+
+        getLineHeight: function(elem) {
+            return parseInt($(elem)['offsetParent' in $.fn ? 'offsetParent' : 'parent']().css('fontSize'), 10);
+        },
+
+        getPageHeight: function(elem) {
+            return $(elem).height();
+        },
+
+        settings: {
+            adjustOldDeltas: true
         }
-        if (n.detail) {
-            s = n.detail * -1
-        }
-        if (n.deltaY) {
-            a = n.deltaY * -1;
-            s = a
-        }
-        if (n.deltaX) {
-            h = n.deltaX;
-            s = h * -1
-        }
-        if (n.wheelDeltaY !== undefined) {
-            a = n.wheelDeltaY
-        }
-        if (n.wheelDeltaX !== undefined) {
-            h = n.wheelDeltaX * -1
-        }
-        u = Math.abs(s);
-        if (!l || u < l) {
-            l = u
-        }
-        f = Math.max(Math.abs(a), Math.abs(h));
-        if (!o || f < o) {
-            o = f
-        }
-        r = s > 0 ? "floor" : "ceil";
-        s = Math[r](s / l);
-        h = Math[r](h / o);
-        a = Math[r](a / o);
-        i.unshift(t, s, h, a);
-        return (e.event.dispatch || e.event.handle).apply(this, i)
-    }
-});
-/*! Hammer.JS - v1.0.5 - 2013-04-07
- * http://eightmedia.github.com/hammer.js
- *
- * Copyright (c) 2013 Jorik Tangelder <j.tangelder@gmail.com>;
- * Licensed under the MIT license */
-(function(t, e) {
-    "use strict";
-    function n() {
-        if (!i.READY) {
-            i.event.determineEventTypes();
-            for (var t in i.gestures)
-                i.gestures.hasOwnProperty(t) && i.detection.register(i.gestures[t]);
-            i.event.onTouch(i.DOCUMENT, i.EVENT_MOVE, i.detection.detect), i.event.onTouch(i.DOCUMENT, i.EVENT_END, i.detection.detect), i.READY = !0
-        }
-    }
-    var i = function(t, e) {
-        return new i.Instance(t, e || {})
     };
-    i.defaults = {stop_browser_behavior: {userSelect: "none",touchAction: "none",touchCallout: "none",contentZooming: "none",userDrag: "none",tapHighlightColor: "rgba(0,0,0,0)"}}, i.HAS_POINTEREVENTS = navigator.pointerEnabled || navigator.msPointerEnabled, i.HAS_TOUCHEVENTS = "ontouchstart" in t, i.MOBILE_REGEX = /mobile|tablet|ip(ad|hone|od)|android/i, i.NO_MOUSEEVENTS = i.HAS_TOUCHEVENTS && navigator.userAgent.match(i.MOBILE_REGEX), i.EVENT_TYPES = {}, i.DIRECTION_DOWN = "down", i.DIRECTION_LEFT = "left", i.DIRECTION_UP = "up", i.DIRECTION_RIGHT = "right", i.POINTER_MOUSE = "mouse", i.POINTER_TOUCH = "touch", i.POINTER_PEN = "pen", i.EVENT_START = "start", i.EVENT_MOVE = "move", i.EVENT_END = "end", i.DOCUMENT = document, i.plugins = {}, i.READY = !1, i.Instance = function(t, e) {
-        var r = this;
-        return n(), this.element = t, this.enabled = !0, this.options = i.utils.extend(i.utils.extend({}, i.defaults), e || {}), this.options.stop_browser_behavior && i.utils.stopDefaultBrowserBehavior(this.element, this.options.stop_browser_behavior), i.event.onTouch(t, i.EVENT_START, function(t) {
-            r.enabled && i.detection.startDetect(r, t)
-        }), this
-    }, i.Instance.prototype = {on: function(t, e) {
-            for (var n = t.split(" "), i = 0; n.length > i; i++)
-                this.element.addEventListener(n[i], e, !1);
-            return this
-        },off: function(t, e) {
-            for (var n = t.split(" "), i = 0; n.length > i; i++)
-                this.element.removeEventListener(n[i], e, !1);
-            return this
-        },trigger: function(t, e) {
-            var n = i.DOCUMENT.createEvent("Event");
-            n.initEvent(t, !0, !0), n.gesture = e;
-            var r = this.element;
-            return i.utils.hasParent(e.target, r) && (r = e.target), r.dispatchEvent(n), this
-        },enable: function(t) {
-            return this.enabled = t, this
-        }};
-    var r = null, o = !1, s = !1;
-    i.event = {bindDom: function(t, e, n) {
-            for (var i = e.split(" "), r = 0; i.length > r; r++)
-                t.addEventListener(i[r], n, !1)
-        },onTouch: function(t, e, n) {
-            var a = this;
-            this.bindDom(t, i.EVENT_TYPES[e], function(c) {
-                var u = c.type.toLowerCase();
-                if (!u.match(/mouse/) || !s) {
-                    (u.match(/touch/) || u.match(/pointerdown/) || u.match(/mouse/) && 1 === c.which) && (o = !0), u.match(/touch|pointer/) && (s = !0);
-                    var h = 0;
-                    o && (i.HAS_POINTEREVENTS && e != i.EVENT_END ? h = i.PointerEvent.updatePointer(e, c) : u.match(/touch/) ? h = c.touches.length : s || (h = u.match(/up/) ? 0 : 1), h > 0 && e == i.EVENT_END ? e = i.EVENT_MOVE : h || (e = i.EVENT_END), h || null === r ? r = c : c = r, n.call(i.detection, a.collectEventData(t, e, c)), i.HAS_POINTEREVENTS && e == i.EVENT_END && (h = i.PointerEvent.updatePointer(e, c))), h || (r = null, o = !1, s = !1, i.PointerEvent.reset())
-                }
-            })
-        },determineEventTypes: function() {
-            var t;
-            t = i.HAS_POINTEREVENTS ? i.PointerEvent.getEvents() : i.NO_MOUSEEVENTS ? ["touchstart", "touchmove", "touchend touchcancel"] : ["touchstart mousedown", "touchmove mousemove", "touchend touchcancel mouseup"], i.EVENT_TYPES[i.EVENT_START] = t[0], i.EVENT_TYPES[i.EVENT_MOVE] = t[1], i.EVENT_TYPES[i.EVENT_END] = t[2]
-        },getTouchList: function(t) {
-            return i.HAS_POINTEREVENTS ? i.PointerEvent.getTouchList() : t.touches ? t.touches : [{identifier: 1,pageX: t.pageX,pageY: t.pageY,target: t.target}]
-        },collectEventData: function(t, e, n) {
-            var r = this.getTouchList(n, e), o = i.POINTER_TOUCH;
-            return (n.type.match(/mouse/) || i.PointerEvent.matchType(i.POINTER_MOUSE, n)) && (o = i.POINTER_MOUSE), {center: i.utils.getCenter(r),timeStamp: (new Date).getTime(),target: n.target,touches: r,eventType: e,pointerType: o,srcEvent: n,preventDefault: function() {
-                    this.srcEvent.preventManipulation && this.srcEvent.preventManipulation(), this.srcEvent.preventDefault && this.srcEvent.preventDefault()
-                },stopPropagation: function() {
-                    this.srcEvent.stopPropagation()
-                },stopDetect: function() {
-                    return i.detection.stopDetect()
-                }}
-        }}, i.PointerEvent = {pointers: {},getTouchList: function() {
-            var t = this, e = [];
-            return Object.keys(t.pointers).sort().forEach(function(n) {
-                e.push(t.pointers[n])
-            }), e
-        },updatePointer: function(t, e) {
-            return t == i.EVENT_END ? this.pointers = {} : (e.identifier = e.pointerId, this.pointers[e.pointerId] = e), Object.keys(this.pointers).length
-        },matchType: function(t, e) {
-            if (!e.pointerType)
-                return !1;
-            var n = {};
-            return n[i.POINTER_MOUSE] = e.pointerType == e.MSPOINTER_TYPE_MOUSE || e.pointerType == i.POINTER_MOUSE, n[i.POINTER_TOUCH] = e.pointerType == e.MSPOINTER_TYPE_TOUCH || e.pointerType == i.POINTER_TOUCH, n[i.POINTER_PEN] = e.pointerType == e.MSPOINTER_TYPE_PEN || e.pointerType == i.POINTER_PEN, n[t]
-        },getEvents: function() {
-            return ["pointerdown MSPointerDown", "pointermove MSPointerMove", "pointerup pointercancel MSPointerUp MSPointerCancel"]
-        },reset: function() {
-            this.pointers = {}
-        }}, i.utils = {extend: function(t, n, i) {
-            for (var r in n)
-                t[r] !== e && i || (t[r] = n[r]);
-            return t
-        },hasParent: function(t, e) {
-            for (; t; ) {
-                if (t == e)
-                    return !0;
-                t = t.parentNode
+
+    $.fn.extend({
+        mousewheel: function(fn) {
+            return fn ? this.bind('mousewheel', fn) : this.trigger('mousewheel');
+        },
+
+        unmousewheel: function(fn) {
+            return this.unbind('mousewheel', fn);
+        }
+    });
+
+
+    function handler(event) {
+        var orgEvent   = event || window.event,
+            args       = slice.call(arguments, 1),
+            delta      = 0,
+            deltaX     = 0,
+            deltaY     = 0,
+            absDelta   = 0;
+        event = $.event.fix(orgEvent);
+        event.type = 'mousewheel';
+
+        // Old school scrollwheel delta
+        if ( 'detail'      in orgEvent ) { deltaY = orgEvent.detail * -1;      }
+        if ( 'wheelDelta'  in orgEvent ) { deltaY = orgEvent.wheelDelta;       }
+        if ( 'wheelDeltaY' in orgEvent ) { deltaY = orgEvent.wheelDeltaY;      }
+        if ( 'wheelDeltaX' in orgEvent ) { deltaX = orgEvent.wheelDeltaX * -1; }
+
+        // Firefox < 17 horizontal scrolling related to DOMMouseScroll event
+        if ( 'axis' in orgEvent && orgEvent.axis === orgEvent.HORIZONTAL_AXIS ) {
+            deltaX = deltaY * -1;
+            deltaY = 0;
+        }
+
+        // Set delta to be deltaY or deltaX if deltaY is 0 for backwards compatabilitiy
+        delta = deltaY === 0 ? deltaX : deltaY;
+
+        // New school wheel delta (wheel event)
+        if ( 'deltaY' in orgEvent ) {
+            deltaY = orgEvent.deltaY * -1;
+            delta  = deltaY;
+        }
+        if ( 'deltaX' in orgEvent ) {
+            deltaX = orgEvent.deltaX;
+            if ( deltaY === 0 ) { delta  = deltaX * -1; }
+        }
+
+        // No change actually happened, no reason to go any further
+        if ( deltaY === 0 && deltaX === 0 ) { return; }
+
+        // Need to convert lines and pages to pixels if we aren't already in pixels
+        // There are three delta modes:
+        //   * deltaMode 0 is by pixels, nothing to do
+        //   * deltaMode 1 is by lines
+        //   * deltaMode 2 is by pages
+        if ( orgEvent.deltaMode === 1 ) {
+            var lineHeight = $.data(this, 'mousewheel-line-height');
+            delta  *= lineHeight;
+            deltaY *= lineHeight;
+            deltaX *= lineHeight;
+        } else if ( orgEvent.deltaMode === 2 ) {
+            var pageHeight = $.data(this, 'mousewheel-page-height');
+            delta  *= pageHeight;
+            deltaY *= pageHeight;
+            deltaX *= pageHeight;
+        }
+
+        // Store lowest absolute delta to normalize the delta values
+        absDelta = Math.max( Math.abs(deltaY), Math.abs(deltaX) );
+
+        if ( !lowestDelta || absDelta < lowestDelta ) {
+            lowestDelta = absDelta;
+
+            // Adjust older deltas if necessary
+            if ( shouldAdjustOldDeltas(orgEvent, absDelta) ) {
+                lowestDelta /= 40;
             }
-            return !1
-        },getCenter: function(t) {
-            for (var e = [], n = [], i = 0, r = t.length; r > i; i++)
-                e.push(t[i].pageX), n.push(t[i].pageY);
-            return {pageX: (Math.min.apply(Math, e) + Math.max.apply(Math, e)) / 2,pageY: (Math.min.apply(Math, n) + Math.max.apply(Math, n)) / 2}
-        },getVelocity: function(t, e, n) {
-            return {x: Math.abs(e / t) || 0,y: Math.abs(n / t) || 0}
-        },getAngle: function(t, e) {
-            var n = e.pageY - t.pageY, i = e.pageX - t.pageX;
-            return 180 * Math.atan2(n, i) / Math.PI
-        },getDirection: function(t, e) {
-            var n = Math.abs(t.pageX - e.pageX), r = Math.abs(t.pageY - e.pageY);
-            return n >= r ? t.pageX - e.pageX > 0 ? i.DIRECTION_LEFT : i.DIRECTION_RIGHT : t.pageY - e.pageY > 0 ? i.DIRECTION_UP : i.DIRECTION_DOWN
-        },getDistance: function(t, e) {
-            var n = e.pageX - t.pageX, i = e.pageY - t.pageY;
-            return Math.sqrt(n * n + i * i)
-        },getScale: function(t, e) {
-            return t.length >= 2 && e.length >= 2 ? this.getDistance(e[0], e[1]) / this.getDistance(t[0], t[1]) : 1
-        },getRotation: function(t, e) {
-            return t.length >= 2 && e.length >= 2 ? this.getAngle(e[1], e[0]) - this.getAngle(t[1], t[0]) : 0
-        },isVertical: function(t) {
-            return t == i.DIRECTION_UP || t == i.DIRECTION_DOWN
-        },stopDefaultBrowserBehavior: function(t, e) {
-            var n, i = ["webkit", "khtml", "moz", "ms", "o", ""];
-            if (e && t.style) {
-                for (var r = 0; i.length > r; r++)
-                    for (var o in e)
-                        e.hasOwnProperty(o) && (n = o, i[r] && (n = i[r] + n.substring(0, 1).toUpperCase() + n.substring(1)), t.style[n] = e[o]);
-                "none" == e.userSelect && (t.onselectstart = function() {
-                    return !1
-                })
-            }
-        }}, i.detection = {gestures: [],current: null,previous: null,stopped: !1,startDetect: function(t, e) {
-            this.current || (this.stopped = !1, this.current = {inst: t,startEvent: i.utils.extend({}, e),lastEvent: !1,name: ""}, this.detect(e))
-        },detect: function(t) {
-            if (this.current && !this.stopped) {
-                t = this.extendEventData(t);
-                for (var e = this.current.inst.options, n = 0, r = this.gestures.length; r > n; n++) {
-                    var o = this.gestures[n];
-                    if (!this.stopped && e[o.name] !== !1 && o.handler.call(o, t, this.current.inst) === !1) {
-                        this.stopDetect();
-                        break
-                    }
-                }
-                return this.current && (this.current.lastEvent = t), t.eventType == i.EVENT_END && !t.touches.length - 1 && this.stopDetect(), t
-            }
-        },stopDetect: function() {
-            this.previous = i.utils.extend({}, this.current), this.current = null, this.stopped = !0
-        },extendEventData: function(t) {
-            var e = this.current.startEvent;
-            if (e && (t.touches.length != e.touches.length || t.touches === e.touches)) {
-                e.touches = [];
-                for (var n = 0, r = t.touches.length; r > n; n++)
-                    e.touches.push(i.utils.extend({}, t.touches[n]))
-            }
-            var o = t.timeStamp - e.timeStamp, s = t.center.pageX - e.center.pageX, a = t.center.pageY - e.center.pageY, c = i.utils.getVelocity(o, s, a);
-            return i.utils.extend(t, {deltaTime: o,deltaX: s,deltaY: a,velocityX: c.x,velocityY: c.y,distance: i.utils.getDistance(e.center, t.center),angle: i.utils.getAngle(e.center, t.center),direction: i.utils.getDirection(e.center, t.center),scale: i.utils.getScale(e.touches, t.touches),rotation: i.utils.getRotation(e.touches, t.touches),startEvent: e}), t
-        },register: function(t) {
-            var n = t.defaults || {};
-            return n[t.name] === e && (n[t.name] = !0), i.utils.extend(i.defaults, n, !0), t.index = t.index || 1e3, this.gestures.push(t), this.gestures.sort(function(t, e) {
-                return t.index < e.index ? -1 : t.index > e.index ? 1 : 0
-            }), this.gestures
-        }}, i.gestures = i.gestures || {}, i.gestures.Hold = {name: "hold",index: 10,defaults: {hold_timeout: 500,hold_threshold: 1},timer: null,handler: function(t, e) {
-            switch (t.eventType) {
-                case i.EVENT_START:
-                    clearTimeout(this.timer), i.detection.current.name = this.name, this.timer = setTimeout(function() {
-                        "hold" == i.detection.current.name && e.trigger("hold", t)
-                    }, e.options.hold_timeout);
-                    break;
-                case i.EVENT_MOVE:
-                    t.distance > e.options.hold_threshold && clearTimeout(this.timer);
-                    break;
-                case i.EVENT_END:
-                    clearTimeout(this.timer)
-            }
-        }}, i.gestures.Tap = {name: "tap",index: 100,defaults: {tap_max_touchtime: 250,tap_max_distance: 10,tap_always: !0,doubletap_distance: 20,doubletap_interval: 300},handler: function(t, e) {
-            if (t.eventType == i.EVENT_END) {
-                var n = i.detection.previous, r = !1;
-                if (t.deltaTime > e.options.tap_max_touchtime || t.distance > e.options.tap_max_distance)
-                    return;
-                n && "tap" == n.name && t.timeStamp - n.lastEvent.timeStamp < e.options.doubletap_interval && t.distance < e.options.doubletap_distance && (e.trigger("doubletap", t), r = !0), (!r || e.options.tap_always) && (i.detection.current.name = "tap", e.trigger(i.detection.current.name, t))
-            }
-        }}, i.gestures.Swipe = {name: "swipe",index: 40,defaults: {swipe_max_touches: 1,swipe_velocity: .7},handler: function(t, e) {
-            if (t.eventType == i.EVENT_END) {
-                if (e.options.swipe_max_touches > 0 && t.touches.length > e.options.swipe_max_touches)
-                    return;
-                (t.velocityX > e.options.swipe_velocity || t.velocityY > e.options.swipe_velocity) && (e.trigger(this.name, t), e.trigger(this.name + t.direction, t))
-            }
-        }}, i.gestures.Drag = {name: "drag",index: 50,defaults: {drag_min_distance: 10,drag_max_touches: 1,drag_block_horizontal: !1,drag_block_vertical: !1,drag_lock_to_axis: !1,drag_lock_min_distance: 25},triggered: !1,handler: function(t, n) {
-            if (i.detection.current.name != this.name && this.triggered)
-                return n.trigger(this.name + "end", t), this.triggered = !1, e;
-            if (!(n.options.drag_max_touches > 0 && t.touches.length > n.options.drag_max_touches))
-                switch (t.eventType) {
-                    case i.EVENT_START:
-                        this.triggered = !1;
-                        break;
-                    case i.EVENT_MOVE:
-                        if (t.distance < n.options.drag_min_distance && i.detection.current.name != this.name)
-                            return;
-                        i.detection.current.name = this.name, (i.detection.current.lastEvent.drag_locked_to_axis || n.options.drag_lock_to_axis && n.options.drag_lock_min_distance <= t.distance) && (t.drag_locked_to_axis = !0);
-                        var r = i.detection.current.lastEvent.direction;
-                        t.drag_locked_to_axis && r !== t.direction && (t.direction = i.utils.isVertical(r) ? 0 > t.deltaY ? i.DIRECTION_UP : i.DIRECTION_DOWN : 0 > t.deltaX ? i.DIRECTION_LEFT : i.DIRECTION_RIGHT), this.triggered || (n.trigger(this.name + "start", t), this.triggered = !0), n.trigger(this.name, t), n.trigger(this.name + t.direction, t), (n.options.drag_block_vertical && i.utils.isVertical(t.direction) || n.options.drag_block_horizontal && !i.utils.isVertical(t.direction)) && t.preventDefault();
-                        break;
-                    case i.EVENT_END:
-                        this.triggered && n.trigger(this.name + "end", t), this.triggered = !1
-                }
-        }}, i.gestures.Transform = {name: "transform",index: 45,defaults: {transform_min_scale: .01,transform_min_rotation: 1,transform_always_block: !1},triggered: !1,handler: function(t, n) {
-            if (i.detection.current.name != this.name && this.triggered)
-                return n.trigger(this.name + "end", t), this.triggered = !1, e;
-            if (!(2 > t.touches.length))
-                switch (n.options.transform_always_block && t.preventDefault(), t.eventType) {
-                    case i.EVENT_START:
-                        this.triggered = !1;
-                        break;
-                    case i.EVENT_MOVE:
-                        var r = Math.abs(1 - t.scale), o = Math.abs(t.rotation);
-                        if (n.options.transform_min_scale > r && n.options.transform_min_rotation > o)
-                            return;
-                        i.detection.current.name = this.name, this.triggered || (n.trigger(this.name + "start", t), this.triggered = !0), n.trigger(this.name, t), o > n.options.transform_min_rotation && n.trigger("rotate", t), r > n.options.transform_min_scale && (n.trigger("pinch", t), n.trigger("pinch" + (1 > t.scale ? "in" : "out"), t));
-                        break;
-                    case i.EVENT_END:
-                        this.triggered && n.trigger(this.name + "end", t), this.triggered = !1
-                }
-        }}, i.gestures.Touch = {name: "touch",index: -1 / 0,defaults: {prevent_default: !1,prevent_mouseevents: !1},handler: function(t, n) {
-            return n.options.prevent_mouseevents && t.pointerType == i.POINTER_MOUSE ? (t.stopDetect(), e) : (n.options.prevent_default && t.preventDefault(), t.eventType == i.EVENT_START && n.trigger(this.name, t), e)
-        }}, i.gestures.Release = {name: "release",index: 1 / 0,handler: function(t, e) {
-            t.eventType == i.EVENT_END && e.trigger(this.name, t)
-        }}, "object" == typeof module && "object" == typeof module.exports ? module.exports = i : (t.Hammer = i, "function" == typeof t.define && t.define.amd && t.define("hammer", [], function() {
-        return i
-    }))
-})(this), function(t, e) {
-    "use strict";
-    t !== e && (Hammer.event.bindDom = function(n, i, r) {
-        t(n).on(i, function(t) {
-            var n = t.originalEvent || t;
-            n.pageX === e && (n.pageX = t.pageX, n.pageY = t.pageY), n.target || (n.target = t.target), n.which === e && (n.which = n.button), n.preventDefault || (n.preventDefault = t.preventDefault), n.stopPropagation || (n.stopPropagation = t.stopPropagation), r.call(this, n)
-        })
-    }, Hammer.Instance.prototype.on = function(e, n) {
-        return t(this.element).on(e, n)
-    }, Hammer.Instance.prototype.off = function(e, n) {
-        return t(this.element).off(e, n)
-    }, Hammer.Instance.prototype.trigger = function(e, n) {
-        var i = t(this.element);
-        return i.has(n.target).length && (i = t(n.target)), i.trigger({type: e,gesture: n})
-    }, t.fn.hammer = function(e) {
-        return this.each(function() {
-            var n = t(this), i = n.data("hammer");
-            i ? i && e && Hammer.utils.extend(i.options, e) : n.data("hammer", new Hammer(this, e || {}))
-        })
-    })
-}(window.jQuery || window.Zepto);
+        }
+
+        // Adjust older deltas if necessary
+        if ( shouldAdjustOldDeltas(orgEvent, absDelta) ) {
+            // Divide all the things by 40!
+            delta  /= 40;
+            deltaX /= 40;
+            deltaY /= 40;
+        }
+
+        // Get a whole, normalized value for the deltas
+        delta  = Math[ delta  >= 1 ? 'floor' : 'ceil' ](delta  / lowestDelta);
+        deltaX = Math[ deltaX >= 1 ? 'floor' : 'ceil' ](deltaX / lowestDelta);
+        deltaY = Math[ deltaY >= 1 ? 'floor' : 'ceil' ](deltaY / lowestDelta);
+
+        // Add information to the event object
+        event.deltaX = deltaX;
+        event.deltaY = deltaY;
+        event.deltaFactor = lowestDelta;
+        // Go ahead and set deltaMode to 0 since we converted to pixels
+        // Although this is a little odd since we overwrite the deltaX/Y
+        // properties with normalized deltas.
+        event.deltaMode = 0;
+
+        // Add event and delta to the front of the arguments
+        args.unshift(event, delta, deltaX, deltaY);
+
+        // Clearout lowestDelta after sometime to better
+        // handle multiple device types that give different
+        // a different lowestDelta
+        // Ex: trackpad = 3 and mouse wheel = 120
+        if (nullLowestDeltaTimeout) { clearTimeout(nullLowestDeltaTimeout); }
+        nullLowestDeltaTimeout = setTimeout(nullLowestDelta, 200);
+
+        return ($.event.dispatch || $.event.handle).apply(this, args);
+    }
+
+    function nullLowestDelta() {
+        lowestDelta = null;
+    }
+
+    function shouldAdjustOldDeltas(orgEvent, absDelta) {
+        // If this is an older event and the delta is divisable by 120,
+        // then we are assuming that the browser is treating this as an
+        // older mouse wheel event and that we should divide the deltas
+        // by 40 to try and get a more usable deltaFactor.
+        // Side note, this actually impacts the reported scroll distance
+        // in older browsers and can cause scrolling to be slower than native.
+        // Turn this off by setting $.event.special.mousewheel.settings.adjustOldDeltas to false.
+        return special.settings.adjustOldDeltas && orgEvent.type === 'mousewheel' && absDelta % 120 === 0;
+    }
+
+}));
