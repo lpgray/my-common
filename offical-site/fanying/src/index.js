@@ -145,12 +145,12 @@ $(function() {
     winHeight = $(window).height();
     resetPage();
     $(window).resize(function() {
-        resetPage()
+        resetPage();
     });
     totalPage = $(".page").length;
     
     var e = 1;
-    $(document).bind("mousewheel", function(t, i, a, n) {
+    $('body').on("mousewheel", function(t, i, a, n) {
         if (!pageTransition) {
             if (i <= -e) {
                 if (currentPage + 1 <= totalPage) {
@@ -195,6 +195,21 @@ $(function() {
         }
         function showDesc(idx){
             $descs.eq(idx).addClass('active').siblings().removeClass('active');
+        }
+
+        var $modal = $('#J_modal');
+        $modal.find('.close').click(function(){
+            $modal.fadeOut();
+            return false;
+        });
+        $modal.on('mousewheel', function(e){
+            e.stopPropagation && e.stopPropagation();
+            // e.preventDefault && e.preventDefault();
+            // return false;
+        });
+        function showModal(option){
+            $('#J_modalCtn').html(option.innerHTML);
+            $modal.fadeIn(500);
         }
         
         $drawerTrig.click(function(){
@@ -243,6 +258,12 @@ $(function() {
                 rightMoved = 1;
                 leftMoved = 0;
             });
+        });
+
+        $('.carousel-imgs-wrapper').on('click', 'img', function(e){
+            showModal({innerHTML : '<img src="'+ $(this).attr('src') +'" alt="" />'});
+            e.stopPropagation && e.stopPropagation();
+            return false;
         });
 
         if($.browser.version < 10){
@@ -479,10 +500,10 @@ $(function() {
             map = new BMap.Map('J_mapCtn');
             map.centerAndZoom(new BMap.Point(118.819224,31.950503), 32);
             var marker = new BMap.Marker(new BMap.Point(118.819224,31.950503));
-            var control = new BMap.NavigationControl({
-                anchor : BMAP_ANCHOR_TOP_LEFT
-            });
-            map.addControl(control);
+            // var control = new BMap.NavigationControl({
+            //     anchor : BMAP_ANCHOR_TOP_LEFT
+            // });
+            // map.addControl(control);
             map.addOverlay(marker);
             var opts = {      
                 width : 220,     // 信息窗口宽度      

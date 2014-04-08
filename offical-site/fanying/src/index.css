@@ -114,7 +114,7 @@ body {
 }
 #page-indicator {
 	position: absolute;
-	z-index: 9999;
+	z-index: 100;
 	right: 60px;
 	top: 42%;
 	width: 20px;
@@ -1026,6 +1026,9 @@ body {
 	border: 1px solid #eee;
 	opacity: 0;
 	filter: alpha(opacity=0);
+}
+.page4-desc .thumnail img{
+	width: 100%;
 }
 .page4-desc .thumnail h4{
 	font-size: 14px;

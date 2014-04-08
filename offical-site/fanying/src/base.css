@@ -5,7 +5,7 @@ input,select,textarea{font-size:100%;}
 input[type="reset"]::-moz-focus-inner,input[type="button"]::-moz-focus-inner,input[type="submit"]::-moz-focus-inner,input[type="file"]>input[type="button"]::-moz-focus-inner,button[type="reset"]::-moz-focus-inner,button[type="button"]::-moz-focus-inner,button[type="submit"]::-moz-focus-inner,button[type="file"]>button[type="button"]::-moz-focus-inner{border:none;padding:0;}
 table{border-collapse:collapse;border-spacing:0;}
 th{text-align:inherit;}
-fieldset,img,a img{border:0; max-width: 100%; *width: 100%;}
+fieldset,img,a img{border:0;}
 abbr,acronym{border:0;font-variant:normal;}
 del{text-decoration:line-through;}
 address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:500;}
@@ -101,3 +101,9 @@ a.link-bg:hover{background-color: #0CB8C2; text-decoration: none;}
 .block-green a {
 	color: #fff;
 }
+
+.modal{display: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; background: rgba(0,0,0,.5);z-index: 1000; overflow-y: auto;}
+.modal .close{font-size: 60px;color: #fff; position: fixed; right: 20px; top: 0;text-decoration: none; z-index: 1005;}
+.modal-inner{width: 960px;margin: 0 auto;}
+.modal-ctn{text-align: center;}
+.modal-bg{position: absolute; width: 100%; height: 100%; left: 0; top: 0; *background-color: #000; z-index: 1004;}
