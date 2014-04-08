@@ -37,11 +37,8 @@ module.exports = function(grunt) {
       gruntfile: {
         src: 'Gruntfile.js'
       },
-      // lib_test: {
-      //   src: ['lib/**/*.js', 'test/**/*.js']
-      // }
       dev: {
-        src : ['src/**/*.js']
+        src : ['src/carousel2.js', 'src/index.js']
       }
     },
     watch: {

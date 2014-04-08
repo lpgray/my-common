@@ -10,7 +10,7 @@ body {
 
 .header {
 	background: rgba(0,0,0,.5);
-	width: 100%; height: 60px;
+	width: 100%; height: 80px;
 	box-shadow: none;
 	position: fixed;
 	z-index: 5;
@@ -22,7 +22,7 @@ body {
 	overflow: hidden;
 }
 .header .logo{
-	width: 110px;
+	width: 140px;
 	height: 100%;
 	margin: 0 auto;
 	padding: 0;
@@ -33,15 +33,16 @@ body {
 	text-align: center;
 	text-decoration: none;
 	padding: 0 10px;
-	line-height: 60px;
+	line-height: 80px;
 	transition: line-height .5s ease-in-out .6s;
 }
 .header .logo a{
-	padding: 0; margin: 10px 0 0 0;
+	padding: 0; margin: 18px 0 0 0;
 	overflow: hidden;
 	line-height: 0;
-	height: 42px;
-	max-height: 42px;
+	height: 80px;
+	max-height: 80px;
+	width: 100%;
 }
 .header .logo img{
 	width: 100%;
@@ -57,14 +58,11 @@ body {
 }
 .header ul li{
 	float: left;
-	font-size: 20px;
+	font-size: 22px;
 	height: 100%;
 	margin: 0 10px;
 	box-sizing: border-box;
 	border-bottom: 5px solid transparent;
-}
-.header ul li.active{
-	border-color: #019199;
 }
 .header ul.right{
 	left: auto;
@@ -73,15 +71,20 @@ body {
 .header-black{
 	background: rgba(0,0,0,1);
 	background: #000;
-	height: 40px;
+	height: 60px;
 }
 .header-black a{
-	line-height: 40px;
+	line-height: 60px;
+}
+.header-black ul li.active{
+	border-color: #019199;
 }
 .header-black .logo a{
-	max-height: 24px;
+	max-height: 29px;
 }
-
+.header-black .logo{
+	max-width: 130px;
+}
 
 
 
@@ -94,11 +97,13 @@ body {
 	z-index: 1;
 }
 .page h1{
-	font-size: 30px;
+	font-size: 48px;
 	text-align: center;
 	font-weight: 300;
 	font-family: "Helvetica Neue",Helvetica,tahoma,arial,"Hiragino Sans GB", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Micro Hei Mono", "WenQuanYi Zen Hei", "WenQuanYi Zen Hei", "Apple LiGothic Medium", "SimHei", "ST Heiti", "WenQuanYi Zen Hei Sharp";
-	padding: 60px 0;
+	padding: 80px 0 0;
+	position: relative;
+	z-index: 500;
 }
 #page.animate {
 	-webkit-transition: -webkit-transform 1s ease;
@@ -185,6 +190,16 @@ body {
 }
 
 
+/* screen */
+.page-banner{
+	position: absolute;
+	width: 960px; height: 380px;
+	top: 50%; left: 50%;
+	margin-top: -190px;
+	margin-left: -480px;
+}
+
+
 
 #page-1 {
 	background: #000 url(imgs/bg-1.png) top center no-repeat;
@@ -200,7 +215,6 @@ body {
 	height: 380px;
 	background: url(imgs/page1-2.png) 0 0 no-repeat;
 	float: left;
-	margin-top: 150px;
 	opacity: 0;
 	position: relative;
 	margin-left: -80px;
@@ -213,14 +227,12 @@ body {
 	opacity: 0;
 	margin-right: -80px;
 	*margin-right: 0;
-	margin-top: 80px;
 }
 .page1-desc{
 	width: 500px;
 	height: 120px;
 	background: url(imgs/page1-2.png) 120px -560px no-repeat;
 	float: right;
-	margin-top: 30px;
 	opacity: 0;
 	margin-right: -80px;
 	*margin-right: 0;
@@ -228,7 +240,7 @@ body {
 .page1-right{
 	position: absolute;
 	right: 0;
-	margin-top: 80px;
+	margin-top: 30px;
 	z-index: 1;
 	text-align: right;
 }
@@ -607,7 +619,6 @@ body {
 }
 .page-2-stage{
 	height: 90%;
-	margin-top: 20px;
 	background-color: #fff;
 }
 .page2-desc-wrapper{
@@ -630,8 +641,8 @@ body {
 	height: 50px;
 	line-height: 50px;
 	border-radius: 50%;
-	border: 1px solid #97BA0C;
-	color: #97BA0C;
+	border: 1px solid #019199;
+	color: #019199;
 	text-align: center;
 	margin-right: 15px;
 	font-size: 30px;
@@ -655,7 +666,7 @@ body {
 }
 .page2-desc-wrapper a.active i{
 	color: #fff;
-	background: #97BA0C;
+	background: #019199;
 	transition: all .5s;
 }
 .page2-desc-wrapper a.active h2{
@@ -715,7 +726,7 @@ body {
 	z-index: 4;
 }
 .page2-device .layer2{
-	background-position: 0 -270px;
+	background-position: 0 -268px;
 	opacity: 1;
 	z-index: 3;
 }
@@ -758,7 +769,6 @@ body {
 	left: -250px;
 	top: -140px;
 }
-
 
 
 
@@ -913,7 +923,7 @@ body {
 	margin: 0 auto;
 	height: 350px;
 	position: relative;
-	margin-bottom: 50px;
+	margin-bottom: 90px;
 }
 .page4-inner h2{
 	font-size: 28px;
