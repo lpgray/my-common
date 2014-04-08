@@ -305,29 +305,29 @@ $(function() {
         $page2selection.click(function(){
             activeTriggerAndLayer($(this).index());
         });
-        if($.browser.version < 10){
-            $page2selection.css('opacity', '0');
-            pageEvents[2] = function(){
-                loopWithPause($page2selection, function(idx, item){
-                    $(item).animate({
-                        top : 0,
-                        opacity : 1   
-                    });
-                    if(idx === $page2selection.length-1){
-                        loopWithPause($page2layers, function(idx, layer){
-                            var top = -150 + (idx*40);
-                            $(layer).animate({
-                                top : top
-                            });
-                        }, 200);
-                    }
-                }, 100);
-            }
-            pageReverts[2] = function(){
-                $page2selection.css('opacity', '0');
-                $page2layers.css('top', 0);
-            }    
-        }else{
+        // if($.browser.version < 10){
+        //     $page2selection.css('opacity', '0');
+        //     pageEvents[2] = function(){
+        //         loopWithPause($page2selection, function(idx, item){
+        //             $(item).animate({
+        //                 top : 0,
+        //                 opacity : 1   
+        //             });
+        //             if(idx === $page2selection.length-1){
+        //                 loopWithPause($page2layers, function(idx, layer){
+        //                     var top = -200 + (idx*60);
+        //                     $(layer).animate({
+        //                         top : top
+        //                     });
+        //                 }, 200);
+        //             }
+        //         }, 100);
+        //     }
+        //     pageReverts[2] = function(){
+        //         $page2selection.css('opacity', '0');
+        //         $page2layers.css('top', 0);
+        //     }    
+        // }else{
             pageEvents[2] = function(){
                 loopWithPause($page2selection, function(idx, item){
                     $(item).addClass('animate');
@@ -349,7 +349,7 @@ $(function() {
                     $(item).removeClass('layer' + idx + '-ignore layer' + idx + '-active active');
                 });
             }
-        }
+        // }
     }());
 
     (function(){

@@ -109,6 +109,7 @@ var Detect = (function() {
 					}
 					toggles[idx].className = 'active';
 					self.showGroup(idx);
+					return false;
 				}
 			}(i));
 		}
