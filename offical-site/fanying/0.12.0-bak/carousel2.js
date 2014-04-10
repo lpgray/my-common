@@ -37,27 +37,8 @@ var Detect = (function() {
 	}
 }());
 
-(function(){
-	// 填充carousel图片
-	$('.mudules-description').find('[data-type]').each(function(){
-		var $self = $(this);
-		var type = $self.data('type');
-		var tmpl = '<div class="carousel2">';
-			tmpl +='	<div class="carousel-imgs-wrapper">';
-			tmpl +=' 		<ul>';
-		
-		var imgs = MODULE_IMGS[type];
-		for(var i = 0,l = imgs.length; i<l ; i++){
-			tmpl +='			<li><a href="#"><img data-src="'+imgs[i].name+'" alt=""></a></li>';
-		}
 
-			tmpl +='		</ul>';
-			tmpl +='	</div>';
-			tmpl +='	<div class="carousel-toggles-wrapper">';		
-			tmpl +='	</div>';
-			tmpl +='</div>';
-		$self.append(tmpl);
-	});
+(function(){
 
 	function slide(dom, position){
 		var originLeft = dom.offsetLeft;
@@ -98,11 +79,11 @@ var Detect = (function() {
 		var togglesWrapper = domC2.children[1];
 		
 		var liNumber = ul.children.length;
-		var unitWidth = 84;
+		var unitWidth = 80;
 		var ulWidth = parseInt(liNumber * unitWidth);
 		ul.style.width = ulWidth + 'px';
 		
-		var domC2Width = 420;
+		var domC2Width = 320;
 		var groupNumber = Math.ceil(ulWidth/domC2Width);
 		var tmpl = '';
 		for(var i = 0; i < groupNumber; i++){
@@ -168,26 +149,13 @@ var Detect = (function() {
 			}
 
 			this.currentGroup = idx;
-			idx && this.lazyLoadImgsAt(this.currentGroup); // 第一组不做加载，第一组在index.js中控制加载
 		},
 		calcLastLeftMove : function(ulWidth, ctnWidth, groupNumber){
 			return ctnWidth * (groupNumber-1) - (ctnWidth * groupNumber - ulWidth);
-		},
-		lazyLoadImgsAt : function(groupNumber){
-			var end = (groupNumber + 1) * 5;
-			if(end >= this.ul.children.length){
-				end = this.ul.children.length;
-			}
-			var start = end - 5;
-			var imgs = this.ul.getElementsByTagName('img');
-			for(var i = start; i<end; i++){
-				var src = imgs[i].getAttribute('src');
-				if(!src){
-					imgs[i].src = imgs[i].getAttribute('data-src');
-				}
-			}
 		}
 	}
 
-	window.carousel2 = carousel2;
+	$('.carousel2').each(function(){
+		new carousel2({elem : this});
+	});
 }());

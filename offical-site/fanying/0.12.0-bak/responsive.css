@@ -1,0 +1,9 @@
+@media (max-width: 1300px) {
+	.wrapper{width: 960px}
+}
+@media (min-width: 1301px) and (max-width: 1400px){
+	.wrapper{width: 1200px}
+}
+@media (min-width: 1401px){
+	.wrapper{width: 1300px}
+}

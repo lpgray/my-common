@@ -1,0 +1,40 @@
+.page6-top {
+	text-align: center;
+	height: 60%;
+	background: #fff;
+}
+.page6-main {
+	height: 40%;
+}
+.page6-main h2{
+	font-size: 20px;
+	margin-top: 50px;
+}
+.page6-main p{
+	font-size: 12px;
+	margin-top: 10px;
+}
+.page6-main .border{
+	height: 6px;
+	background: url(imgs/p6-border.png) 0 0 repeat;
+}
+.page6-main img{
+	width: 132px;
+	margin-bottom: 10px;
+}
+.page6-main .cell-left{
+	float: left;
+	margin-right: 20px;
+}
+.page6-main .cell-right{
+	float: right;
+	margin-top: 50px;
+}
+.page6-main .cell-right p{
+	font-size: 12px;
+	margin-top: 0;
+}
+.p6-wrapper{
+	width: 1000px;
+	margin: 0 auto;
+}

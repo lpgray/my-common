@@ -1,13 +1,50 @@
 var winWidth
     , winHeight
+    , partners = [
+        {
+            name : '中国电信'
+        },
+        {
+            name : 'SIEMENS'
+        },
+        {
+            name : 'Atos'
+        },
+        {
+            name : '太平洋保险'
+        },
+        {
+            name : '凤凰传媒'
+        },
+        {
+            name : 'HELLA'
+        },
+        {
+            name : '东南大学'
+        },
+        {
+            name : '苏源高科'
+        },
+        {
+            name : '话机世界'
+        },
+        {
+            name : '江苏教育频道'
+        },
+        {
+            name : '平安银行'
+        },
+        {
+            name : '凤凰出版社'
+        }
+    ]
     , lastPage = 0
     , currentPage = 1
     , totalPage = 0
     , pageTransition = false
     , pageEvents = {}
     , pageReverts = {}
-    , $header = $('#J_Header')
-    , carousels = [];
+    , $header = $('#J_Header');
 
 function goToPage(targetPage, mode) {
     var $targetPage = $("#page-" + targetPage);
@@ -136,10 +173,6 @@ $(function() {
         if (!pageTransition)
             goToPage(targetPage, "fade");
     });
-    // 创建carousel2实例
-    $('.carousel2').each(function(){
-        carousels.push(new carousel2({elem : this}));
-    });
 
     (function(){
         var $page1 = $('#page-1')
@@ -152,15 +185,14 @@ $(function() {
             , $hideTrigLeft = $page1.find('.hide-trigger-left')
             , $hideTrigRight = $page1.find('.hide-trigger-right')
             , listOuterWidth = $lis.length * 110;
-        function openDrawer(){
+        function openDrawer(idx){
             if ($drawer.hasClass("on")) {
                 $drawer.removeClass("on").attr('style','');
-                $itemsInDrawer.removeClass("p1-module-wrapper");
+                $itemsInDrawer.removeClass("wrapper");
                 $lis.removeClass('active');
             } else {
-                $drawer.height($lis.height() * 5 - 80).addClass("on");
-                $itemsInDrawer.addClass("p1-module-wrapper");
-                carousels[0].lazyLoadImgsAt(0);
+                $drawer.height($lis.height() * 5 - 100).addClass("on");
+                $itemsInDrawer.addClass("wrapper");
             }
         }
         function showDesc(idx){
@@ -174,6 +206,8 @@ $(function() {
         });
         $modal.on('mousewheel', function(e){
             e.stopPropagation && e.stopPropagation();
+            // e.preventDefault && e.preventDefault();
+            // return false;
         });
         function showModal(option){
             $('#J_modalCtn').html(option.innerHTML);
@@ -192,13 +226,13 @@ $(function() {
                 openDrawer(idx);
             }
             showDesc(idx);
-            carousels[idx].lazyLoadImgsAt(0); // 在这里懒加载当前module下carousel的第1组图片
             $self.addClass('active').siblings().removeClass('active');
         });
 
         var leftMoved = 1;
         var rightMoved = 0;
         var moving = 0;
+        
         $hideTrigLeft.mouseover(function(){
             if(moving || leftMoved){
                 return;
@@ -212,6 +246,7 @@ $(function() {
                 rightMoved = 0;
             });
         });
+        
         $hideTrigRight.mouseover(function(){
             if(moving || rightMoved){
                 return;
@@ -233,24 +268,24 @@ $(function() {
             return false;
         });
 
-        // if($.browser.version < 10){
-        //     var $device = $page1.find('.page1-device')
-        //         , $title = $page1.find('.page1-title')
-        //         , $desc = $page1.find('.page1-desc');
-        //     $device.css('display', 'none');
-        //     $title.css('display', 'none');
-        //     $desc.css('display', 'none');
-        //     pageEvents[1] = function(){
-        //         $device.fadeIn(400);
-        //         $title.fadeIn(400);
-        //         $desc.fadeIn(400);
-        //     }
-        //     pageReverts[1] = function(){
-        //         $device.css('display', 'none');
-        //         $title.css('display', 'none');
-        //         $desc.css('display', 'none');
-        //     }
-        // }
+        if($.browser.version < 10){
+            var $device = $page1.find('.page1-device')
+                , $title = $page1.find('.page1-title')
+                , $desc = $page1.find('.page1-desc');
+            $device.css('display', 'none');
+            $title.css('display', 'none');
+            $desc.css('display', 'none');
+            pageEvents[1] = function(){
+                $device.fadeIn(400);
+                $title.fadeIn(400);
+                $desc.fadeIn(400);
+            }
+            pageReverts[1] = function(){
+                $device.css('display', 'none');
+                $title.css('display', 'none');
+                $desc.css('display', 'none');
+            }
+        }
     }());
 
     (function(){
@@ -441,17 +476,17 @@ $(function() {
     (function(){
         var $partners = $('#page-5').find('.partners');
         var tmpl = '';
-        $.each(PARTNERS, function(idx, item) {
-            tmpl += '<li class="logo logo-' + idx + '"><a href="###">' + item.name + '</a></li>';
+        $.each(partners, function(idx, item) {
+            tmpl += '<li class="p5-logo logo-' + idx + '"><a href="###">' + item.name + '</a></li>';
         });
         $partners.html(tmpl);
         pageEvents[5] = function(){
             loopWithPause($partners.children(), function(idx, item){
-                $(item).addClass('active');
-            }, 30);
+                $(item).addClass('p5-logo-active');
+            }, 16);
         }
         pageReverts[5] = function(){
-            $partners.children().removeClass('active');
+            $partners.children().removeClass('p5-logo-active');
         }
     }());
     

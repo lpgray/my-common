@@ -1,0 +1,99 @@
+#page-5{
+	background: #000 url(imgs/bg-3.png) center center no-repeat;
+	text-align: center;
+}
+#page-5 h1 {
+	color: #fff;
+}
+.p5-banner{
+	height: 400px;
+	width: 1300px;
+	position: absolute;
+	left: 50%;
+	margin-left: -650px;
+	top: 50%;
+	margin-top: -220px;
+}
+.p5-banner .logo{
+	display: block;
+	width: 120px;
+	height: 120px;
+	background-image: url(imgs/p5.png);
+	background-repeat: no-repeat;
+	opacity: 0;
+	-webkit-transform: scale(.2);
+	-moz-webkit-transform: scale(.2);
+	-ms-webkit-transform: scale(.2);
+	-o-webkit-transform: scale(.2);
+}
+.p5-banner .active{
+	-webkit-transform: scale(1);
+	-moz-webkit-transform: scale(1);
+	-ms-webkit-transform: scale(1);
+	-o-webkit-transform: scale(1);
+	transition: all .2s;
+	opacity: 1;
+}
+.p5-banner .logo:hover{
+	-webkit-transform: scale(1.1);
+	-moz-webkit-transform: scale(1.1);
+	-ms-webkit-transform: scale(1.1);
+	-o-webkit-transform: scale(1.1);
+	webkit-transform: scale(1.1);
+	transition: all .2s;
+}
+.p5-banner ul{
+	text-align: center;
+}
+.p5-banner li{
+	display: block;
+	width: 120px;
+	height: 120px;
+	margin: 0;
+	float: left;
+	margin: 0 98px 98px 98px;
+}
+.p5-banner li a{
+	display: block;
+	width: 100%;
+	padding-top: 120px;
+	cursor: default;
+	text-decoration: none;
+	font-size: 20px;
+}
+#page-5 .logo-0{
+	background-position: 0 0;
+}
+#page-5 .logo-1{
+	background-position: -121px 0;
+}
+#page-5 .logo-2{
+	background-position: -242px 0;
+}
+#page-5 .logo-3{
+	background-position: -363px 0;
+}
+#page-5 .logo-4{
+	background-position: 0 -121px;
+}
+#page-5 .logo-5{
+	background-position: -121px -121px;
+}
+#page-5 .logo-6{
+	background-position: -242px -121px;
+}
+#page-5 .logo-7{
+	background-position: -363px -121px;
+}
+#page-5 .logo-8{
+	background-position: 0 -242px;
+}
+#page-5 .logo-9{
+	background-position: -121px -242px;
+}
+#page-5 .logo-10{
+	background-position: -242px -242px;
+}
+#page-5 .logo-11{
+	background-position: -363px -242px;
+}
