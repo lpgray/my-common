@@ -114,9 +114,9 @@
 	transition: all .3s;
 }
 .page4-desc .thumnail{
-	width: 320px;
+	width: 252px;
 	position: relative;
-	padding: 5px;
+	padding: 8px;
 	border-radius: 5px;
 	box-shadow: 0 2px 6px rgba(0,0,0,.4);
 	background: #fff;
@@ -128,13 +128,13 @@
 	width: 100%;
 }
 .page4-desc .thumnail h4{
-	font-size: 20px;
+	font-size: 16px;
 	color: #333;
 	height: 20px;
 	line-height: 20px;
 }
 .page4-desc .thumnail h5{
-	font-size: 16px;
+	font-size: 14px;
 	height: 20px;
 	line-height: 20px;
 }
