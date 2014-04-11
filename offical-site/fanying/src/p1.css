@@ -15,9 +15,6 @@
 	     -o-transition: height .3s;
 	        transition: height .3s;
 }
-#page-1 .modules-box a {
-	-webkit-touch-callout: none;
-}
 #page-1 .modules-box .hide-trigger{
 	height: 160px;
 	width: 25%;
@@ -108,9 +105,6 @@
 	filter: alpha(opacity=100);
 	z-index: 5;
 }
-#page-1 .modules-box.on .mudules-description {
-	display: block;
-}
 #page-1 .modules .modules-list {
 	white-space: nowrap;
 	padding-bottom: 70px;
@@ -123,11 +117,17 @@
 	     -o-user-select: none;
 	        user-select: none;
 }
+#page-1 .modules-box.on .mudules-description {
+	display: block;
+}
 #page-1 .modules-box.on .modules .modules-list {
 	white-space: normal;
 	width: 500px;
 	float: left;
 	position: static;
+}
+#page-1 .modules-box.on{
+	padding: 30px 0 40px;
 }
 #page-1 .modules-list li {
 	display: inline-block;

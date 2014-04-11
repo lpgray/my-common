@@ -10,22 +10,11 @@
 /* ===========================
  *	Page 1
  * =========================== */
-/*@media (max-width: 1366px) {
-	.p1-banner{
-		-webkit-transform: scale(.7);
-		-moz-transform: scale(.7);
-		-ms-transform: scale(.6);
-		-o-transform: scale(.7);
+@media (max-width: 1366px) {
+	#page-1 .modules-box.on{
+		padding: 0;
 	}
 }
-@media (min-width: 1367px) and (max-width: 1440px){
-	.p1-banner{
-		-webkit-transform: scale(.8);
-		-moz-transform: scale(.8);
-		-ms-transform: scale(.7);
-		-o-transform: scale(.8);
-	}
-}*/
 /* ===========================
  *	Page 2
  * =========================== */

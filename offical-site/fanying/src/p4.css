@@ -68,7 +68,7 @@
 	top: 165px;
 }
 .page4-circle .arrow-2:hover{
-	left: 220px;
+	left: 230px;
 }
 .page4-circle .shadow-2{
 	width: 309px;
@@ -97,11 +97,11 @@
 	z-index: 0;
 }
 .page4-desc{
-	font-size: 20px;
-	width: 278px;
+	font-size: 22px;
+	width: 370px;
 	height: 60px;
 	line-height: 26px;
-	color: #888;
+	color: #a3a3a3;
 	position: absolute;
 	top: 0;
 	z-index: 1;
@@ -112,6 +112,7 @@
 	position: relative;
 	top: 0;
 	transition: all .3s;
+	line-height: 32px;
 }
 .page4-desc .thumnail{
 	width: 252px;
@@ -139,32 +140,31 @@
 	line-height: 20px;
 }
 .page4-desc .line{
-	background-image: url(imgs/p4-hover.png);
+	background-image: url(imgs/p4-hover2.png);
 	background-repeat: no-repeat;
-	height: 30px;
+	height: 34px;
 }
 .page4-desc1 .line{
-	background-position: -47px -363px;
+	background-position: 0 0;
 }
 .page4-desc2 .line{
-	background-position: 0 -60px;
+	background-position: 0 -311px;
 }
 .page4-desc3 .line{
-	background-position: 0 -207px;
+	background-position: 0 -641px;
 	margin-top: -20px;
 }
 .page4-desc4 .line{
-	background-position: -47px -464px;
+	background-position: 0 -924px;
 	margin-top: -20px;
 }
 .page4-desc1{
 	left: -220px;
-	background-position: 0 -681px;
 }
 .page4-desc1-animate{
 	opacity: 1;
 	transition: all .5s;
-	left: -190px;
+	left: -290px;
 }
 .page4-desc2{
 	text-align: right;
@@ -192,7 +192,7 @@
 .page4-desc4-animate{
 	opacity: 1;
 	transition: all .5s;
-	left: -190px;
+	left: -290px
 }
 .page4-article{
 	width: 900px;
@@ -249,13 +249,13 @@
 	color: #333;
 }
 .page4-loaded .j_active_0 .line{
-	background-position: 0 0;
+	background-position: 0 -459px;
 }
 .page4-loaded .j_active_1 .line{
-	background-position: 0 -147px;
+	background-position: 0 -785px;
 }
 .page4-loaded .j_active_3 .line{
-	background-position: -30px -299px;
+	background-position: -55px -153px;
 }
 
 .p4-banner{margin-top: -220px;}

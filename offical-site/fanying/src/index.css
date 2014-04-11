@@ -71,15 +71,18 @@ body {
 	left: auto;
 	right: 0;
 }
+.header ul.right li{
+	margin: 0 30px;
+}
 .header ul li.active .line{
 	background-color: #ef4842;
-}
-.header-black ul li.active .line{
-	background-color: #fff;
 }
 .header-black{
 	background: #ef4842;
 	height: 60px;
+}
+.header-black ul li.active .line{
+	background-color: #fff;
 }
 .header-black a{
 	height: 54px;
@@ -87,9 +90,6 @@ body {
 }
 .header-black .logo a{
 	max-height: 29px;
-}
-.header-black .logo{
-	max-width: 130px;
 }
 
 

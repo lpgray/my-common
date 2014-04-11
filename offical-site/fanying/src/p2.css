@@ -10,16 +10,14 @@
 	width: 390px;
 	word-break: break-word;
 	float: right;
-	margin-right: 0;
+	margin-right: 40px;
+	margin-top: -30px;
 }
 .page2-desc-wrapper h2{
 	font-size: 34px;
 	margin-bottom: 5px;
 	height: 58px;
 	line-height: 58px;
-}
-.page2-desc-wrapper a{
-	color: #666;
 }
 .page2-desc-wrapper h2 i{
 	font-style: normal;
@@ -36,12 +34,13 @@
 	vertical-align: middle;
 }
 .page2-desc-wrapper a.desc{
-	margin-bottom: 15px;
+	margin-bottom: 30px;
 	display: block;
 	cursor: pointer;
 	opacity: 0;
 	position: relative;
 	top: 20px;
+	color: #666;
 }
 .page2-desc-wrapper a.animate{
 	transition: all .4s;
@@ -62,16 +61,17 @@
 }
 .page2-desc-wrapper p{
 	width: 320px;
-	padding-left: 90px;
-	height: 70px;
+	padding-left: 94px;
+	height: 80px;
 	max-height: 0;
 	overflow: hidden;
 	text-decoration: none;
 	font-size: 16px;
 	transition: all .5s;
+	line-height: 28px;
 }
 .page2-desc-wrapper a.active p{
-	max-height: 70px;
+	max-height: 80px;
 }
 .page2-desc-wrapper a.desc .line{
 	width: 350px;
@@ -162,7 +162,7 @@
 }
 
 /* 0.13.0 */
-.p2-banner{width: 1280px; margin-left: -750px; margin-top: -220px;}
+.p2-banner{width: 1280px; margin-left: -640px; margin-top: -220px;}
 .p2-inner .ico{width: 58px;height: 58px;display: block;background-image:url(imgs/p2-icon.png);background-repeat: no-repeat;vertical-align: middle;}
 .p2-inner .ico-0{background-position: 0 0}
 .p2-inner .ico-1{background-position: -58px 0}
