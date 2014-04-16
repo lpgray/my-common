@@ -39,7 +39,7 @@ var Detect = (function() {
 
 (function(){
 	// 填充carousel图片
-	$('.mudules-description').find('[data-type]').each(function(){
+	$('.mudules-description').find('[data-type]').each(function(idx){
 		var $self = $(this);
 		var type = $self.data('type');
 		var tmpl = '<div class="carousel2">';
@@ -48,15 +48,19 @@ var Detect = (function() {
 		
 		var imgs = MODULE_IMGS[type];
 		for(var i = 0,l = imgs.length; i<l ; i++){
-			tmpl +='			<li><a href="#"><img data-src="'+imgs[i].name+'" alt=""></a></li>';
+			tmpl +='			<li><a rel="carousel2_img_group_'+idx+'" href="'+imgs[i].name+'"><img data-src="'+imgs[i].name+'" alt=""></a></li>';
 		}
 
 			tmpl +='		</ul>';
 			tmpl +='	</div>';
-			tmpl +='	<div class="carousel-toggles-wrapper">';		
+			tmpl +='	<div class="carousel-toggles-wrapper">';	
 			tmpl +='	</div>';
 			tmpl +='</div>';
 		$self.append(tmpl);
+	});
+
+	$('.carousel2').each(function(idx){
+		$(this).find('a[rel=carousel2_img_group_'+idx+']').fancybox({'transitionIn' : 'elastic', 'transitionOut'	: 'elastic'});
 	});
 
 	function slide(dom, position){

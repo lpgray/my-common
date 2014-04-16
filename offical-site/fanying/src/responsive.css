@@ -10,9 +10,19 @@
 /* ===========================
  *	Page 1
  * =========================== */
+@media (max-width: 1200px) {
+	#page-1 .modules-box{
+		height: 40px;
+	}
+}
 @media (max-width: 1366px) {
 	#page-1 .modules-box.on{
 		padding: 0;
+	}
+}
+@media (max-width: 1100px) {
+	.p1-banner{
+		width: 1100px;
 	}
 }
 /* ===========================
@@ -26,23 +36,15 @@
 		transform: scale(.7);
 	}
 }
-@media (min-width: 1367px) and (max-width: 1440px){
-	.p2-banner{-webkit-transform: scale(.85);
-		-moz-transform: scale(.85);
-		-ms-transform: scale(.85);
-		-o-transform: scale(.85);
-		transform: scale(.85);
-	}
-}
 /* ===========================
  *	Page 3
  * =========================== */
 @media (max-width: 1366px) {
 	#page-3 .timeline{
-		margin-top: 40px;
+		margin-top: 100px;
 	}
 	#page-3 .introduction{
-		margin-top: 20px;
+		margin-top: 40px;
 	}
 }
 /* ===========================

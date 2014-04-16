@@ -32,6 +32,11 @@
 	-o-transform: rotate(-400deg);
 	transform: rotate(-400deg);
 	opacity: 0;
+	-webkit-transition: all 1.5s ease-in-out 0;
+	-moz-transition: all 1.5s ease-in-out 0;
+	-ms-transition: all 1.5s ease-in-out 0;
+	-o-transition: all 1.5s ease-in-out 0;
+	transition: all 1.5s ease-in-out 0;
 }
 .page4-circle .arrow,
 .page4-shadow .arrow{
@@ -207,7 +212,6 @@
 	-ms-transform: rotate(0);
 	-o-transform: rotate(0);
 	transform: rotate(0);
-	transition: all .8s ease-in-out 0;
 	opacity: 1;
 }
 .page4-loaded .page4-inner h2{
@@ -216,11 +220,11 @@
 }
 .page4-desc1 .thumnail{
 	top: -200px;
-	left: -200px;
+	left: -90px;
 }
 .page4-desc4 .thumnail{
 	top: -100px;
-	left: -200px;
+	left: -90px;
 }
 .page4-desc2 .thumnail{
 	top: -200px;

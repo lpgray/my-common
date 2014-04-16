@@ -44,6 +44,7 @@ body {
 	height: 100%;
 	max-height: 90px;
 	width: 100%;
+	transition: max-height 2s ease-in-out 0;
 }
 .header .logo img{
 	width: 100%;
@@ -90,6 +91,7 @@ body {
 }
 .header-black .logo a{
 	max-height: 29px;
+	transition: max-height 1s ease-in-out 0;
 }
 
 

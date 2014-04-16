@@ -135,6 +135,7 @@ $(function() {
         var targetPage = parseInt($(this).attr("data-rel"));
         if (!pageTransition)
             goToPage(targetPage, "fade");
+        return false;
     });
     // 创建carousel2实例
     $('.carousel2').each(function(){
@@ -227,11 +228,11 @@ $(function() {
             });
         });
 
-        $('.carousel-imgs-wrapper').on('click', 'img', function(e){
-            showModal({innerHTML : '<img src="'+ $(this).attr('src') +'" alt="" />'});
-            e.stopPropagation && e.stopPropagation();
-            return false;
-        });
+        // $('.carousel-imgs-wrapper').on('click', 'img', function(e){
+        //     showModal({innerHTML : '<img src="'+ $(this).attr('src') +'" alt="" />'});
+        //     e.stopPropagation && e.stopPropagation();
+        //     return false;
+        // });
 
         // if($.browser.version < 10){
         //     var $device = $page1.find('.page1-device')
@@ -269,7 +270,7 @@ $(function() {
                 }
             });
         }
-        $page2selection.click(function(){
+        $page2selection.hover(function(){
             activeTriggerAndLayer($(this).index());
         });
         // if($.browser.version < 10){
@@ -484,4 +485,6 @@ $(function() {
             });
         };
     }());
+
+    
 });

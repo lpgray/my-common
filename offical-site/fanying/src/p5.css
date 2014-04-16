@@ -25,13 +25,13 @@
 	-moz-webkit-transform: scale(.2);
 	-ms-webkit-transform: scale(.2);
 	-o-webkit-transform: scale(.2);
+	transition: all .5s;
 }
 .p5-banner .active{
 	-webkit-transform: scale(1);
 	-moz-webkit-transform: scale(1);
 	-ms-webkit-transform: scale(1);
 	-o-webkit-transform: scale(1);
-	transition: all .2s;
 	opacity: 1;
 }
 .p5-banner .logo:hover{
@@ -40,7 +40,6 @@
 	-ms-webkit-transform: scale(1.1);
 	-o-webkit-transform: scale(1.1);
 	webkit-transform: scale(1.1);
-	transition: all .2s;
 }
 .p5-banner ul{
 	text-align: center;
