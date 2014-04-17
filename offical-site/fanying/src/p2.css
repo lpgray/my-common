@@ -133,16 +133,16 @@
 	z-index: 1;
 }
 .page2-device .layer1-active{
-	top: -200px;
+	top: -280px;
 }
 .page2-device .layer2-active{
-	top: -140px;
+	top: -200px;
 }
 .page2-device .layer3-active{
-	top: -80px;
+	top: -120px;
 }
 .page2-device .layer4-active{
-	top: -20px;
+	top: -40px;
 }
 .page2-device .layer1-ignore{
 	left: -250px;

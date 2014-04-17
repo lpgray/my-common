@@ -1,163 +1,96 @@
 var MODULE_IMGS = {
 	'home' : [ // 首页
-		{ name : 'demos/carousel2/1.jpg' },
-		{ name : 'demos/carousel2/2.jpg' },
-		{ name : 'demos/carousel2/3.jpg' },
-		{ name : 'demos/carousel2/4.jpg' },
-		{ name : 'demos/carousel2/5.jpg' },
-		{ name : 'demos/carousel2/6.jpg' },
-		{ name : 'demos/carousel2/7.jpg' },
-		{ name : 'demos/carousel2/8.jpg' }
+		{ 
+			id : 'home1',
+			name : 'demos/carousel2/1.jpg' ,
+			others : [
+				'demos/carousel2/1.jpg',
+				'demos/carousel2/1.jpg',
+				'demos/carousel2/1.jpg',
+				'demos/carousel2/1.jpg',
+				'demos/carousel2/1.jpg'
+			]
+		},
+		{ id : 'home2', name : 'demos/carousel2/2.jpg' },
+		{ id : 'home3', name : 'demos/carousel2/3.jpg' },
+		// { name : 'demos/carousel2/4.jpg' },
+		// { name : 'demos/carousel2/5.jpg' },
+		// { name : 'demos/carousel2/6.jpg' },
+		// { name : 'demos/carousel2/7.jpg' },
+		// { name : 'demos/carousel2/8.jpg' }
 	],
 	'mobileecommerce' : [ // 移动电商
-		{ name : 'demos/carousel2/1.jpg' },
-		{ name : 'demos/carousel2/2.jpg' },
-		{ name : 'demos/carousel2/3.jpg' },
-		{ name : 'demos/carousel2/4.jpg' },
-		{ name : 'demos/carousel2/5.jpg' },
-		{ name : 'demos/carousel2/6.jpg' },
-		{ name : 'demos/carousel2/7.jpg' },
-		{ name : 'demos/carousel2/8.jpg' }
+		{ id : 'mobileecommerce1', name : 'demos/carousel2/1.jpg' }
 	],
 	'news' : [ // 新闻出版
-		{ name : 'demos/carousel2/1.jpg' },
-		{ name : 'demos/carousel2/2.jpg' },
-		{ name : 'demos/carousel2/3.jpg' },
-		{ name : 'demos/carousel2/4.jpg' },
-		{ name : 'demos/carousel2/5.jpg' },
-		{ name : 'demos/carousel2/6.jpg' },
-		{ name : 'demos/carousel2/7.jpg' },
-		{ name : 'demos/carousel2/8.jpg' }
+		{ id : 'news1', name : 'demos/carousel2/1.jpg' }
 	],
 	'media' : [ // 广电传媒
-		{ name : 'demos/carousel2/1.jpg' },
-		{ name : 'demos/carousel2/2.jpg' },
-		{ name : 'demos/carousel2/3.jpg' },
-		{ name : 'demos/carousel2/4.jpg' },
-		{ name : 'demos/carousel2/5.jpg' },
-		{ name : 'demos/carousel2/6.jpg' },
-		{ name : 'demos/carousel2/7.jpg' },
-		{ name : 'demos/carousel2/8.jpg' }
+		{ id : 'media1', name : 'demos/carousel2/1.jpg' }
 	],
 	'social' : [ // 社交娱乐
-		{ name : 'demos/carousel2/1.jpg' },
-		{ name : 'demos/carousel2/2.jpg' },
-		{ name : 'demos/carousel2/3.jpg' },
-		{ name : 'demos/carousel2/4.jpg' },
-		{ name : 'demos/carousel2/5.jpg' },
-		{ name : 'demos/carousel2/6.jpg' },
-		{ name : 'demos/carousel2/7.jpg' },
-		{ name : 'demos/carousel2/8.jpg' }
+		{ id : 'social1', name : 'demos/carousel2/1.jpg' }
 	],
 	'education' : [ // 教育培训
-		{ name : 'demos/carousel2/1.jpg' },
-		{ name : 'demos/carousel2/2.jpg' },
-		{ name : 'demos/carousel2/3.jpg' },
-		{ name : 'demos/carousel2/4.jpg' },
-		{ name : 'demos/carousel2/5.jpg' },
-		{ name : 'demos/carousel2/6.jpg' },
-		{ name : 'demos/carousel2/7.jpg' },
-		{ name : 'demos/carousel2/8.jpg' }
+		{ id : 'education1', name : 'demos/carousel2/1.jpg' }
 	],
 	'finance' : [ // 金融保险
-		{ name : 'demos/carousel2/1.jpg' },
-		{ name : 'demos/carousel2/2.jpg' },
-		{ name : 'demos/carousel2/3.jpg' },
-		{ name : 'demos/carousel2/4.jpg' },
-		{ name : 'demos/carousel2/5.jpg' },
-		{ name : 'demos/carousel2/6.jpg' },
-		{ name : 'demos/carousel2/7.jpg' },
-		{ name : 'demos/carousel2/8.jpg' }
+		{ id : 'finance1', name : 'demos/carousel2/1.jpg' }
 	],
 	'estate' : [ // 房地产
-		{ name : 'demos/carousel2/1.jpg' },
-		{ name : 'demos/carousel2/2.jpg' },
-		{ name : 'demos/carousel2/3.jpg' },
-		{ name : 'demos/carousel2/4.jpg' },
-		{ name : 'demos/carousel2/5.jpg' },
-		{ name : 'demos/carousel2/6.jpg' },
-		{ name : 'demos/carousel2/7.jpg' },
-		{ name : 'demos/carousel2/8.jpg' }
+		{ id : 'estate1', name : 'demos/carousel2/1.jpg' }
 	],
 	'district' : [ // 区域门户
-		{ name : 'demos/carousel2/1.jpg' },
-		{ name : 'demos/carousel2/2.jpg' },
-		{ name : 'demos/carousel2/3.jpg' },
-		{ name : 'demos/carousel2/4.jpg' },
-		{ name : 'demos/carousel2/5.jpg' },
-		{ name : 'demos/carousel2/6.jpg' },
-		{ name : 'demos/carousel2/7.jpg' },
-		{ name : 'demos/carousel2/8.jpg' }
+		{ id : 'district1', name : 'demos/carousel2/1.jpg' }
 	],
 	'art' : [ // 文化艺术
-		{ name : 'demos/carousel2/1.jpg' },
-		{ name : 'demos/carousel2/2.jpg' },
-		{ name : 'demos/carousel2/3.jpg' },
-		{ name : 'demos/carousel2/4.jpg' },
-		{ name : 'demos/carousel2/5.jpg' },
-		{ name : 'demos/carousel2/6.jpg' },
-		{ name : 'demos/carousel2/7.jpg' },
-		{ name : 'demos/carousel2/8.jpg' }
+		{ id : 'art1', name : 'demos/carousel2/1.jpg' }
 	],
 	'oa' : [ // 协同办公
-		{ name : 'demos/carousel2/1.jpg' },
-		{ name : 'demos/carousel2/2.jpg' },
-		{ name : 'demos/carousel2/3.jpg' },
-		{ name : 'demos/carousel2/4.jpg' },
-		{ name : 'demos/carousel2/5.jpg' },
-		{ name : 'demos/carousel2/6.jpg' },
-		{ name : 'demos/carousel2/7.jpg' },
-		{ name : 'demos/carousel2/8.jpg' }
+		{ id : 'oa1', name : 'demos/carousel2/1.jpg' }
 	],
 	'hotel' : [ // 酒店住宿
-		{ name : 'demos/carousel2/1.jpg' },
-		{ name : 'demos/carousel2/2.jpg' },
-		{ name : 'demos/carousel2/3.jpg' },
-		{ name : 'demos/carousel2/4.jpg' },
-		{ name : 'demos/carousel2/5.jpg' },
-		{ name : 'demos/carousel2/6.jpg' },
-		{ name : 'demos/carousel2/7.jpg' },
-		{ name : 'demos/carousel2/8.jpg' }
+		{ id : 'hotel1', name : 'demos/carousel2/1.jpg' }
 	],
 	'outdoor' : [ // 户外休闲
-		{ name : 'demos/carousel2/1.jpg' },
-		{ name : 'demos/carousel2/2.jpg' },
-		{ name : 'demos/carousel2/3.jpg' },
-		{ name : 'demos/carousel2/4.jpg' },
-		{ name : 'demos/carousel2/5.jpg' },
-		{ name : 'demos/carousel2/6.jpg' },
-		{ name : 'demos/carousel2/7.jpg' },
-		{ name : 'demos/carousel2/8.jpg' }
+		{ id : 'outdoor1', name : 'demos/carousel2/1.jpg' },
+		{ id : 'outdoor2', name : 'demos/carousel2/2.jpg' },
+		{ id : 'outdoor3', name : 'demos/carousel2/3.jpg' },
+		{ id : 'outdoor4', name : 'demos/carousel2/4.jpg' },
+		{ id : 'outdoor5', name : 'demos/carousel2/5.jpg' },
+		{ id : 'outdoor6', name : 'demos/carousel2/6.jpg' },
+		{ id : 'outdoor7', name : 'demos/carousel2/7.jpg' },
+		{ id : 'outdoor8', name : 'demos/carousel2/8.jpg' }
 	],
 	'company' : [ // 企业移动
-		{ name : 'demos/carousel2/1.jpg' },
-		{ name : 'demos/carousel2/2.jpg' },
-		{ name : 'demos/carousel2/3.jpg' },
-		{ name : 'demos/carousel2/4.jpg' },
-		{ name : 'demos/carousel2/5.jpg' },
-		{ name : 'demos/carousel2/6.jpg' },
-		{ name : 'demos/carousel2/7.jpg' },
-		{ name : 'demos/carousel2/8.jpg' }
+		{ id : 'company1', name : 'demos/carousel2/1.jpg' },
+		{ id : 'company2', name : 'demos/carousel2/2.jpg' },
+		{ id : 'company3', name : 'demos/carousel2/3.jpg' },
+		{ id : 'company4', name : 'demos/carousel2/4.jpg' },
+		{ id : 'company5', name : 'demos/carousel2/5.jpg' },
+		{ id : 'company6', name : 'demos/carousel2/6.jpg' },
+		{ id : 'company7', name : 'demos/carousel2/7.jpg' },
+		{ id : 'company8', name : 'demos/carousel2/8.jpg' }
 	],
 	'3d' : [ // 3D实景
-		{ name : 'demos/carousel2/1.jpg' },
-		{ name : 'demos/carousel2/2.jpg' },
-		{ name : 'demos/carousel2/3.jpg' },
-		{ name : 'demos/carousel2/4.jpg' },
-		{ name : 'demos/carousel2/5.jpg' },
-		{ name : 'demos/carousel2/6.jpg' },
-		{ name : 'demos/carousel2/7.jpg' },
-		{ name : 'demos/carousel2/8.jpg' }
+		{ id : '3d1', name : 'demos/carousel2/1.jpg' },
+		{ id : '3d2', name : 'demos/carousel2/2.jpg' },
+		{ id : '3d3', name : 'demos/carousel2/3.jpg' },
+		{ id : '3d4', name : 'demos/carousel2/4.jpg' },
+		{ id : '3d5', name : 'demos/carousel2/5.jpg' },
+		{ id : '3d6', name : 'demos/carousel2/6.jpg' },
+		{ id : '3d7', name : 'demos/carousel2/7.jpg' },
+		{ id : '3d8', name : 'demos/carousel2/8.jpg' }
 	],
 	'internetofthings' : [ // 智能物联
-		{ name : 'demos/carousel2/1.jpg' },
-		{ name : 'demos/carousel2/2.jpg' },
-		{ name : 'demos/carousel2/3.jpg' },
-		{ name : 'demos/carousel2/4.jpg' },
-		{ name : 'demos/carousel2/5.jpg' },
-		{ name : 'demos/carousel2/6.jpg' },
-		{ name : 'demos/carousel2/7.jpg' },
-		{ name : 'demos/carousel2/8.jpg' }
+		{ id : 'internetofthings1', name : 'demos/carousel2/1.jpg' },
+		{ id : 'internetofthings2', name : 'demos/carousel2/2.jpg' },
+		{ id : 'internetofthings3', name : 'demos/carousel2/3.jpg' },
+		{ id : 'internetofthings4', name : 'demos/carousel2/4.jpg' },
+		{ id : 'internetofthings5', name : 'demos/carousel2/5.jpg' },
+		{ id : 'internetofthings6', name : 'demos/carousel2/6.jpg' },
+		{ id : 'internetofthings7', name : 'demos/carousel2/7.jpg' },
+		{ id : 'internetofthings8', name : 'demos/carousel2/8.jpg' }
 	]
 };
 

@@ -38,29 +38,46 @@ var Detect = (function() {
 }());
 
 (function(){
+	// 图片目录
+	var catalog = {};
 	// 填充carousel图片
 	$('.mudules-description').find('[data-type]').each(function(idx){
+		catalog[idx] = [];
+
 		var $self = $(this);
 		var type = $self.data('type');
+		var after = '';
 		var tmpl = '<div class="carousel2">';
 			tmpl +='	<div class="carousel-imgs-wrapper">';
 			tmpl +=' 		<ul>';
 		
 		var imgs = MODULE_IMGS[type];
 		for(var i = 0,l = imgs.length; i<l ; i++){
-			tmpl +='			<li><a rel="carousel2_img_group_'+idx+'" href="'+imgs[i].name+'"><img data-src="'+imgs[i].name+'" alt=""></a></li>';
+			tmpl +='			<li><a rel="'+ imgs[i].id +'" href="'+imgs[i].name+'"><img data-src="'+imgs[i].name+'" alt=""></a></li>';
+			if(imgs[i].others){
+				for(var j = 0, l2 = imgs[i].others.length; j < l2; j++){
+					after +='<a rel="'+ imgs[i].id +'" style="display:none;" href="'+imgs[i].others[j]+'"><img data-src="'+imgs[i].others[j]+'" alt=""></a>';
+				}
+			}
+			catalog[idx].push(imgs[i].id);
 		}
 
 			tmpl +='		</ul>';
 			tmpl +='	</div>';
-			tmpl +='	<div class="carousel-toggles-wrapper">';	
+			tmpl +='	<div class="carousel-toggles-wrapper">';
 			tmpl +='	</div>';
 			tmpl +='</div>';
+
+		tmpl += after;
+		
 		$self.append(tmpl);
 	});
 
 	$('.carousel2').each(function(idx){
-		$(this).find('a[rel=carousel2_img_group_'+idx+']').fancybox({'transitionIn' : 'elastic', 'transitionOut'	: 'elastic'});
+		var types = catalog[idx];
+		for(var i = 0; i < types.length; i++){
+			$(this).find('a[rel='+types[i]+']').fancybox({'transitionIn' : 'elastic', 'transitionOut'	: 'elastic'});
+		}
 	});
 
 	function slide(dom, position){
@@ -112,7 +129,9 @@ var Detect = (function() {
 		for(var i = 0; i < groupNumber; i++){
 			tmpl += '<a href="###"></a>';
 		}
-		togglesWrapper.innerHTML = tmpl;
+		if(groupNumber > 1){
+			togglesWrapper.innerHTML = tmpl;
+		}
 
 		var lastLeftMove = this.calcLastLeftMove(ulWidth, domC2Width, groupNumber);
 		var toggles = togglesWrapper.children;
@@ -185,9 +204,11 @@ var Detect = (function() {
 			var start = end - 5;
 			var imgs = this.ul.getElementsByTagName('img');
 			for(var i = start; i<end; i++){
-				var src = imgs[i].getAttribute('src');
-				if(!src){
-					imgs[i].src = imgs[i].getAttribute('data-src');
+				if(imgs[i]){
+					var src = imgs[i].getAttribute('src');
+					if(!src){
+						imgs[i].src = imgs[i].getAttribute('data-src');
+					}
 				}
 			}
 		}
