@@ -1,26 +1,33 @@
 var MODULE_IMGS = {
-	'home' : [ // 首页
-		{ 
-			id : 'home1',
-			name : 'demos/carousel2/1.jpg' ,
-			others : [
-				'demos/carousel2/1.jpg',
-				'demos/carousel2/1.jpg',
-				'demos/carousel2/1.jpg',
-				'demos/carousel2/1.jpg',
-				'demos/carousel2/1.jpg'
-			]
-		},
-		{ id : 'home2', name : 'demos/carousel2/2.jpg' },
-		{ id : 'home3', name : 'demos/carousel2/3.jpg' },
-		// { name : 'demos/carousel2/4.jpg' },
-		// { name : 'demos/carousel2/5.jpg' },
-		// { name : 'demos/carousel2/6.jpg' },
-		// { name : 'demos/carousel2/7.jpg' },
-		// { name : 'demos/carousel2/8.jpg' }
-	],
+	// 'home' : [ // 首页
+	// 	{ 
+	// 		id : 'home1',
+	// 		name : 'demos/carousel2/1.jpg' ,
+	// 		title : '测试文字测试文字1234',
+	// 		others : [
+	// 			'demos/carousel2/6.jpg',
+	// 			'demos/carousel2/2.jpg',
+	// 			'demos/carousel2/3.jpg',
+	// 			'demos/carousel2/4.jpg',
+	// 			'demos/carousel2/5.jpg'
+	// 		]
+	// 	},
+	// 	{ id : 'home2', name : 'demos/carousel2/2.jpg' },
+	// 	{ id : 'home3', name : 'demos/carousel2/3.jpg' },
+	// 	// { name : 'demos/carousel2/4.jpg' },
+	// 	// { name : 'demos/carousel2/5.jpg' },
+	// 	// { name : 'demos/carousel2/6.jpg' },
+	// 	// { name : 'demos/carousel2/7.jpg' },
+	// 	// { name : 'demos/carousel2/8.jpg' }
+	// ],
 	'mobileecommerce' : [ // 移动电商
-		{ id : 'mobileecommerce1', name : 'demos/carousel2/1.jpg' }
+		{ id : 'mobileecommerce1', name : 'demos/carousel2/1.jpg', others : [
+				'demos/carousel2/6.jpg',
+				'demos/carousel2/2.jpg',
+				'demos/carousel2/3.jpg',
+				'demos/carousel2/4.jpg',
+				'demos/carousel2/5.jpg'
+			]}
 	],
 	'news' : [ // 新闻出版
 		{ id : 'news1', name : 'demos/carousel2/1.jpg' }
@@ -29,7 +36,13 @@ var MODULE_IMGS = {
 		{ id : 'media1', name : 'demos/carousel2/1.jpg' }
 	],
 	'social' : [ // 社交娱乐
-		{ id : 'social1', name : 'demos/carousel2/1.jpg' }
+		{ id : 'social1', name : 'demos/carousel2/1.jpg', others : [
+				'demos/carousel2/6.jpg',
+				'demos/carousel2/2.jpg',
+				'demos/carousel2/3.jpg',
+				'demos/carousel2/4.jpg',
+				'demos/carousel2/5.jpg'
+			]}
 	],
 	'education' : [ // 教育培训
 		{ id : 'education1', name : 'demos/carousel2/1.jpg' }

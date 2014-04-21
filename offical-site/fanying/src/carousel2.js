@@ -53,10 +53,11 @@ var Detect = (function() {
 		
 		var imgs = MODULE_IMGS[type];
 		for(var i = 0,l = imgs.length; i<l ; i++){
-			tmpl +='			<li><a rel="'+ imgs[i].id +'" href="'+imgs[i].name+'"><img data-src="'+imgs[i].name+'" alt=""></a></li>';
+			var title = imgs[i].title || '';
+			tmpl +='			<li><a title="'+title+'" rel="'+ imgs[i].id +'" href="'+imgs[i].name+'"><img data-src="'+imgs[i].name+'" alt=""></a></li>';
 			if(imgs[i].others){
 				for(var j = 0, l2 = imgs[i].others.length; j < l2; j++){
-					after +='<a rel="'+ imgs[i].id +'" style="display:none;" href="'+imgs[i].others[j]+'"><img data-src="'+imgs[i].others[j]+'" alt=""></a>';
+					after +='<a title="'+title+'" rel="'+ imgs[i].id +'" style="display:none;" href="'+imgs[i].others[j]+'"><img data-src="'+imgs[i].others[j]+'" alt=""></a>';
 				}
 			}
 			catalog[idx].push(imgs[i].id);
@@ -66,9 +67,10 @@ var Detect = (function() {
 			tmpl +='	</div>';
 			tmpl +='	<div class="carousel-toggles-wrapper">';
 			tmpl +='	</div>';
-			tmpl +='</div>';
+			
+			tmpl += after;
 
-		tmpl += after;
+			tmpl +='</div>';
 		
 		$self.append(tmpl);
 	});

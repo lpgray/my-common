@@ -45,6 +45,7 @@
 	background-repeat: no-repeat;
 	text-indent: -9999px;
 	z-index: 1;
+	-webkit-transition: all .5s;
 	transition: all .5s;
 	top: 0;
 	cursor: pointer;
@@ -116,6 +117,7 @@
 .page4-desc p{
 	position: relative;
 	top: 0;
+	-webkit-transition: all .3s;
 	transition: all .3s;
 	line-height: 32px;
 }
@@ -168,6 +170,7 @@
 }
 .page4-desc1-animate{
 	opacity: 1;
+	-webkit-transition: all .5s;
 	transition: all .5s;
 	left: -290px;
 }
@@ -177,6 +180,7 @@
 }
 .page4-desc2-animate{
 	opacity: 1;
+	-webkit-transition: all .5s;
 	transition: all .5s;
 	left: 480px;
 }
@@ -187,6 +191,7 @@
 }
 .page4-desc3-animate{
 	opacity: 1;
+	-webkit-transition: all .5s;
 	transition: all .5s;
 	left: 480px;
 }
@@ -196,6 +201,7 @@
 }
 .page4-desc4-animate{
 	opacity: 1;
+	-webkit-transition: all .5s;
 	transition: all .5s;
 	left: -290px
 }
@@ -216,6 +222,7 @@
 }
 .page4-loaded .page4-inner h2{
 	opacity: 1;
+	-webkit-transition: all 1s ease-in-out .8s;
 	transition: all 1s ease-in-out .8s;
 }
 .page4-desc1 .thumnail{
@@ -237,6 +244,7 @@
 .page4-loaded .j_active_2 .thumnail{
 	opacity: 1;
 	filter: alpha(opacity=100);
+	-webkit-transition: opacity .4s;
 	transition: opacity .4s;
 }
 .page4-loaded .j_active_2 .page4-desc p,
@@ -244,6 +252,7 @@
 	opacity: 0;
 	filter: alpha(opacity=0);
 	*visibility: hidden;
+	-webkit-transition: opacity .4s;
 	transition: opacity .4s;
 }
 .page4-loaded .j_active_0 p,

@@ -41,6 +41,7 @@
 	position: relative;
 	top: 20px;
 	color: #666;
+	-webkit-transition: all .4s;
 	transition: all .4s;
 }
 .page2-desc-wrapper a.animate{
@@ -54,6 +55,7 @@
 .page2-desc-wrapper a.active i{
 	color: #fff;
 	background: #ef4842;
+	-webkit-transition: all .5s;
 	transition: all .5s;
 }
 .page2-desc-wrapper a.active h2{
@@ -67,6 +69,7 @@
 	overflow: hidden;
 	text-decoration: none;
 	font-size: 16px;
+	-webkit-transition: all .5s;
 	transition: all .5s;
 	line-height: 28px;
 }
@@ -82,6 +85,7 @@
 	max-width: 0;
 	left: 0;
 	z-index: 6;
+	-webkit-transition: all .5s;
 	transition: all .5s;
 }
 .page2-desc-wrapper a.active .line{
@@ -103,6 +107,7 @@
 	height: 330px;
 	opacity: 0;
 	top: 0; left: 60px;
+	-webkit-transition: all .6s ease .2s;
 	transition: all .6s ease .2s;
 }
 .page2-device .phone{

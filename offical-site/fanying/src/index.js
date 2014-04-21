@@ -161,11 +161,12 @@ $(function() {
             } else {
                 $drawer.height($lis.height() * 5 - 80).addClass("on");
                 $itemsInDrawer.addClass("p1-module-wrapper");
-                carousels[0].lazyLoadImgsAt(0);
+                // carousels[0].lazyLoadImgsAt(0);
             }
         }
         function showDesc(idx){
             $descs.eq(idx).addClass('active').siblings().removeClass('active');
+            idx && carousels[idx-1].lazyLoadImgsAt(0);
         }
 
         var $modal = $('#J_modal');
@@ -176,10 +177,10 @@ $(function() {
         $modal.on('mousewheel', function(e){
             e.stopPropagation && e.stopPropagation();
         });
-        function showModal(option){
-            $('#J_modalCtn').html(option.innerHTML);
-            $modal.fadeIn(500);
-        }
+        // function showModal(option){
+        //     $('#J_modalCtn').html(option.innerHTML);
+        //     $modal.fadeIn(500);
+        // }
         
         $drawerTrig.click(function(){
             openDrawer();
