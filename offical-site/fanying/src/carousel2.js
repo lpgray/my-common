@@ -54,11 +54,18 @@ var Detect = (function() {
 		var imgs = MODULE_IMGS[type];
 		for(var i = 0,l = imgs.length; i<l ; i++){
 			var title = imgs[i].title || '';
-			tmpl +='			<li><a title="'+title+'" rel="'+ imgs[i].id +'" href="'+imgs[i].name+'"><img data-src="'+imgs[i].name+'" alt=""></a></li>';
-			if(imgs[i].others){
-				for(var j = 0, l2 = imgs[i].others.length; j < l2; j++){
+			
+			if(imgs[i].others && imgs[i].others.length){
+				tmpl +='<li>';
+				tmpl += '	<a title="'+title+'" rel="'+ imgs[i].id +'" href="'+ imgs[i].others[0] +'"><img data-src="'+imgs[i].name+'" alt=""></a>';
+				tmpl += '</li>';
+				for(var j = 1, l2 = imgs[i].others.length; j < l2; j++){
 					after +='<a title="'+title+'" rel="'+ imgs[i].id +'" style="display:none;" href="'+imgs[i].others[j]+'"><img data-src="'+imgs[i].others[j]+'" alt=""></a>';
 				}
+			}else{
+				tmpl +='<li>';
+				tmpl += '	<a title="'+title+'"><img data-src="'+imgs[i].name+'" alt=""></a>';
+				tmpl += '</li>';
 			}
 			catalog[idx].push(imgs[i].id);
 		}
@@ -78,7 +85,7 @@ var Detect = (function() {
 	$('.carousel2').each(function(idx){
 		var types = catalog[idx];
 		for(var i = 0; i < types.length; i++){
-			$(this).find('a[rel='+types[i]+']').fancybox({'transitionIn' : 'elastic', 'transitionOut'	: 'elastic'});
+			$(this).find('a[rel='+types[i]+']').fancybox();
 		}
 	});
 

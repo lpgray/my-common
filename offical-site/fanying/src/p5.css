@@ -22,9 +22,10 @@
 	background-repeat: no-repeat;
 	opacity: 0;
 	-webkit-transform: scale(.2);
-	-moz-webkit-transform: scale(.2);
-	-ms-webkit-transform: scale(.2);
-	-o-webkit-transform: scale(.2);
+	-moz-transform: scale(.2);
+	-ms-transform: scale(.2);
+	-o-transform: scale(.2);
+	transform: scale(.2);
 	-webkit-transition: all .5s;
 	-moz-transition: all .5s;
 	-ms-transition: all .5s;
@@ -33,17 +34,18 @@
 }
 .p5-banner .active{
 	-webkit-transform: scale(1);
-	-moz-webkit-transform: scale(1);
-	-ms-webkit-transform: scale(1);
-	-o-webkit-transform: scale(1);
+	-moz-transform: scale(1);
+	-ms-transform: scale(1);
+	-o-transform: scale(1);
+	transform: scale(1);
 	opacity: 1;
 }
 .p5-banner .logo:hover{
 	-webkit-transform: scale(1.1);
-	-moz-webkit-transform: scale(1.1);
-	-ms-webkit-transform: scale(1.1);
-	-o-webkit-transform: scale(1.1);
-	webkit-transform: scale(1.1);
+	-moz-transform: scale(1.1);
+	-ms-transform: scale(1.1);
+	-o-transform: scale(1.1);
+	transform: scale(1.1);
 }
 .p5-banner ul{
 	text-align: center;

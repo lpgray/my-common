@@ -166,7 +166,7 @@ $(function() {
         }
         function showDesc(idx){
             $descs.eq(idx).addClass('active').siblings().removeClass('active');
-            idx && carousels[idx-1].lazyLoadImgsAt(0);
+            idx && carousels[idx-1].lazyLoadImgsAt(0); // 在这里懒加载当前module下carousel的第1组图片
         }
 
         var $modal = $('#J_modal');
@@ -194,7 +194,7 @@ $(function() {
                 openDrawer(idx);
             }
             showDesc(idx);
-            carousels[idx].lazyLoadImgsAt(0); // 在这里懒加载当前module下carousel的第1组图片
+            // carousels[idx].lazyLoadImgsAt(0);
             $self.addClass('active').siblings().removeClass('active');
         });
 
