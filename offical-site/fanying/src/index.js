@@ -71,8 +71,74 @@ function resetPage() {
         }else{
             $('body').removeClass('body-small')
         }
+
+        Slider.reset();
     }, 100);
 }
+
+/**
+ * 首屏幻灯
+ */
+var Slider = (function(){
+    var $slider = $('#J_p1Slider');
+
+    var $wrap = $slider.children('.items');
+    var len = $wrap.children('.item').length;
+
+    var current = 0
+        , last = 0
+        , pause = false;
+
+    $slider.find('.prev').click(function(){
+        last = current;
+        show(--current);
+    });
+    $slider.find('.next').click(function(){
+        last = current;
+        show(++current);
+    });
+    $slider.find('.ctrl').hover(function(){
+        pause = true;
+    }, function(){
+        pause = false;
+    });
+
+    function show(i){
+        if(i < 0){
+            i = len -1;
+        }else if(i >= len){
+            i = 0;
+        }
+
+        current = i;
+       
+        $wrap.children().eq(last).fadeOut(1000);
+        $wrap.children().eq(current).fadeIn(1000);
+    }
+
+    show(current);
+    var timer;
+
+    return {
+        reset : function(){
+            $wrap.width(winWidth * len);
+            $wrap.children().width(winWidth);
+        },
+        disable : function(){
+            clearInterval(timer);
+        },
+        enable: function() {
+            timer = setInterval(function() {
+                if (pause) {
+                    return;
+                }
+                last = current;
+                show(++current);
+            }, 3000);
+        }
+    }
+}());
+Slider.enable();
 
 /**
  * 延迟遍历数组
