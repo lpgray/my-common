@@ -77,7 +77,7 @@ body {
 	right: 0;
 }
 .header ul.right li{
-	margin: 0 30px;
+	margin: 0 10px;
 }
 .header ul li.active .line{
 	background-color: #ef4842;

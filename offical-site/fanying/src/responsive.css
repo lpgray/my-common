@@ -70,10 +70,10 @@
 	}
 }
 /* ===========================
- *	Page 5
+ *	Page Partner
  * =========================== */
 @media (max-width: 1366px) {
-	.p5-banner{
+	.p-partner .banner{
 		-webkit-transform: scale(.75);
 		-moz-transform: scale(.75);
 		-ms-transform: scale(.7);

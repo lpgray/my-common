@@ -1,11 +1,11 @@
-#page-5{
+.p-partner{
 	background: #000 url(imgs/bg-3.png) center center no-repeat;
 	text-align: center;
 }
-#page-5 h1 {
+.p-partner h1 {
 	color: #fff;
 }
-.p5-banner{
+.p-partner .banner{
 	height: 400px;
 	width: 1300px;
 	position: absolute;
@@ -14,7 +14,7 @@
 	top: 50%;
 	margin-top: -220px;
 }
-.p5-banner .logo{
+.p-partner .banner .logo{
 	display: block;
 	width: 120px;
 	height: 120px;
@@ -32,7 +32,7 @@
 	-o-transition: all .5s;
 	transition: all .5s;
 }
-.p5-banner .active{
+.p-partner .banner .active{
 	-webkit-transform: scale(1);
 	-moz-transform: scale(1);
 	-ms-transform: scale(1);
@@ -40,17 +40,17 @@
 	transform: scale(1);
 	opacity: 1;
 }
-.p5-banner .logo:hover{
+.p-partner .banner .logo:hover{
 	-webkit-transform: scale(1.1);
 	-moz-transform: scale(1.1);
 	-ms-transform: scale(1.1);
 	-o-transform: scale(1.1);
 	transform: scale(1.1);
 }
-.p5-banner ul{
+.p-partner .banner ul{
 	text-align: center;
 }
-.p5-banner li{
+.p-partner .banner li{
 	display: block;
 	width: 120px;
 	height: 120px;
@@ -58,7 +58,7 @@
 	float: left;
 	margin: 0 98px 98px 98px;
 }
-.p5-banner li a{
+.p-partner .banner li a{
 	display: block;
 	width: 100%;
 	padding-top: 120px;
@@ -66,39 +66,39 @@
 	text-decoration: none;
 	font-size: 20px;
 }
-#page-5 .logo-0{
+.p-partner .logo-0{
 	background-position: 0 0;
 }
-#page-5 .logo-1{
+.p-partner .logo-1{
 	background-position: -121px 0;
 }
-#page-5 .logo-2{
+.p-partner .logo-2{
 	background-position: -242px 0;
 }
-#page-5 .logo-3{
+.p-partner .logo-3{
 	background-position: -363px 0;
 }
-#page-5 .logo-4{
+.p-partner .logo-4{
 	background-position: 0 -121px;
 }
-#page-5 .logo-5{
+.p-partner .logo-5{
 	background-position: -121px -121px;
 }
-#page-5 .logo-6{
+.p-partner .logo-6{
 	background-position: -242px -121px;
 }
-#page-5 .logo-7{
+.p-partner .logo-7{
 	background-position: -363px -121px;
 }
-#page-5 .logo-8{
+.p-partner .logo-8{
 	background-position: 0 -242px;
 }
-#page-5 .logo-9{
+.p-partner .logo-9{
 	background-position: -121px -242px;
 }
-#page-5 .logo-10{
+.p-partner .logo-10{
 	background-position: -242px -242px;
 }
-#page-5 .logo-11{
+.p-partner .logo-11{
 	background-position: -363px -242px;
 }
